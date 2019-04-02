@@ -1,0 +1,88 @@
+mysql:
+  host: 192.168.182.118
+  port: 3973
+  user: deve
+  password: weiphone
+  database: google_play
+  charset: utf8
+
+We_mysql:
+  host: 192.168.166.34
+  port: 4002
+  user: root
+  password: weapp
+  database: we+
+  charset: utf8
+
+
+download_basicUrl:
+  url: /home/feng/android_files/google_files/app_page
+
+DES3:
+  key:  4d9f0c946572aa6e6d34f2db
+  appkey: tutuappandroidweb
+
+
+logger:
+  version: 1
+  disable_existing_loggers: False
+  formatters:
+    simple:
+      format: "%(asctime)s - %(filename)s - %(lineno)s %(levelname)s - %(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: DEBUG
+      formatter: simple
+      stream: ext://sys.stdout
+  loggers:
+    my_module:
+      level: ERROR
+      handlers: [console]
+      propagate: no
+  root:
+    level: INFO
+    handlers: [console]
+
+redis_topic:
+  #测试都用test
+  test:
+    product_auto: test_product:queen
+    product_manual: test_product_timely:queen
+    download_check: test_download:queen
+    download_derect: test_download_derect:queen
+  #正式的用production
+  production:
+    #生产包：
+    product_auto: product:queen
+    product_manual: product_timely:queen
+    #下载包
+    download_check: download:queen
+    download_derect: download_derect:queen
+
+ip_config:
+  #ip相关的下载路径配置
+  ip_to_host: {
+      '23.236.115.226': 'http://crawer1.tutuapp.net:8080',
+      '23.236.115.227': 'http://crawer2.tutuapp.net:8080',
+      '23.236.115.228': 'http://crawer3.tutuapp.net:8080',
+  }
+
+  ip_to_filePath:  {
+      "23.236.115.226": "android_files",
+      "23.236.115.227": "android_files1",
+      "23.236.115.228": "android_files2",
+  }
+
+#项目的环境部署相关
+deploy:
+  production_ips :
+    #生产环境的ip
+    ip: ["23.236.115.226","23.236.115.227"]
+  manual_ips:
+    #手动接口的ip
+    ip: ["23.236.115.228"]
+
+#设置项目多久跑一次
+schedule_time:
+  every_hours: 2

@@ -1,0 +1,18 @@
+class Xpaths:
+    def __init__(self):
+        self.get_app_urls = "//div[@class='while_apps']//div[@class='item_holder']/a/@href"
+        self.categories = "//div[@class='info']//div[1]//a//text()"
+        self.version = "//div[@class='info']//div[4]/text()"
+        self.os = "//div[@class='info']//div[5]/text()"
+        self.internet = "//div[@class='info']//div[6]/text()"
+        self.size = "//div[@class='info']//div[7]/text()"
+        self.raiting = "//div[@class='info']//div[8]/text()"
+        self.russian = "//div[@class='info']//div[9]/text()"
+        self.pkg_name = "//h1[@itemprop='name']//text()"
+        self.img_urls = "//div[@class='fotorama__nav__shaft']//img[@class='fotorama__img']/@src"
+        self.description = "//div[@itemprop='description']//text()"
+        self.icon = "//div[@class='c in_holder']/img/@src"
+        self.download_first_url = "//div[@id='wnload__']/a/@href"
+        self.download_second_url = "//a[@id='download_up']/@href"
+        self.md5 = "//div[@class='c']//strong/text()"
+        self.app_url = "//meta[@property='og:type']/@content"
