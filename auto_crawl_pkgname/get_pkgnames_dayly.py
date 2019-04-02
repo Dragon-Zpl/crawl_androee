@@ -32,7 +32,7 @@ class CrawlPkgnames:
                         logger.info(url+",status:"+str(r.status))
                         return None
             except Exception as e:
-                logger.info(e)
+                logger.info("url:{},error:{}".format(url,e))
                 proxy = await self.get_proxy()
         else:
             logger.info('fail 3 time3,checkout please!')
@@ -116,9 +116,10 @@ class CrawlPkgnames:
         all_data = []
 
         for result in detail_results:
-            data = self.analysis_data(data=result)
-            print(data)
-            all_data.append(data)
+            if result:
+                data = self.analysis_data(data=result)
+                print(data)
+                all_data.append(data)
 
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
