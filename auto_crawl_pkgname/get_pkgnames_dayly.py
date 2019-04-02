@@ -23,6 +23,7 @@ class CrawlPkgnames:
         for i in range(3):
             try:
                 async with session.get(url=url, proxy=proxy, headers=headers, timeout=15) as r:
+                    logger.info("url:{},status:{}".format(url,r.status))
                     if r.status in [200, 201]:
                         data = await r.text()
                         return data
