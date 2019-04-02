@@ -82,7 +82,7 @@ class CrawlPkgnames:
         content = etree.HTML(data)
         data_dic = {}
         name = content.xpath(self.analysis.pkg_name)
-        if name and '[' in name:
+        if name and '[' in name[0]:
             data_dic["name"] = re.search(r'[\d\D]*\[', name[0]).group().replace(' [', "")
         elif name:
             data_dic["name"] = name[0]
@@ -98,7 +98,7 @@ class CrawlPkgnames:
         data_dic["russian"] = content.xpath(self.analysis.russian)[0]
         data_dic["img_urls"] = ','.join(content.xpath(self.analysis.img_urls))
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
-        data_dic["app_url"] = content.xpath(self.analysis.app_url)
+        data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
         mod_nuber = content.xpath(self.analysis.mod_number)
         if mod_nuber:
             mod_nuber = re.search("\d+",mod_nuber[0]).group()
