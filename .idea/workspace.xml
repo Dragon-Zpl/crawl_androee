@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" beforeDir="false" afterPath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" afterDir="false" />
-    </list>
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +20,7 @@
           <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="58">
+                <state relative-caret-position="208">
                   <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
                   <folding>
                     <element signature="e#0#14#0" expanded="true" />
@@ -83,8 +81,8 @@
           <file leaf-file-name="init.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/utils/init.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="100">
-                  <caret line="10" column="127" selection-start-line="10" selection-start-column="127" selection-end-line="10" selection-end-column="127" />
+                <state relative-caret-position="225">
+                  <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="1" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -94,7 +92,11 @@
           </file>
           <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/TestDemo.py">
-              <provider selected="true" editor-type-id="text-editor" />
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="125">
+                  <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+                </state>
+              </provider>
             </entry>
           </file>
           <file leaf-file-name="Xpath_word.py" pinned="false" current-in-tab="false">
@@ -142,13 +144,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/CrawlProxy/crawl_proxies.py" />
-        <option value="$PROJECT_DIR$/TestDemo.py" />
         <option value="$PROJECT_DIR$/Analysis_data/Xpath_word.py" />
         <option value="$PROJECT_DIR$/Mysql_/mysql_op.py" />
         <option value="$PROJECT_DIR$/auto_crawl.py" />
         <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/utils/init.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
+        <option value="$PROJECT_DIR$/TestDemo.py" />
       </list>
     </option>
   </component>
@@ -347,9 +349,6 @@
     <entry file="file://$PROJECT_DIR$/CrawlProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestDemo.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
@@ -381,19 +380,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mysql_/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/init.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="10" column="127" selection-start-line="10" selection-start-column="127" selection-end-line="10" selection-end-column="127" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/python/Lib/asyncio/events.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -401,9 +387,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Mysql_/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestDemo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
+        <state relative-caret-position="208">
           <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />

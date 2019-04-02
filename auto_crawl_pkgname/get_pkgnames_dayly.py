@@ -36,7 +36,7 @@ class CrawlPkgnames:
                 logger.info("url:{},error:{}".format(url,e))
                 proxy = await self.get_proxy()
         else:
-            logger.info('fail 3 time3,checkout please!')
+            logger.info('fail 3 time3,checkout please!url:{}'.format(url))
     async def get_proxy_pool(self):
         async with self.lock:
             if len(self.proxies) <= 3:
@@ -93,7 +93,11 @@ class CrawlPkgnames:
         data_dic["russian"] = content.xpath(self.analysis.russian)[0]
         data_dic["img_urls"] = ','.join(content.xpath(self.analysis.img_urls))
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
-        data_dic["download_first_url"] = content.xpath(self.analysis.download_first_url)[-1]
+        download_first_url = content.xpath(self.analysis.download_first_url)
+        if download_first_url:
+            data_dic["download_first_url"] = download_first_url[-1]
+        else:
+            data_dic["download_first_url"] = "None"
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
         self.download_urls.add(data_dic["download_first_url"])
         return data_dic
