@@ -18,6 +18,7 @@ class CrawlPkgnames:
         self.pkg_urls = set()
         self.download_urls =set()
         self.mysql_op = MysqlHeaper()
+        self.proxies = []
     async def request_web(self,url,proxy=None):
         for i in range(3):
             try:

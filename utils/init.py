@@ -8,7 +8,7 @@ import yaml
 
 etree = lxml.html.etree
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:51.0) Gecko/20100101 Firefox/51.0',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36',
 }
 conn = aiohttp.TCPConnector(
                             family=socket.AF_INET,
