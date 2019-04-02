@@ -99,6 +99,7 @@ class CrawlPkgnames:
         data_dic["img_urls"] = ','.join(content.xpath(self.analysis.img_urls))
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
         mod_nuber = re.search("\d+",content.xpath(self.analysis.mod_number)[0]).group()
+        logger.info('mod_nuber:'+str(mod_nuber))
         r = requests.get(url=self.mod_pkg_url+mod_nuber)
         mod_content = etree.HTML(r.text)
         data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
