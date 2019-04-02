@@ -144,7 +144,7 @@ class asyncCrawlProxy():
         }
         try:
             start_time = time.time()
-            async with session.get(url="https://google.com",
+            async with session.get(url="https://www.androeed.ru",
                                    proxy=proxy,
                                    headers=headers_normal,  # 可以引用到外部的headers
                                    timeout=10) as resp:

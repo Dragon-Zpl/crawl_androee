@@ -1,6 +1,9 @@
 import asyncio
 from random import choice
 import re
+
+import requests
+
 from Analysis_data.Xpath_word import Xpaths
 from CrawlProxy.crawl_proxies import asyncCrawlProxy
 from Mysql_.mysql_op import MysqlHeaper
@@ -11,6 +14,8 @@ class CrawlPkgnames:
         self.mods_urls = ["https://www.androeed.ru/files/vzlomannie_igri_na_android-" + str(page) + ".html?hl=en" for page in range(1,6)]
         self.host = "https://www.androeed.ru"
         self.app_url = "https://www.androeed.ru/android/programmy.html?hl=en"
+        # 包的下载地址在该接口下
+        self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_commen_ebu_v_rot_dapda&ui="
         self.flag = 1
         self.lock = asyncio.Lock(loop=loop)
         self.crawlProxy = asyncCrawlProxy()
@@ -93,12 +98,10 @@ class CrawlPkgnames:
         data_dic["russian"] = content.xpath(self.analysis.russian)[0]
         data_dic["img_urls"] = ','.join(content.xpath(self.analysis.img_urls))
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
-        download_first_url = content.xpath(self.analysis.download_first_url)
-        if download_first_url:
-            data_dic["download_first_url"] = download_first_url[-1]
-        else:
-            data_dic["download_first_url"] = "None"
-        data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
+        mod_nuber = re.search("\d+",content.xpath(self.analysis.mod_number)[0]).group()
+        r = requests.get(url=self.mod_pkg_url+mod_nuber)
+        mod_content = etree.HTML(r.text)
+        data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
         self.download_urls.add(data_dic["download_first_url"])
         return data_dic
     def build_detail_tasks(self):
