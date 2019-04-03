@@ -43,7 +43,7 @@ class Helper:
         print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
         cls.writeencryptapkinfo(config_info, tpkdir)
-        # cls.downIcon(tpkdir, docid, mysqlheaper)
+        cls.downIcon(tpkdir, docid)
         obbname = obbpath.split('/')[-1]
         detfile_obb = tpkdir + '/data/' + obbname
         cls.mymovefile(obbpath, detfile_obb)
@@ -83,13 +83,14 @@ class Helper:
         return cbc_base
 
     @classmethod
-    def downIcon(self, tpkdir, pkg_name, mysqlwapper):
+    def downIcon(self, tpkdir, pkg_name):
         try:
-            sql = 'SELECT coverimgurl from crawl_google_play_app_info where pkgname=\'{}\''.format(pkg_name)
-            task = asyncio.ensure_future(mysqlwapper.fetch_one(sql, ))
-            loop.run_until_complete(task)
-            image_url = task.result()
-            image_url = image_url[0]
+            # sql = 'SELECT coverimgurl from crawl_google_play_app_info where pkgname=\'{}\''.format(pkg_name)
+            # task = asyncio.ensure_future(mysqlwapper.fetch_one(sql, ))
+            # loop.run_until_complete(task)
+            # image_url = task.result()
+            # image_url = image_url[0]
+            image_url = "https://i1.androeed.ru/icons/2019/03/30/15919.png"
             print(image_url)
             image_response = requests.get(image_url, verify=False).content
             image_path = os.path.join(tpkdir, r'icon.png')
@@ -189,7 +190,7 @@ class Helper:
             return developer
 
 
-# b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
-# print(b)
+b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
+print(b)
 dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
-b = Helper.build_tpk(basic_dir="/home/feng/pkgtest/test",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)
+b = Helper.build_tpk(basic_dir="/home/feng/pkgtest",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)
