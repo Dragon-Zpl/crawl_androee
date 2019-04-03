@@ -96,11 +96,11 @@ class CrawlPkgnames:
         data_dic["size"] = content.xpath(self.analysis.size)[0]
         data_dic["raiting"] = content.xpath(self.analysis.raiting)[0]
         data_dic["russian"] = content.xpath(self.analysis.russian)[0]
-        img_urls = re.findall(r"load[\d\D]+?\" \'\)",data)
+        img_urls = re.findall(r"\('#images_while'\)\.load[\d\D]+?\" \'\)", data)
         if len(img_urls) > 0:
             try:
-                img_url = img_urls[0].replace("load('", "").replace("\" ')", "")
-                r = requests.get(url=img_url + self.host)
+                img_url = img_urls[0].replace("('#images_while').load('","").replace("\" ')","")
+                r = requests.get(url=self.host + img_url)
                 img_content = etree.HTML(r.text)
                 if img_content.xpath(self.analysis.img_urls):
                     data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
