@@ -39,7 +39,8 @@ class Helper:
 
     @classmethod
     def build_tpk(cls, basic_dir, obbpath, docid, dict_tpk):
-        tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
+        # tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
+        tpkdir = "/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru"
         print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
         cls.writeencryptapkinfo(config_info, tpkdir)
@@ -69,7 +70,7 @@ class Helper:
         data = json.dumps(data)
         iv = 'wEiphTn!'
         block_size = DES3.block_size
-        print('block_size is {} is {}'.format(block_size, block_size % 8 == 0))
+        logger.info('block_size is {} is {}'.format(block_size, block_size % 8 == 0))
         PADDING = lambda s: s + (block_size - len(s) % block_size) * chr(block_size - len(s) % block_size)
         des3 = DES3.new(key, DES3.MODE_CBC, iv)
         ciphertext = base64.b64encode(des3.encrypt(PADDING(data)))
@@ -190,7 +191,7 @@ class Helper:
             return developer
 
 
-# b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
-# print(b)
-dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
-b = Helper.build_tpk(basic_dir="/home/feng/pkgtest/",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)
+b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
+print(b)
+# dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
+# b = Helper.build_tpk(basic_dir="/home/feng/pkgtest/",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)

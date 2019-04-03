@@ -76,8 +76,8 @@
       <file leaf-file-name="helper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="192" selection-start-line="192" selection-end-line="193" selection-end-column="8" />
+            <state relative-caret-position="185">
+              <caret line="172" column="50" selection-start-line="172" selection-start-column="50" selection-end-line="172" selection-end-column="50" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -506,8 +506,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="192" selection-start-line="192" selection-end-line="193" selection-end-column="8" />
+        <state relative-caret-position="185">
+          <caret line="172" column="50" selection-start-line="172" selection-start-column="50" selection-end-line="172" selection-end-column="50" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
