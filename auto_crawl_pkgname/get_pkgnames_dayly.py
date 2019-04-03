@@ -96,12 +96,18 @@ class CrawlPkgnames:
         data_dic["size"] = content.xpath(self.analysis.size)[0]
         data_dic["raiting"] = content.xpath(self.analysis.raiting)[0]
         data_dic["russian"] = content.xpath(self.analysis.russian)[0]
-        data_dic["img_urls"] = ','.join(content.xpath(self.analysis.img_urls))
+        img_url = re.findall(r"load[\d\D]+?\" \'\)",data)
+        if len(img_url) > 0:
+            img_url = re.findall(r"load[\d\D]+?\" \'\)",data)[0].replace("load('","").replace("\" ')","")
+            r = requests.get(url=img_url+self.host)
+            img_content = etree.HTML(r.text)
+            if img_content.xpath(self.analysis.img_urls):
+                data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
         mod_nuber = content.xpath(self.analysis.mod_number)
         if mod_nuber:
-            mod_nuber = re.search("\d+",mod_nuber[0]).group()
+            mod_nuber = re.findall("\d+",mod_nuber[0])[-1]
             logger.info('mod_nuber:'+str(mod_nuber))
             r = requests.get(url=self.mod_pkg_url+mod_nuber)
             mod_content = etree.HTML(r.text)

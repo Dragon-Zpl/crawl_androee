@@ -1,8 +1,9 @@
 import re
-name = ['REKT High Octane Stunts [Mod: Unlocked + Money]']
-if name and '[' in name:
-    a = re.search(r'[\d\D]*\[', name[0]).group().replace(' [', "")
-elif name:
-    a = name[0]
 
-print(a)
+a = """
+('#images_while').load('/index.php?m=files&f=images_while&id=8525&youtube=9uXNn1AKon0" ')
+"""
+
+b = re.findall(r"load[\d\D]+?\" \'\)",a)[0].replace("load('","").replace("\" ')","")
+
+print(b)
