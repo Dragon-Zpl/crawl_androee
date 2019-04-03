@@ -10,4 +10,4 @@ co = etree.HTML(r.text)
 
 print(co.xpath("//a[@class='google_play round5']/@href"))
 
-print('2:'+str(co.xpath("//div[@class='c in_holder']/img/@src")))
+print('2:'+str(co.xpath("//div[@class='c in_holder']/img/@data-src")))
