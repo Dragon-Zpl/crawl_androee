@@ -1,27 +1,27 @@
-import re
+import hashlib
+import os
+import shutil
 
-import requests
+from helper import Helper
 
-b = 'https://www.androeed.ru/files/google-play-market.html?hl=en'
 
-r = requests.get(url=b)
 
-from lxml import etree
 
-content = etree.HTML(r.text)
+def _download_obb(obbname, basic_dir, apk_details, pkgname):
+    md5_pkgname = hashlib.md5((pkgname).encode('utf-8')).hexdigest()
+    apk_path = basic_dir + md5_pkgname + ".apk"
+    app_path = basic_dir + md5_pkgname + "/"
+    obb_path_temp = app_path + obbname
+    if os.path.exists(basic_dir + obbname):
+        os.system("rm {}".format(basic_dir + obbname))
+    shutil.move(obb_path_temp, basic_dir)
+    obbpath = basic_dir + obbname
+    tpkpath = _compose_tpk(apk_details, apk_path, obbpath, basic_dir, pkgname)
+    os.system("rm -rf {}".format(app_path))
 
-mod_nuber = content.xpath("//a[@class='google_play round5']/@href")
-print(mod_nuber)
-if mod_nuber:
-    temp = re.findall("\d+", mod_nuber[-1])
-    if temp:
-        pass
-    else:
-        print('i comein')
-        mod_nuber = content.xpath("//div[@class='c in_holder']/img/@data-src")
-        print(mod_nuber)
-if mod_nuber:
-    temp = re.findall("\d+",mod_nuber[-1])
-    if temp:
-        download_url = temp[-1]
-        print('download_url:'+str(download_url))
+def _compose_tpk(self, apk_details, apkpath, obbpath, basic_dir, pkgname):
+    dict_tpk = Helper.configinfo(apk_details, apkpath)
+    Helper.build_tpk(basic_dir, obbpath, pkgname, dict_tpk)
+    md5_pkgname = hashlib.md5((pkgname).encode('utf-8')).hexdigest()
+    tpkpath = basic_dir + md5_pkgname + ".tpk"
+    return tpkpath
