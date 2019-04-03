@@ -6,12 +6,12 @@ r = requests.get(url='https://www.androeed.ru/files/downhill-masters.html?hl=en'
 
 content = etree.HTML(r.text)
 host = "https://www.androeed.ru"
-img_urls = re.findall(r"load[\d\D]+?\" \'\)",r.text)
+img_urls = re.findall(r"\('#images_while'\)\.load[\d\D]+?\" \'\)",r.text)
 data_dic = {}
 if len(img_urls) > 0:
     try:
         print(img_urls)
-        img_url = img_urls[0].replace("load('", "").replace("\" ')", "")
+        img_url = img_urls[0].replace("('#images_while').load('","").replace("\" ')","")
         print(img_url)
         r = requests.get(url=img_url + host)
         print(r.status_code)
@@ -23,3 +23,5 @@ if len(img_urls) > 0:
 
 
 print(data_dic)
+
+
