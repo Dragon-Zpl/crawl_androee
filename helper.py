@@ -189,5 +189,7 @@ class Helper:
             return developer
 
 
-b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
-print(b)
+# b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
+# print(b)
+dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
+b = Helper.build_tpk(basic_dir="/home/feng/pkgtest/test",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)
