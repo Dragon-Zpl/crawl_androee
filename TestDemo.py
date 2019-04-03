@@ -13,7 +13,7 @@ if len(img_urls) > 0:
         print(img_urls)
         img_url = img_urls[0].replace("('#images_while').load('","").replace("\" ')","")
         print(img_url)
-        r = requests.get(url=img_url + host)
+        r = requests.get(url=host + img_url)
         print(r.status_code)
         img_content = etree.HTML(r.text)
         if img_content.xpath("//img/@src"):
