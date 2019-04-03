@@ -2,7 +2,7 @@ import re
 
 import requests
 from lxml import etree
-r = requests.get(url='https://www.androeed.ru/files/downhill-masters.html?hl=en')
+r = requests.get(url='https://www.androeed.ru/files/intro-maker-dlya-youtube-sozdatel-videorolikov.html?hl=en')
 
 content = etree.HTML(r.text)
 host = "https://www.androeed.ru"
