@@ -21,7 +21,6 @@ class CrawlPkgnames:
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
         self.pkg_urls = set()
-        self.download_urls =set()
         self.mysql_op = MysqlHeaper()
         self.proxies = []
     async def request_web(self,url,proxy=None):
@@ -142,7 +141,6 @@ class CrawlPkgnames:
                     else:
                         data_dic["download_first_url"] = "None"
                         logger.info('长度有问题请查看'+data_dic["app_url"])
-                    self.download_urls.add(data_dic["download_first_url"])
                 else:
                     data_dic["download_first_url"] = "None"
             else:
