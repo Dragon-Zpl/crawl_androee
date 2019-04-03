@@ -84,6 +84,7 @@ class CrawlPkgnames:
         name = content.xpath(self.analysis.pkg_name)
         if name and '[' in name[0]:
             data_dic["name"] = re.search(r'[\d\D]*\[', name[0]).group().replace(' [', "")
+            data_dic["what_news"] = re.search("\[[\d\D]+?\]",name[0]).group().replace('[','').replace(']','')
         elif name:
             data_dic["name"] = name[0]
         else:
@@ -113,6 +114,7 @@ class CrawlPkgnames:
             data_dic["img_urls"] = "None"
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
+
         mod_nuber = content.xpath(self.analysis.mod_number1)
         if mod_nuber:
             temp = re.findall("\d+", mod_nuber[-1])
@@ -129,7 +131,17 @@ class CrawlPkgnames:
                 if data:
                     mod_content = etree.HTML(data)
                     # data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
-                    data_dic["download_first_url"] = len(mod_content.xpath(self.analysis.download_first_url))
+                    download_url_len = len(mod_content.xpath(self.analysis.download_first_url))
+                    if download_url_len ==1 or download_url_len ==2:
+                        data_dic["download_first_url"] = [mod_content.xpath(self.analysis.download_first_url)[-1]]
+                    elif download_url_len == 3:
+                        # 第一个为破解包，第二个为apk包
+                        data_dic["download_first_url"] = [mod_content.xpath(self.analysis.download_first_url)[-1],mod_content.xpath(self.analysis.download_first_url)[-2]]
+                    elif download_url_len == 4:
+                        data_dic["download_first_url"] = [mod_content.xpath(self.analysis.download_first_url)[-2]]
+                    else:
+                        data_dic["download_first_url"] = "None"
+                        logger.info('长度有问题请查看'+data_dic["app_url"])
                     self.download_urls.add(data_dic["download_first_url"])
                 else:
                     data_dic["download_first_url"] = "None"
@@ -137,7 +149,7 @@ class CrawlPkgnames:
                 data_dic["download_first_url"] = "None"
                 logger.info('is questsion:'+data_dic["app_url"]+":"+str(mod_nuber)+','+str(temp))
         else:
-            logger.info('没有的url：'+ data_dic["app_url"])
+            logger.info('没有的url：'+ data_dic["app_url"]+str(mod_nuber))
             data_dic["download_first_url"] = "None"
         logger.info(data_dic)
         return data_dic
