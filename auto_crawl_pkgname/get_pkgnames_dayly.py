@@ -165,7 +165,7 @@ class CrawlPkgnames:
                 task = asyncio.ensure_future(self.analysis_data(data=result))
                 data_tasks.append(task)
 
-        loop.run_until_complete(data_tasks)
+        loop.run_until_complete(asyncio.gather(*data_tasks))
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
         #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)
