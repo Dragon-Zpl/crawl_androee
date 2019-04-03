@@ -115,13 +115,13 @@ class CrawlPkgnames:
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
 
-        mod_nuber = content.xpath(self.analysis.mod_number1)
+        mod_nuber = content.xpath(self.analysis.mod_number2)
         if mod_nuber:
             temp = re.findall("\d+", mod_nuber[-1])
             if temp:
                 pass
             else:
-                mod_nuber = content.xpath(self.analysis.mod_number2)
+                mod_nuber = content.xpath(self.analysis.mod_number1)
         if mod_nuber:
             temp = re.findall("\d+",mod_nuber[-1])
             if temp:
