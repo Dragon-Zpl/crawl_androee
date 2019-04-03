@@ -78,7 +78,7 @@ class CrawlPkgnames:
         for url in urls:
             self.pkg_urls.add(self.host + url)
 
-    def analysis_data(self,data):
+    async def analysis_data(self,data):
         content = etree.HTML(data)
         data_dic = {}
         name = content.xpath(self.analysis.pkg_name)
@@ -96,34 +96,50 @@ class CrawlPkgnames:
         data_dic["size"] = content.xpath(self.analysis.size)[0]
         data_dic["raiting"] = content.xpath(self.analysis.raiting)[0]
         data_dic["russian"] = content.xpath(self.analysis.russian)[0]
-        img_urls = re.findall(r"\('#images_while'\)\.load[\d\D]+?\" \'\)", data)
+        img_urls = re.findall(r"\('#images_while'\)\.load[\d\D]+?\)", data)
         if len(img_urls) > 0:
             try:
-                img_url = img_urls[0].replace("('#images_while').load('","").replace("\" ')","")
-                r = requests.get(url=self.host + img_url)
-                img_content = etree.HTML(r.text)
-                if img_content.xpath(self.analysis.img_urls):
-                    data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
+                img_url = img_urls[0].replace("('#images_while').load('","").replace("\" ')","").replace("')","")
+                data = await self.request_web(url=self.host + img_url)
+                if data:
+                    img_content = etree.HTML(data)
+                    if img_content.xpath(self.analysis.img_urls):
+                        data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
+                else:
+                    data_dic["img_urls"] = "None"
             except Exception as e :
                 logger.info("error:{},img_urls:{}".format(e,str(img_urls)))
+        else:
+            data_dic["img_urls"] = "None"
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
-        mod_nuber = content.xpath(self.analysis.mod_number)
+        mod_nuber = content.xpath(self.analysis.mod_number1)
+        if mod_nuber:
+            temp = re.findall("\d+", mod_nuber[-1])
+            if temp:
+                pass
+            else:
+                mod_nuber = content.xpath(self.analysis.mod_number2)
         if mod_nuber:
             temp = re.findall("\d+",mod_nuber[-1])
             if temp:
                 download_url = temp[-1]
                 logger.info('download_url:'+str(download_url))
-                r = requests.get(url=self.mod_pkg_url+download_url)
-                mod_content = etree.HTML(r.text)
-                data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
-                self.download_urls.add(data_dic["download_first_url"])
+                data = await self.request_web(url=self.mod_pkg_url+download_url)
+                if data:
+                    mod_content = etree.HTML(data)
+                    # data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
+                    data_dic["download_first_url"] = len(mod_content.xpath(self.analysis.download_first_url))
+                    self.download_urls.add(data_dic["download_first_url"])
+                else:
+                    data_dic["download_first_url"] = "None"
             else:
                 data_dic["download_first_url"] = "None"
                 logger.info('is questsion:'+data_dic["app_url"]+":"+str(mod_nuber)+','+str(temp))
         else:
             logger.info('没有的url：'+ data_dic["app_url"])
             data_dic["download_first_url"] = "None"
+        logger.info(data_dic)
         return data_dic
     def build_detail_tasks(self):
         tasks = []
@@ -142,14 +158,14 @@ class CrawlPkgnames:
         detail_tasks = self.build_detail_tasks()
         detail_results = loop.run_until_complete(asyncio.gather(*detail_tasks))
 
-        all_data = []
+        data_tasks = []
 
         for result in detail_results:
             if result:
-                data = self.analysis_data(data=result)
-                print(data)
-                all_data.append(data)
+                task = asyncio.ensure_future(self.analysis_data(data=result))
+                data_tasks.append(task)
 
+        loop.run_until_complete(data_tasks)
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
         #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)
