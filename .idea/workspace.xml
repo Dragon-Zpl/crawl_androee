@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/TestDemo.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestDemo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" beforeDir="false" afterPath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +20,8 @@
       <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="116" column="53" lean-forward="true" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
+            <state relative-caret-position="908">
+              <caret line="149" column="12" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="12" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -85,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestDemo.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="12" column="66" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="66" />
+              <caret line="12" column="62" lean-forward="true" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -106,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Xpath_word.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Xpath_word.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="19" column="64" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="64" />
+              <caret line="19" column="69" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -141,9 +141,9 @@
         <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/utils/init.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/crawl_proxies.py" />
+        <option value="$PROJECT_DIR$/TestDemo.py" />
         <option value="$PROJECT_DIR$/Analysis_data/Xpath_word.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
-        <option value="$PROJECT_DIR$/TestDemo.py" />
       </list>
     </option>
   </component>
@@ -465,10 +465,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TestDemo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="62" lean-forward="true" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="116" column="53" lean-forward="true" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
+        <state relative-caret-position="908">
+          <caret line="149" column="12" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="12" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -478,14 +485,7 @@
     <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="19" column="64" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestDemo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="66" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="66" />
+          <caret line="19" column="69" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="69" />
         </state>
       </provider>
     </entry>

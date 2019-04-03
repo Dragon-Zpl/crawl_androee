@@ -106,6 +106,7 @@ class CrawlPkgnames:
                     if img_content.xpath(self.analysis.img_urls):
                         data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
                 else:
+                    logger.info('img_url:'+img_url)
                     data_dic["img_urls"] = "None"
             except Exception as e :
                 logger.info("error:{},img_urls:{}".format(e,str(img_urls)))
