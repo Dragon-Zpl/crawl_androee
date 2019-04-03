@@ -3,10 +3,11 @@ import re
 import requests
 from lxml import etree
 r = requests.get(url='https://www.androeed.ru/files/intro-maker-dlya-youtube-sozdatel-videorolikov.html?hl=en')
-
+print(r.status_code)
 content = etree.HTML(r.text)
 host = "https://www.androeed.ru"
 img_urls = re.findall(r"\('#images_while'\)\.load[\d\D]+?\" \'\)",r.text)
+print(img_urls)
 data_dic = {}
 if len(img_urls) > 0:
     try:
