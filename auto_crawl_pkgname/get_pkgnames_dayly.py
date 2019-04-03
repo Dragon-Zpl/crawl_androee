@@ -107,12 +107,17 @@ class CrawlPkgnames:
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
         mod_nuber = content.xpath(self.analysis.mod_number)
         if mod_nuber:
-            mod_nuber = re.findall("\d+",mod_nuber[0])[-1]
-            logger.info('mod_nuber:'+str(mod_nuber))
-            r = requests.get(url=self.mod_pkg_url+mod_nuber)
-            mod_content = etree.HTML(r.text)
-            data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
-            self.download_urls.add(data_dic["download_first_url"])
+            mod_nuber = re.findall("\d+",mod_nuber[0])
+            if mod_nuber:
+                mod_nuber = mod_nuber[-1]
+                logger.info('mod_nuber:'+str(mod_nuber))
+                r = requests.get(url=self.mod_pkg_url+mod_nuber)
+                mod_content = etree.HTML(r.text)
+                data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
+                self.download_urls.add(data_dic["download_first_url"])
+            else:
+                data_dic["download_first_url"] = "None"
+                logger.info('is questsion:'+data_dic["app_url"]+":"+str(mod_nuber))
         else:
             logger.info('没有的url：'+ data_dic["app_url"])
             data_dic["download_first_url"] = "None"
