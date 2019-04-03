@@ -101,10 +101,12 @@ class Helper:
     @classmethod
     def configinfo(cls, apk_details, apkpath,obb_path):
         aapk_str = 'aapt dump badging {} > tmp.txt'.format(apkpath)
-        f = os.popen(aapk_str)
-        result = f.readlines()
+        os.system(aapk_str)
+        with open('tmp.txt', 'r', encoding='utf8', errors='ignore') as f:
+            result = f.readlines()
+            print('result:'+str(result))
         results = ''.join(result)
-        logger.info(results)
+        logger.info('results:'+str(results))
         try:
             pkgname = re.search(r'package: name=\'(.*?)\'', results).group(1)
             print("pkgname is {}".format(pkgname))
