@@ -13,8 +13,8 @@ import requests
 from Crypto.Cipher import DES3
 from lxml import etree
 
-from utils.init import config_file, loop, logger
-from utils.project_helper import ProjectHepler
+# from utils.init import config_file, loop, logger
+# from utils.project_helper import ProjectHepler
 
 
 class MyEncoder(json.JSONEncoder):
