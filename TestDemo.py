@@ -1,7 +1,13 @@
-a = 'FR LEGENDS [Mod Money]'
+import requests
 
-import re
+b = 'https://www.androeed.ru/files/karta-rossii-dlya-navitel.html?hl=en'
 
+r = requests.get(url=b)
 
-b = re.search("\[[\d\D]+?\]",a)
-print(b.group().replace('[','').replace(']',''))
+from lxml import etree
+
+co = etree.HTML(r.text)
+
+print(co.xpath("//a[@class='google_play round5']/@href"))
+
+print('2:'+str(co.xpath("//div[@class='c in_holder']/img/@src")))
