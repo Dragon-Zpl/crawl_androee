@@ -98,26 +98,29 @@ class CrawlPkgnames:
         data_dic["russian"] = content.xpath(self.analysis.russian)[0]
         img_url = re.findall(r"load[\d\D]+?\" \'\)",data)
         if len(img_url) > 0:
-            img_url = re.findall(r"load[\d\D]+?\" \'\)",data)[0].replace("load('","").replace("\" ')","")
-            r = requests.get(url=img_url+self.host)
-            img_content = etree.HTML(r.text)
-            if img_content.xpath(self.analysis.img_urls):
-                data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
+            try:
+                img_url = re.findall(r"load[\d\D]+?\" \'\)", data)[0].replace("load('", "").replace("\" ')", "")
+                r = requests.get(url=img_url + self.host)
+                img_content = etree.HTML(r.text)
+                if img_content.xpath(self.analysis.img_urls):
+                    data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
+            except Exception as e :
+                logger.info("error:{},img_url:{}".format(e,str(img_url)))
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
         mod_nuber = content.xpath(self.analysis.mod_number)
         if mod_nuber:
-            mod_nuber = re.findall("\d+",mod_nuber[0])
-            if mod_nuber:
-                mod_nuber = mod_nuber[-1]
-                logger.info('mod_nuber:'+str(mod_nuber))
-                r = requests.get(url=self.mod_pkg_url+mod_nuber)
+            temp = re.findall("\d+",mod_nuber[0])
+            if temp:
+                download_url = temp[-1]
+                logger.info('download_url:'+str(download_url))
+                r = requests.get(url=self.mod_pkg_url+download_url)
                 mod_content = etree.HTML(r.text)
                 data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
                 self.download_urls.add(data_dic["download_first_url"])
             else:
                 data_dic["download_first_url"] = "None"
-                logger.info('is questsion:'+data_dic["app_url"]+":"+str(mod_nuber))
+                logger.info('is questsion:'+data_dic["app_url"]+":"+str(mod_nuber)+','+str(temp))
         else:
             logger.info('没有的url：'+ data_dic["app_url"])
             data_dic["download_first_url"] = "None"
