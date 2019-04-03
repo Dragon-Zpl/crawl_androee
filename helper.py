@@ -103,9 +103,10 @@ class Helper:
         aapk_str = 'aapt dump badging {} > tmp.txt'.format(apkpath)
         f = os.popen(aapk_str)
         result = f.readlines()
-        result = ''.join(result)
+        results = ''.join(result)
+        logger.info(results)
         try:
-            pkgname = re.search(r'package: name=\'(.*?)\'', result).group(1)
+            pkgname = re.search(r'package: name=\'(.*?)\'', results).group(1)
             print("pkgname is {}".format(pkgname))
         except:
             print("re pkgname error")
@@ -130,8 +131,8 @@ class Helper:
         delete_command = 'rm -rf {} {} {}'.format(obb_path, file_dir + '/' + 'Read*', file_dir + '/' + 'ReXdl.com.url')
         os.system(delete_command)
 
-        app_version_code = re.search(r'versionCode=\'(.*?)\'', result).group(1)
-        app_version = re.search(r'versionName=\'(.*?)\'', result).group(1)
+        app_version_code = re.search(r'versionCode=\'(.*?)\'', results).group(1)
+        app_version = re.search(r'versionName=\'(.*?)\'', results).group(1)
         apkfile_size = os.path.getsize(apkpath)
         obbfile_size = os.path.getsize(new_obb_path)
         developer = cls.get_app_other_info(pkgname)
