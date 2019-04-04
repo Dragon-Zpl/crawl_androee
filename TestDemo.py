@@ -19,4 +19,5 @@ params = (
                             data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
                             data_dic["app_url"]
                         )
-loop.run_until_complete(MysqlHeaper.update(sql,params))
+t = MysqlHeaper()
+loop.run_until_complete(t.update(sql=sql,params=params))
