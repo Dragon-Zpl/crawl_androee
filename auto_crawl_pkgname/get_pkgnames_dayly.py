@@ -170,7 +170,7 @@ class CrawlPkgnames:
                             if '.zip' in obb_download_url:
                                 data_dic["download_first_url"] = [apk_download_url, obb_download_url]
                             else:
-                                return None
+                                data_dic["download_first_url"] = ""
                         elif download_url_len == 4:
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
                             data = await self.request_web(url=temp_apk_download_url)
@@ -182,15 +182,15 @@ class CrawlPkgnames:
                             logger.info('长度有问题请查看' + data_dic["app_url"])
                     except Exception as e:
                         logger.info("error:{},url:{}".format(e,data_dic["app_url"]))
-                        return None
+                        data_dic["download_first_url"] = ""
                 else:
-                    return None
+                    data_dic["download_first_url"] = ""
             else:
                 logger.info('is questsion:' + data_dic["app_url"] + ":" + str(mod_nuber) + ',' + str(temp))
-                return None
+                data_dic["download_first_url"] = ""
         else:
             logger.info('没有的url：'+ data_dic["app_url"]+str(mod_nuber))
-            data_dic["download_first_url"] = "None"
+            data_dic["download_first_url"] = ""
         logger.info(data_dic)
         return data_dic
     def build_detail_tasks(self):
@@ -254,11 +254,22 @@ class CrawlPkgnames:
                             data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
                             data_dic["app_url"]
                         )
-                        loop.run_until_complete(self.save_mysql(params=params))
+
                     else:
+                        nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+                        params = (
+                            "", "", 0, nowtime, data_dic["categories"], data_dic["size"],
+                            "",
+                            data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
+                            data_dic["os"], data_dic["internet"],
+                            data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
+                            data_dic["app_url"]
+                        )
+                        loop.run_until_complete(self.save_mysql(params=params))
                         logger.info('have question' + str(data_dic))
                 else:
                     logger.info('不存在download_url'+str(result))
+
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
         #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)
