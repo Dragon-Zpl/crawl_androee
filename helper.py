@@ -152,7 +152,7 @@ class Helper:
             'data_path': data_path,
             'data_size': str(obbfile_size)
         }
-        return dict_tpk
+        return dict_tpk,new_obb_path
 
     @classmethod
     def writeencryptapkinfo(cls, config_info, tpkdir):
@@ -226,8 +226,8 @@ class Helper:
             logger.info('have obb pkg')
             obb_path = basic + '.zip'
             cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
-            dict_tpk = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
-            cls.build_tpk(basic_dir=basic_dir,obbpath=obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
+            dict_tpk,new_obb_path = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
+            cls.build_tpk(basic_dir=basic_dir,obbpath=new_obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
 # b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
 # print(b)
 # dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
