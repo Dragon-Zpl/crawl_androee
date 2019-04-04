@@ -113,7 +113,6 @@ class Helper:
         try:
             pkgname = re.search(r'package: name=\'(.*?)\'', results).group(1)
             logger.info("pkgname is {}".format(pkgname))
-            data_dic["pkgname"] = pkgname
         except:
             logger.info("re pkgname error")
             os.remove(apkpath)
@@ -142,7 +141,6 @@ class Helper:
         apkfile_size = os.path.getsize(apkpath)
         obbfile_size = os.path.getsize(new_obb_path)
         developer = cls.get_app_other_info(pkgname)
-        data_dic["developer"] = developer
         data_path = '/sdcard/android/obb/' + pkgname + '/'
         dict_tpk = {
             'app_name': data_dic["name"],
@@ -234,7 +232,29 @@ class Helper:
             os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
         data_dic["md5"] = cls.Filemd5(md5_path)
         data_dic["file_path"] = md5_path
+        data_dic = cls.get_info_app(data_dic,apk_path)
         return data_dic
+
+    @classmethod
+    def get_info_app(cls,data,apkpath):
+        aapk_str = 'aapt dump badging {} > tmp.txt'.format(apkpath)
+        os.system(aapk_str)
+        with open('tmp.txt', 'r', encoding='utf8', errors='ignore') as f:
+            result = f.readlines()
+            # print('result:'+str(result))
+        results = ''.join(result)
+        # logger.info('results:'+str(results))
+        try:
+            pkgname = re.search(r'package: name=\'(.*?)\'', results).group(1)
+            data["pkgname"] = pkgname
+            logger.info("pkgname is {}".format(pkgname))
+        except:
+            logger.info("re pkgname error")
+            return
+        developer = cls.get_app_other_info(pkgname)
+        data["developer"] = developer
+        return data
+
     @classmethod
     def Filemd5(cls,filepath):
         fp = open(filepath, 'rb')
