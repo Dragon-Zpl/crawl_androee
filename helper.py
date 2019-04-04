@@ -64,7 +64,7 @@ class Helper:
         cls.mymovefile(tpkdir + '/' + tpkfilename + '.tpk', basic_dir + tpkfilename + '.tpk')
         del_srcfile = 'rm -fr ' + tpkdir
         os.system(del_srcfile)
-
+        return basic_dir + tpkfilename + '.tpk'
     @classmethod
     def encryptapkinfo(self, data, key, appkey):
         data['expired_date'] = int(time.time()) + 12 * 60 * 60
@@ -113,6 +113,7 @@ class Helper:
         try:
             pkgname = re.search(r'package: name=\'(.*?)\'', results).group(1)
             logger.info("pkgname is {}".format(pkgname))
+            data_dic["pkgname"] = pkgname
         except:
             logger.info("re pkgname error")
             os.remove(apkpath)
@@ -141,6 +142,7 @@ class Helper:
         apkfile_size = os.path.getsize(apkpath)
         obbfile_size = os.path.getsize(new_obb_path)
         developer = cls.get_app_other_info(pkgname)
+        data_dic["developer"] = developer
         data_path = '/sdcard/android/obb/' + pkgname + '/'
         dict_tpk = {
             'app_name': data_dic["name"],
@@ -222,12 +224,27 @@ class Helper:
         basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         apk_path = basic + '.apk'
         cls.urlFetch(targetFile=apk_path,targetUrl=data_dic["download_first_url"][0])
+        md5_path = apk_path
         if len(data_dic["download_first_url"])>1:
             logger.info('have obb pkg')
             obb_path = basic + '.zip'
             cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
             dict_tpk,new_obb_path = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
-            cls.build_tpk(basic_dir=basic_dir,obbpath=new_obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
+            md5_path =  cls.build_tpk(basic_dir=basic_dir,obbpath=new_obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
             os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
-
-
+        data_dic["md5"] = cls.Filemd5(md5_path)
+        data_dic["file_path"] = md5_path
+        return data_dic
+    @classmethod
+    def Filemd5(cls,filepath):
+        fp = open(filepath, 'rb')
+        md5_obj = hashlib.md5()
+        while True:
+            tmp = fp.read(8096)
+            if not tmp:
+                break
+            md5_obj.update(tmp)
+        hash_code = md5_obj.hexdigest()
+        fp.close()
+        md5 = str(hash_code).lower()
+        return md5

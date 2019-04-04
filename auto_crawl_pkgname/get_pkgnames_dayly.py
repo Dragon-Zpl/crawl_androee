@@ -1,7 +1,9 @@
 import asyncio
+import datetime
 from random import choice
 import re
 
+import aiomysql
 import requests
 
 from Analysis_data.Xpath_word import Xpaths
@@ -24,6 +26,16 @@ class CrawlPkgnames:
         self.pkg_urls = set()
         self.mysql_op = MysqlHeaper()
         self.proxies = []
+
+    async def get_pool(self, loop=None, config='mysql'):
+        fr = open('./config/config.yaml', 'r')
+        config_file = yaml.load(fr)
+        local_mysql_config = config_file[config]
+        self.pool = await aiomysql.create_pool(host=local_mysql_config["host"], port=local_mysql_config["port"],
+                                               user=local_mysql_config["user"], password=local_mysql_config["password"],
+                                               db=local_mysql_config["database"], loop=loop,
+                                               charset=local_mysql_config["charset"], autocommit=True)
+        return self
     async def request_web(self,url,proxy=None):
         for i in range(3):
             try:
@@ -185,6 +197,23 @@ class CrawlPkgnames:
             task = asyncio.ensure_future(self.request_web(url=url),loop=loop)
             tasks.append(task)
         return tasks
+
+    async def save_mysql(self,params):
+        try:
+            sql = """
+                insert into crawl_androeed_apk_info(pkgname, md5, is_delete, update_time,category,app_size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,app_url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                                     ON DUPLICATE KEY UPDATE md5=VALUES(md5), is_delete=VALUES(is_delete), file_path=VALUES(file_path), description=VALUES(description), app_url=VALUES(app_url), update_time=VALUES(update_time), img_urls=VALUES(img_urls), version=VALUES(version)
+                                     , os=VALUES(os), app_size=VALUES(app_size), category=VALUES(category), icon_path=VALUES(icon_path), whatsnew=VALUES(whatsnew)
+            """
+            async with self.pool.acquire() as conn:
+                async with conn.cursor() as cur:
+                    results = await cur.execute(sql, params)
+                    return results
+        except Exception as e:
+            logger.error("{} {}".format(e,params))
+            await self.get_pool()
+            return None
+
     def run(self):
         self.pkg_urls.clear()
         logger.info('start crawl ...')
@@ -208,7 +237,19 @@ class CrawlPkgnames:
         for result in results:
             if result:
                 logger.info(result)
-                Helper.build_download_task(data_dic=result)
+                data_dic = Helper.build_download_task(data_dic=result)
+                logger.info('data_dic'+str(data_dic))
+                if data_dic:
+                    #(pkgname, md5, is_delete, update_time,category,size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,app_url
+                    nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+                    params = (
+                        data_dic["pkgname"],data_dic["md5"],0,nowtime,data_dic["categories"],data_dic["size"],data_dic["developer"],
+                        data_dic["file_path"],data_dic["icon"],data_dic["what_news"],data_dic["version"],data_dic["os"],data_dic["internet"],
+                        data_dic["raiting"],data_dic["russian"],data_dic["img_urls"],data_dic["description"],data_dic["app_url"]
+                    )
+                    loop.run_until_complete(self.save_mysql(params=params))
+                else:
+                    logger.info('have question'+str(data_dic))
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
         #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)

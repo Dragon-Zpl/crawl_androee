@@ -6,6 +6,8 @@ import socket, asyncio
 import redis
 import yaml
 
+from Mysql_.mysql_op import MysqlHeaper
+
 etree = lxml.html.etree
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36',
@@ -25,3 +27,5 @@ with open('./config/config.yaml', 'r') as fr:
 redis_topic = config_file["redis_topic"]["test"]
 logging.config.dictConfig(config_file['logger'])
 logger = logging.getLogger('project')
+
+loop.run_until_complete(MysqlHeaper().get_pool())
