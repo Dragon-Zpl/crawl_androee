@@ -223,6 +223,9 @@ class Helper:
         apk_path = basic + '.apk'
         cls.urlFetch(targetFile=apk_path,targetUrl=data_dic["download_first_url"][0])
         md5_path = apk_path
+        data_dic["md5"] = cls.Filemd5(md5_path)
+        data_dic["file_path"] = md5_path
+        data_dic = cls.get_info_app(data_dic,apk_path)
         if len(data_dic["download_first_url"])>1:
             logger.info('have obb pkg')
             obb_path = basic + '.zip'
@@ -230,9 +233,7 @@ class Helper:
             dict_tpk,new_obb_path = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
             md5_path =  cls.build_tpk(basic_dir=basic_dir,obbpath=new_obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
             os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
-        data_dic["md5"] = cls.Filemd5(md5_path)
-        data_dic["file_path"] = md5_path
-        data_dic = cls.get_info_app(data_dic,apk_path)
+
         return data_dic
 
     @classmethod
