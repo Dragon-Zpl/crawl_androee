@@ -206,6 +206,7 @@ class Helper:
 
     @classmethod
     def runProcess(cls, commandString):
+        logger.info("runProcess")
         p = subprocess.Popen(commandString, shell=True, stderr=subprocess.PIPE)
         output, err = p.communicate()
 
