@@ -37,7 +37,7 @@ class test:
     def run(self):
         loop.run_until_complete(self.get_pool())
         nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
-        params = ('', '', 0, '2019-04-04 16:59:50', 'Clash of Clans,Strategy', '99 Mb', '', '',
+        params = ('', '','', 0, '2019-04-04 16:59:50', 'Clash of Clans,Strategy', '99 Mb', '', '',
          'https://i1.androeed.ru/icons/2019/04/02/w_160_2096.png', '', ' 11.446.11', 'Android 4.1 or above', 'Required',
          ' 4.6', 'Present',
          'https://i1.androeed.ru/screens/2019/04/02/674510.png,https://i1.androeed.ru/screens/2019/04/02/674511.png,https://i1.androeed.ru/screens/2019/04/02/674512.png,https://i1.androeed.ru/screens/2019/04/02/674513.png',
