@@ -8,7 +8,7 @@ import os
 import re
 import shutil
 import time
-
+import subprocess
 import requests
 from Crypto.Cipher import DES3
 from lxml import etree
@@ -38,13 +38,13 @@ class Helper:
         return download_dir
 
     @classmethod
-    def build_tpk(cls, basic_dir, obbpath, docid, dict_tpk):
+    def build_tpk(cls, basic_dir, obbpath, dict_tpk):
         # tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
-        tpkdir = "/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru"
+        tpkdir = "/home/feng/pkgtest/" + hashlib.md5((dict_tpk["pkg_name"]).encode('utf-8')).hexdigest()
         print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
         cls.writeencryptapkinfo(config_info, tpkdir)
-        cls.downIcon(tpkdir, docid)
+        cls.downIcon(tpkdir,dict_tpk)
         obbname = obbpath.split('/')[-1]
         detfile_obb = tpkdir + '/data/' + obbname
         cls.mymovefile(obbpath, detfile_obb)
@@ -84,14 +84,14 @@ class Helper:
         return cbc_base
 
     @classmethod
-    def downIcon(self, tpkdir, pkg_name):
+    def downIcon(self, tpkdir, data_dict):
         try:
             # sql = 'SELECT coverimgurl from crawl_google_play_app_info where pkgname=\'{}\''.format(pkg_name)
             # task = asyncio.ensure_future(mysqlwapper.fetch_one(sql, ))
             # loop.run_until_complete(task)
             # image_url = task.result()
             # image_url = image_url[0]
-            image_url = "https://i1.androeed.ru/icons/2019/03/30/15919.png"
+            image_url = data_dict["icon"]
             print(image_url)
             image_response = requests.get(image_url, verify=False).content
             image_path = os.path.join(tpkdir, r'icon.png')
@@ -191,7 +191,41 @@ class Helper:
             return developer
 
 
+    @classmethod
+    def get_conpose_tpk_info(cls, url):
+        file_dir = ""
+        if not os.path.exists(file_dir):
+            os.makedirs(file_dir)
+        file_name = url.split("id=")[-1]
+        apk_filename = file_name + '.apk'
+        obb_filename = file_name + '.zip'
+        apk_path = file_dir + '/' + apk_filename
+        obb_path = file_dir + '/' + obb_filename
+        tpkdir = file_dir + '/' + file_name
+        return tpkdir, apk_path, obb_path, file_dir
+
+    @classmethod
+    def runProcess(cls, commandString):
+        p = subprocess.Popen(commandString, shell=True, stderr=subprocess.PIPE)
+        output, err = p.communicate()
+
+    @classmethod
+    def urlFetch(cls, targetUrl, targetFile):
+        print("wget --no-check-certificate --output-document \"" + targetFile + "\" \"" + targetUrl + "\"")
+        cls.runProcess("wget --no-check-certificate --output-document \"" + targetFile + "\" \"" + targetUrl + "\"")
+
+    @classmethod
+    def build_download_task(cls,apk_url=None,obb_url=None):
+        basic = "/home/feng/pkgtest/"
+        cls.urlFetch(targetFile=basic,targetUrl=apk_url)
+        if obb_url:
+            logger.info('have obb pkg')
+            cls.urlFetch(targetFile=basic, targetUrl=obb_url)
+
 # b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
 # print(b)
-dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
-b = Helper.build_tpk(basic_dir="/home/feng/pkgtest/",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)
+# dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
+# b = Helper.build_tpk(basic_dir="/home/feng/pkgtest/",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)
+
+
+a = Helper.build_download_task(apk_url="http://s42.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_url="http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
