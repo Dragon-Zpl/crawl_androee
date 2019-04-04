@@ -49,3 +49,12 @@
 
 import requests
 # https://www.androeed.ru/index.php?m=files&f=load_commen_ebu_v_rot_dapda&ui=10655,status:404
+headers = {
+"cookie": "__cfduid=d0ea7337e6f842d0f110bcd26554254281553761465; _ym_uid=1553761473953334256; _ym_d=1553761473; _ym_isad=2; _ym_visorc_17058511=w; tmr_detect=0%7C1554363489319",
+"referer": "https://www.androeed.ru/files/live-or-die-survival-.html?hl=en",
+"user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
+":authority": "www.androeed.ru"
+}
+r = requests.get('https://www.androeed.ru/index.php?m=files&f=load_comm_ebu_v_rot_dapda&ui=21525')
+print(r.status_code)
+print(r.text)
