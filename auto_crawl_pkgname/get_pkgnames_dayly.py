@@ -227,6 +227,27 @@ class CrawlPkgnames:
             await self.get_pool()
             return None
 
+    async def check_version(self,data):
+        sql = 'select version from crawl_google_play_app_info where name=\'{}\''.format(data["name"])
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                try:
+                    await cur.execute(sql)
+                    recond = await cur.fetchone()
+                    return recond
+                except Exception as e:
+                    print(e)
+                    return None
+
+    def build_check_tasks(self,datas):
+        tasks = []
+        for data in datas:
+            task = asyncio.ensure_future(self.check_version(data))
+            tasks.append(task)
+
+        return tasks
+
+
     def run(self):
         self.pkg_urls.clear()
         loop.run_until_complete(self.get_pool())
@@ -248,6 +269,11 @@ class CrawlPkgnames:
 
         results = loop.run_until_complete(asyncio.gather(*data_tasks))
 
+        #检查更新
+        tasks = self.build_check_tasks(datas)
+
+
+        #下载包
         for data_dic in results:
             if data_dic:
                 logger.info(data_dic)
