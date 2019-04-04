@@ -99,8 +99,10 @@ class CrawlPkgnames:
             data_dic["what_news"] = re.search("\[[\d\D]+?\]",name[0]).group().replace('[','').replace(']','')
         elif name:
             data_dic["name"] = name[0]
+            data_dic["what_news"] = ""
         else:
             data_dic["name"] = ""
+            data_dic["what_news"] = ""
         data_dic["icon"] = content.xpath(self.analysis.icon)[0]
         data_dic["categories"] = ','.join(content.xpath(self.analysis.categories))
         data_dic["version"] = content.xpath(self.analysis.version)[0]
