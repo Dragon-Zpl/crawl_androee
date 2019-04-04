@@ -42,8 +42,12 @@ class test:
                     await cur.execute(sql)
                     recond = await cur.fetchone()
                     print(recond)
-                    if recond == data["version"]:
-                        return data
+                    if recond:
+                        print(recond[0])
+                        if recond[0] == data["version"]:
+                            return data
+                        else:
+                            return None
                     else:
                         return None
                 except Exception as e:
