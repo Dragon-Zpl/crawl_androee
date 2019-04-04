@@ -139,7 +139,10 @@ class CrawlPkgnames:
                             data = await self.request_web(url=temp_apk_download_url)
                             temp_apk_download_url_data = etree.HTML(data)
                             apk_download_url = temp_apk_download_url_data.xpath(self.analysis.pkg_download_url)[0]
-                            data_dic["download_first_url"] = [apk_download_url]
+                            if 'zip' not in apk_download_url:
+                                data_dic["download_first_url"] = [apk_download_url]
+                            else:
+                                logger.info(data_dic["app_url"]+'有问题')
                         elif download_url_len == 3:
                             # 第一个为破解包，第二个为apk包
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
@@ -151,6 +154,7 @@ class CrawlPkgnames:
                             temp_obb_download_url_data = etree.HTML(data)
                             obb_download_url = temp_obb_download_url_data.xpath(self.analysis.pkg_download_url)[0]
                             if '.zip' in obb_download_url:
+                                data_dic["md5"] =
                                 data_dic["download_first_url"] = [apk_download_url, obb_download_url]
                             else:
                                 return None
