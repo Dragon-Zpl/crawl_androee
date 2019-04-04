@@ -39,6 +39,7 @@ class CrawlPkgnames:
     async def request_web(self,url,proxy=None):
         for i in range(3):
             try:
+                proxy = await self.get_proxy()
                 async with session.get(url=url, proxy=proxy, headers=headers, timeout=15) as r:
                     logger.info("url:{},status:{}".format(url,r.status))
                     if r.status in [200, 201]:
@@ -260,7 +261,7 @@ class CrawlPkgnames:
                         params = (
                             "", "", 0, nowtime, data_dic["categories"], data_dic["size"],
                             "",
-                            data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
+                            "", data_dic["icon"], data_dic["what_news"], data_dic["version"],
                             data_dic["os"], data_dic["internet"],
                             data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
                             data_dic["app_url"]
@@ -272,7 +273,7 @@ class CrawlPkgnames:
                     params = (
                         "", "", 0, nowtime, data_dic["categories"], data_dic["size"],
                         "",
-                        data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
+                        "", data_dic["icon"], data_dic["what_news"], data_dic["version"],
                         data_dic["os"], data_dic["internet"],
                         data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
                         data_dic["app_url"]
