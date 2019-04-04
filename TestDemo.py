@@ -22,9 +22,9 @@ class test:
     async def save_mysql(self,params):
         try:
             sql = """
-                insert into crawl_androeed_apk_info(pkgname, md5, is_delete, update_time,category,app_size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                insert into crawl_androeed_apk_info(pkgname,name, md5, is_delete, update_time,category,app_size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                                      ON DUPLICATE KEY UPDATE md5=VALUES(md5), is_delete=VALUES(is_delete), file_path=VALUES(file_path), description=VALUES(description), url=VALUES(url), update_time=VALUES(update_time), img_urls=VALUES(img_urls), version=VALUES(version)
-                                     , os=VALUES(os), app_size=VALUES(app_size), category=VALUES(category), icon_path=VALUES(icon_path), whatsnew=VALUES(whatsnew)
+                                     , os=VALUES(os), app_size=VALUES(app_size), category=VALUES(category), icon_path=VALUES(icon_path), whatsnew=VALUES(whatsnew), name=VALUES(name)
             """
             async with self.pool.acquire() as conn:
                 async with conn.cursor() as cur:
