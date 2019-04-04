@@ -237,11 +237,11 @@ class CrawlPkgnames:
 
         results = loop.run_until_complete(asyncio.gather(*data_tasks))
 
-        for result in results:
-            if result:
-                logger.info(result)
-                if result["download_first_url"]:
-                    data_dic = Helper.build_download_task(data_dic=result)
+        for data_dic in results:
+            if data_dic:
+                logger.info(data_dic)
+                if data_dic["download_first_url"]:
+                    data_dic = Helper.build_download_task(data_dic=data_dic)
                     logger.info('data_dic' + str(data_dic))
                     if data_dic:
                         # (pkgname, md5, is_delete, update_time,category,size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,app_url
@@ -268,7 +268,18 @@ class CrawlPkgnames:
                         loop.run_until_complete(self.save_mysql(params=params))
                         logger.info('have question' + str(data_dic))
                 else:
-                    logger.info('不存在download_url'+str(result))
+                    nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+                    params = (
+                        "", "", 0, nowtime, data_dic["categories"], data_dic["size"],
+                        "",
+                        data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
+                        data_dic["os"], data_dic["internet"],
+                        data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
+                        data_dic["app_url"]
+                    )
+                    loop.run_until_complete(self.save_mysql(params=params))
+                    logger.info('have question' + str(data_dic))
+                    logger.info('不存在download_url'+str(data_dic))
 
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
