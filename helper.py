@@ -218,7 +218,7 @@ class Helper:
         cls.runProcess("wget --no-check-certificate --output-document \"" + targetFile + "\" \"" + targetUrl + "\"")
 
     @classmethod
-    def build_download_task(cls,data_dic):
+    async def build_download_task(cls,data_dic):
         basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         apk_path = basic + '.apk'
         cls.urlFetch(targetFile=apk_path,targetUrl=data_dic["download_first_url"][0])

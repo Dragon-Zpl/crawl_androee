@@ -1,119 +1,38 @@
-# import re
-#
-# import requests
-#
-#
-# url = "https://www.androeed.ru/files/pewdiepies-tuber-simulator.html"
-#
-# mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_commen_ebu_v_rot_dapda&ui="
-# r = requests.get(url)
-# host = "https://www.androeed.ru"
-# data = r.text
-#
-# from lxml import etree
-#
-# from Analysis_data.Xpath_word import Xpaths
-# analysis = Xpaths()
-# def analysis_data(data):
-#     content = etree.HTML(data)
-#     data_dic = {}
-#     name = content.xpath(analysis.pkg_name)
-#     if name and '[' in name[0]:
-#         data_dic["name"] = re.search(r'[\d\D]*\[', name[0]).group().replace(' [', "")
-#         data_dic["what_news"] = re.search("\[[\d\D]+?\]", name[0]).group().replace('[', '').replace(']', '')
-#     elif name:
-#         data_dic["name"] = name[0]
-#     else:
-#         data_dic["name"] = ""
-#     data_dic["icon"] = content.xpath(analysis.icon)[0]
-#     data_dic["categories"] = ','.join(content.xpath(analysis.categories))
-#     data_dic["version"] = content.xpath(analysis.version)[0]
-#     data_dic["os"] = content.xpath(analysis.os)[0]
-#     data_dic["internet"] = content.xpath(analysis.internet)[0]
-#     data_dic["size"] = content.xpath(analysis.size)[0]
-#     data_dic["raiting"] = content.xpath(analysis.raiting)[0]
-#     data_dic["russian"] = content.xpath(analysis.russian)[0]
-#     img_urls = re.findall(r"\('#images_while'\)\.load[\d\D]+?\)", data)
-#     if len(img_urls) > 0:
-#         try:
-#             img_url = img_urls[0].replace("('#images_while').load('", "").replace("\" ')", "").replace("')", "")
-#             r = requests.get(url=host + img_url)
-#             data = r.text
-#             if data:
-#                 img_content = etree.HTML(data)
-#                 if img_content.xpath(analysis.img_urls):
-#                     data_dic["img_urls"] = ','.join(img_content.xpath(analysis.img_urls))
-#             else:
-#                 print('img_url:' + img_url)
-#                 data_dic["img_urls"] = "None"
-#         except Exception as e:
-#             print("error:{},img_urls:{}".format(e, str(img_urls)))
-#     else:
-#         data_dic["img_urls"] = "None"
-#     data_dic["description"] = ''.join(content.xpath(analysis.description))
-#     data_dic["app_url"] = content.xpath(analysis.app_url)[0]
-#
-#     mod_nuber = content.xpath(analysis.mod_number2)
-#     if mod_nuber:
-#         temp = re.findall("\d+", mod_nuber[-1])
-#         if temp:
-#             pass
-#         else:
-#             mod_nuber = content.xpath(analysis.mod_number1)
-#     if mod_nuber:
-#         temp = re.findall("\d+", mod_nuber[-1])
-#         if temp:
-#             download_url = temp[-1]
-#             print('download_url:' + str(download_url))
-#             r = requests.get(url=mod_pkg_url + download_url)
-#             data = r.text
-#             if data:
-#                 mod_content = etree.HTML(data)
-#                 # data_dic["download_first_url"] = mod_content.xpath(analysis.download_first_url)[-1]
-#                 download_url_len = len(mod_content.xpath(analysis.download_first_url))
-#                 if download_url_len == 1 or download_url_len == 2:
-#                     temp_apk_download_url = mod_content.xpath(analysis.download_first_url)[-1]
-#                     temp_apk_download_url_data = etree.HTML(requests.get(temp_apk_download_url).text)
-#                     apk_download_url = temp_apk_download_url_data.xpath(analysis.pkg_download_url)[0]
-#
-#                     data_dic["download_first_url"] = [apk_download_url]
-#                 elif download_url_len == 3:
-#                     # 第一个为apk包，第二个为破解包
-#                     temp_apk_download_url = mod_content.xpath(analysis.download_first_url)[-2]
-#                     temp_obb_download_url = mod_content.xpath(analysis.download_first_url)[-1]
-#                     temp_apk_download_url_data = etree.HTML(requests.get(temp_apk_download_url).text)
-#                     temp_obb_download_url_data = etree.HTML(requests.get(temp_obb_download_url).text)
-#                     apk_download_url = temp_apk_download_url_data.xpath(analysis.pkg_download_url)[0]
-#                     obb_download_url = temp_obb_download_url_data.xpath(analysis.pkg_download_url)[0]
-#                     data_dic["download_first_url"] = [apk_download_url,obb_download_url]
-#                 elif download_url_len == 4:
-#                     temp_apk_download_url = mod_content.xpath(analysis.download_first_url)[-2]
-#                     temp_apk_download_url_data = etree.HTML(requests.get(temp_apk_download_url).text)
-#                     apk_download_url = temp_apk_download_url_data.xpath(analysis.pkg_download_url)[0]
-#                     data_dic["download_first_url"] = [apk_download_url]
-#                 else:
-#                     data_dic["download_first_url"] = "None"
-#                     print('长度有问题请查看' + data_dic["app_url"])
-#             else:
-#                 data_dic["download_first_url"] = "None"
-#         else:
-#             data_dic["download_first_url"] = "None"
-#             print('is questsion:' + data_dic["app_url"] + ":" + str(mod_nuber) + ',' + str(temp))
-#     else:
-#         print('没有的url：' + data_dic["app_url"] + str(mod_nuber))
-#         data_dic["download_first_url"] = "None"
-#     print(data_dic)
-#     return data_dic
-#
-#
-# data_dic = analysis_data(data)
+import asyncio
+import re
+
+import requests
+
+from helper import Helper
+
+data = [
+    {'name': 'Castle Cats', 'what_news': 'Mod Money', 'icon': 'https://i1.androeed.ru/icons/2019/03/31/w_160_14555.png',
+     'categories': 'Arcade,Сlickers,RPG,Squad to squad', 'version': ' 2.5', 'os': 'Android 4.2 or above',
+     'internet': 'Required', 'size': '89 Mb', 'raiting': ' 4.8', 'russian': 'Present',
+     'img_urls': 'https://i1.androeed.ru/screens/2018/10/26/666132.png,https://i1.androeed.ru/screens/2018/10/26/666133.png,https://i1.androeed.ru/screens/2018/10/26/666134.png,https://i1.androeed.ru/screens/2018/10/26/666135.png,https://i1.androeed.ru/screens/2018/10/26/666136.png',
+     'description': "Create your own guild of brave warriors in the castle of cats! Collect legendary heroes and adventurous adventurers - control your guild and send them to an epic adventure to collect rewards! But be careful - the darkness of the Evil Pugomancer in spreads like a forest fire, and it's your mission to save the kingdom of Catania! Эту игру можно скачать в официальном Google Play Маркет.",
+     'app_url': 'https://www.androeed.ru/files/castle-cats-mod-mnogo-deneg.html?hl=en',
+     'download_first_url': ['http://s36.androeed.ru/files/2019/03/31/Castle_Cats_-1554024963-www.androeed.ru.apk']},
+    {'name': 'Hill Climb Racing 2', 'icon': 'https://i1.androeed.ru/icons/2018/11/15/w_160_16127.png',
+     'categories': 'Arcade,Cars,Racing', 'version': ' 1.24.2', 'os': 'Android 4.2 or above', 'internet': 'Not required',
+     'size': '82.76 Mb', 'raiting': ' 4.6', 'russian': 'Present',
+     'img_urls': 'https://i1.androeed.ru/screens/2018/08/03/662055.png,https://i1.androeed.ru/screens/2018/08/03/662056.png,https://i1.androeed.ru/screens/2018/08/03/662057.png,https://i1.androeed.ru/screens/2018/08/03/662058.png,https://i1.androeed.ru/screens/2018/08/03/662059.png',
+     'description': 'Hill Climb Racing 2 is back! Bill returned to the red jeep in the continuation of the most popular racing game in Google Play with more than 500 million total downloads! The Hill Climb Racing 2 has it all: a plurality of stages, improved graphics and a more modern physics engine. Dozens of different options for your car. Update the engine, tires, suspension, chassis, change the color - the list is endless! Эту игру можно скачать в официальном Google Play Маркет.',
+     'app_url': 'https://www.androeed.ru/files/hill-climb-racing-2_.html?hl=en', 'download_first_url': [
+        'http://s37.androeed.ru/files/2019/03/26/Hill_Climb_Racing_2_-1553612093-www.androeed.ru.apk']},
+{'name': "PewDiePie's Tuber Simulator",  'icon': 'https://i1.androeed.ru/icons/2019/03/30/w_160_15919.png', 'download_first_url': ['http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip']}
+
+
+]
 #
 #
 # from helper import Helper
 #
 # Helper.build_download_task(data_dic=data_dic)
+loop = asyncio.get_event_loop()
+tasks = []
+for i in data:
+    task = Helper.build_download_task(data_dic=i)
+    tasks.append(task)
 
-
-
-import requests
-
+loop.run_until_complete(asyncio.wait(tasks))

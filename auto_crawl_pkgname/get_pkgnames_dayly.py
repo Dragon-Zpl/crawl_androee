@@ -7,6 +7,7 @@ import requests
 from Analysis_data.Xpath_word import Xpaths
 from CrawlProxy.crawl_proxies import asyncCrawlProxy
 from Mysql_.mysql_op import MysqlHeaper
+from helper import Helper
 from utils.init import *
 
 class CrawlPkgnames:
@@ -192,7 +193,10 @@ class CrawlPkgnames:
                 task = asyncio.ensure_future(self.analysis_data(data=result))
                 data_tasks.append(task)
 
-        loop.run_until_complete(asyncio.gather(*data_tasks))
+        results = loop.run_until_complete(asyncio.gather(*data_tasks))
+
+        # for result in requests:
+        #     Helper.build_download_task()
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
         #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)
