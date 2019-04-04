@@ -20,7 +20,7 @@ data = [
      'description': 'Hill Climb Racing 2 is back! Bill returned to the red jeep in the continuation of the most popular racing game in Google Play with more than 500 million total downloads! The Hill Climb Racing 2 has it all: a plurality of stages, improved graphics and a more modern physics engine. Dozens of different options for your car. Update the engine, tires, suspension, chassis, change the color - the list is endless! Эту игру можно скачать в официальном Google Play Маркет.',
      'app_url': 'https://www.androeed.ru/files/hill-climb-racing-2_.html?hl=en', 'download_first_url': [
         'http://s37.androeed.ru/files/2019/03/26/Hill_Climb_Racing_2_-1553612093-www.androeed.ru.apk']},
-{'name': "PewDiePie's Tuber Simulator",  'icon': 'https://i1.androeed.ru/icons/2019/03/30/w_160_15919.png', 'download_first_url': ['http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip']}
+{'name': "PewDiePie's Tuber Simulator",  'icon': 'https://i1.androeed.ru/icons/2019/03/30/w_160_15919.png', 'download_first_url': ['http://s42.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk','http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip']}
 
 
 ]
