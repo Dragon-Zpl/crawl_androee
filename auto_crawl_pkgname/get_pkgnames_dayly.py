@@ -218,6 +218,7 @@ class CrawlPkgnames:
 
     def run(self):
         self.pkg_urls.clear()
+        loop.run_until_complete(MysqlHeaper().get_pool())
         logger.info('start crawl ...')
         tasks = self.build_async_tasks()
         results = loop.run_until_complete(asyncio.gather(*tasks))
