@@ -77,9 +77,9 @@ class CrawlPkgnames:
         for url in urls:
             self.pkg_urls.add(self.host + url)
 
-    async def analysis_data(self,data):
+    async def analysis_data(self,data,data_dic):
         content = etree.HTML(data)
-        data_dic = {}
+        data_dic = data_dic
         name = content.xpath(self.analysis.pkg_name)
         if name and '[' in name[0]:
             data_dic["name"] = re.search(r'[\d\D]*\[', name[0]).group().replace(' [', "")
@@ -88,7 +88,6 @@ class CrawlPkgnames:
             data_dic["name"] = name[0]
         else:
             data_dic["name"] = ""
-        data_dic["icon"] = content.xpath(self.analysis.icon)[0]
         data_dic["categories"] = ','.join(content.xpath(self.analysis.categories))
         data_dic["version"] = content.xpath(self.analysis.version)[0]
         data_dic["os"] = content.xpath(self.analysis.os)[0]
@@ -133,12 +132,28 @@ class CrawlPkgnames:
                     # data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
                     download_url_len = len(mod_content.xpath(self.analysis.download_first_url))
                     if download_url_len ==1 or download_url_len ==2:
-                        data_dic["download_first_url"] = [mod_content.xpath(self.analysis.download_first_url)[-1]]
+                        temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-1]
+                        data = await self.request_web(url=temp_apk_download_url)
+                        temp_apk_download_url_data = etree.HTML(data)
+                        apk_download_url = temp_apk_download_url_data.xpath(self.analysis.pkg_download_url)[0]
+                        data_dic["download_first_url"] = [apk_download_url]
                     elif download_url_len == 3:
                         # 第一个为破解包，第二个为apk包
-                        data_dic["download_first_url"] = [mod_content.xpath(self.analysis.download_first_url)[-1],mod_content.xpath(self.analysis.download_first_url)[-2]]
+                        temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
+                        data = await self.request_web(url=temp_apk_download_url)
+                        temp_apk_download_url_data = etree.HTML(data)
+                        apk_download_url = temp_apk_download_url_data.xpath(self.analysis.pkg_download_url)[0]
+                        temp_obb_download_url = mod_content.xpath(self.analysis.download_first_url)[-1]
+                        data = await self.request_web(url=temp_obb_download_url)
+                        temp_obb_download_url_data = etree.HTML(data)
+                        obb_download_url = temp_obb_download_url_data.xpath(self.analysis.pkg_download_url)[0]
+                        data_dic["download_first_url"] = [apk_download_url,obb_download_url]
                     elif download_url_len == 4:
-                        data_dic["download_first_url"] = [mod_content.xpath(self.analysis.download_first_url)[-2]]
+                        temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
+                        data = await self.request_web(url=temp_apk_download_url)
+                        temp_apk_download_url_data = etree.HTML(data)
+                        apk_download_url = temp_apk_download_url_data.xpath(self.analysis.pkg_download_url)[0]
+                        data_dic["download_first_url"] = [apk_download_url]
                     else:
                         data_dic["download_first_url"] = "None"
                         logger.info('长度有问题请查看'+data_dic["app_url"])
@@ -173,7 +188,9 @@ class CrawlPkgnames:
 
         for result in detail_results:
             if result:
-                task = asyncio.ensure_future(self.analysis_data(data=result))
+                data_dic = {}
+                data_dic["icon"] = etree.HTML(result).xpath(self.analysis.icon)
+                task = asyncio.ensure_future(self.analysis_data(data=result,data_dic=data_dic))
                 data_tasks.append(task)
 
         loop.run_until_complete(asyncio.gather(*data_tasks))
