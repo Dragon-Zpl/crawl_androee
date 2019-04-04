@@ -1,55 +1,22 @@
-# import asyncio
-# import re
-#
-# import requests
-#
-# from helper import Helper
-#
-# data = [
-#     {'name': 'Castle Cats', 'what_news': 'Mod Money', 'icon': 'https://i1.androeed.ru/icons/2019/03/31/w_160_14555.png',
-#      'categories': 'Arcade,Сlickers,RPG,Squad to squad', 'version': ' 2.5', 'os': 'Android 4.2 or above',
-#      'internet': 'Required', 'size': '89 Mb', 'raiting': ' 4.8', 'russian': 'Present',
-#      'img_urls': 'https://i1.androeed.ru/screens/2018/10/26/666132.png,https://i1.androeed.ru/screens/2018/10/26/666133.png,https://i1.androeed.ru/screens/2018/10/26/666134.png,https://i1.androeed.ru/screens/2018/10/26/666135.png,https://i1.androeed.ru/screens/2018/10/26/666136.png',
-#      'description': "Create your own guild of brave warriors in the castle of cats! Collect legendary heroes and adventurous adventurers - control your guild and send them to an epic adventure to collect rewards! But be careful - the darkness of the Evil Pugomancer in spreads like a forest fire, and it's your mission to save the kingdom of Catania! Эту игру можно скачать в официальном Google Play Маркет.",
-#      'app_url': 'https://www.androeed.ru/files/castle-cats-mod-mnogo-deneg.html?hl=en',
-#      'download_first_url': ['http://s36.androeed.ru/files/2019/03/31/Castle_Cats_-1554024963-www.androeed.ru.apk']},
-#     {'name': 'Hill Climb Racing 2', 'icon': 'https://i1.androeed.ru/icons/2018/11/15/w_160_16127.png',
-#      'categories': 'Arcade,Cars,Racing', 'version': ' 1.24.2', 'os': 'Android 4.2 or above', 'internet': 'Not required',
-#      'size': '82.76 Mb', 'raiting': ' 4.6', 'russian': 'Present',
-#      'img_urls': 'https://i1.androeed.ru/screens/2018/08/03/662055.png,https://i1.androeed.ru/screens/2018/08/03/662056.png,https://i1.androeed.ru/screens/2018/08/03/662057.png,https://i1.androeed.ru/screens/2018/08/03/662058.png,https://i1.androeed.ru/screens/2018/08/03/662059.png',
-#      'description': 'Hill Climb Racing 2 is back! Bill returned to the red jeep in the continuation of the most popular racing game in Google Play with more than 500 million total downloads! The Hill Climb Racing 2 has it all: a plurality of stages, improved graphics and a more modern physics engine. Dozens of different options for your car. Update the engine, tires, suspension, chassis, change the color - the list is endless! Эту игру можно скачать в официальном Google Play Маркет.',
-#      'app_url': 'https://www.androeed.ru/files/hill-climb-racing-2_.html?hl=en', 'download_first_url': [
-#         'http://s37.androeed.ru/files/2019/03/26/Hill_Climb_Racing_2_-1553612093-www.androeed.ru.apk']},
-# {'name': "PewDiePie's Tuber Simulator",  'icon': 'https://i1.androeed.ru/icons/2019/03/30/w_160_15919.png', 'download_first_url': ['http://s42.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk','http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip']}
-#
-#
-# ]
-# #
-# #
-# from helper import Helper
-# #
-# Helper.build_download_task(data_dic={'name': "PewDiePie's Tuber Simulator",  'icon': 'https://i1.androeed.ru/icons/2019/03/30/w_160_15919.png', 'download_first_url': ['http://s42.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk','http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip']})
-# loop = asyncio.get_event_loop()
-# tasks = []
-# for i in data:
-#     task = Helper.build_download_task(data_dic=i)
-#     tasks.append(task)
-#
-# loop.run_until_complete(asyncio.wait(tasks))
-import hashlib
+import datetime
 
+data_dic = {'name': 'Google Photos', 'what_news': '', 'icon': 'https://i1.androeed.ru/icons/2018/08/17/w_160_8396.png', 'categories': 'Multimedia', 'version': ' 4.13.0', 'os': 'Depends on the device', 'internet': 'Required', 'size': '53.65 Mb', 'raiting': ' 4.5', 'russian': 'Present', 'img_urls': 'https://i1.androeed.ru/screens/2018/07/09/659966.png,https://i1.androeed.ru/screens/2018/07/09/659967.png,https://i1.androeed.ru/screens/2018/07/09/659968.png,https://i1.androeed.ru/screens/2018/07/09/659969.png,https://i1.androeed.ru/screens/2018/07/09/659970.png', 'description': 'Google Photo - online photo storage.\xa0Incredibly handy and useful tool that allows you to store all your photos, pictures and images on Google\'s servers, without fear that they will be gone somewhere else. The application will be indispensable for those who regularly change the device and does not want to wind up with a long and tedious transfer of content, or for those who do not like to store data on your phone (for security reasons or a small amount of physical space).\xa0Well, a real boon for those who like to travel would be a function of "assistant". The app will automatically make a selection at the place and time of creating a full photo album with pictures by placing them in chronological order with geographical marks. Do not forget to download Google Maps before your trip!\xa0By passing alia, Photo Service has a built-in photo editor and allows you to create collages, collections and compilations. Это приложение можно скачать в официальном Google Play Маркет.', 'app_url': 'https://www.androeed.ru/files/foto.html?hl=en', 'download_first_url': ['http://s40.androeed.ru/files/2019/03/27/Google_Photo_foto-1553713474-www.androeed.ru.apk'], 'md5': '0ca36a3ee23dae6e2658bccc56a99540', 'file_path': '/home/feng/pkgtest/39904b13c9433462b2148e4d154f5fb8.apk', 'pkgname': 'com.google.android.apps.photos', 'developer': 'Google LLC'}
 
-def Filemd5(filepath):
-    fp = open(filepath, 'rb')
-    md5_obj = hashlib.md5()
-    while True:
-        tmp = fp.read(8096)
-        if not tmp:
-            break
-        md5_obj.update(tmp)
-    hash_code = md5_obj.hexdigest()
-    fp.close()
-    md5 = str(hash_code).lower()
-    return md5
+from Mysql_.mysql_op import MysqlHeaper
 
-print(Filemd5('/home/feng/pkgtest/38ec8a02163b927fc5a202b075195ed3.tpk'))
+from utils.init import *
+sql = """
+                insert into crawl_androeed_apk_info(pkgname, md5, is_delete, update_time,category,app_size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,app_url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                                     ON DUPLICATE KEY UPDATE md5=VALUES(md5), is_delete=VALUES(is_delete), file_path=VALUES(file_path), description=VALUES(description), app_url=VALUES(app_url), update_time=VALUES(update_time), img_urls=VALUES(img_urls), version=VALUES(version)
+                                     , os=VALUES(os), app_size=VALUES(app_size), category=VALUES(category), icon_path=VALUES(icon_path), whatsnew=VALUES(whatsnew)
+            """
+nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+params = (
+                            data_dic["pkgname"], data_dic["md5"], 0, nowtime, data_dic["categories"], data_dic["size"],
+                            data_dic["developer"],
+                            data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
+                            data_dic["os"], data_dic["internet"],
+                            data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
+                            data_dic["app_url"]
+                        )
+loop.run_until_complete(MysqlHeaper.update(sql,params))

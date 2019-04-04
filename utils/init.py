@@ -28,3 +28,4 @@ redis_topic = config_file["redis_topic"]["test"]
 logging.config.dictConfig(config_file['logger'])
 logger = logging.getLogger('project')
 
+loop.run_until_complete(MysqlHeaper().get_pool())
