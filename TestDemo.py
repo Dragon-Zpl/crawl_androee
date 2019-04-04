@@ -53,7 +53,7 @@ class test:
                     return None
     def run(self):
         loop.run_until_complete(self.get_pool())
-        data = {"name":"Maps - Navigation and Transit","version":" 10.12.1"}
+        data = {"name":"dasdasd","version":" 10.12.1"}
         print(loop.run_until_complete(self.check_version(data)))
 t = test()
 t.run()

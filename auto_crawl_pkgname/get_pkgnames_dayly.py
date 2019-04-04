@@ -288,8 +288,6 @@ class CrawlPkgnames:
                     data_dic = Helper.build_download_task(data_dic=data_dic)
                     logger.info('data_dic' + str(data_dic))
                     if data_dic:
-                        # (pkgname, md5, is_delete, update_time,category,size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,app_url
-
                         loop.run_until_complete(self.save_mysql(data_dic=data_dic))
                     else:
                         data_dic["pkgname"] = ""
