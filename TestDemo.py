@@ -26,9 +26,9 @@
 # ]
 # #
 # #
-from helper import Helper
+# from helper import Helper
 # #
-Helper.build_download_task(data_dic={'name': "PewDiePie's Tuber Simulator",  'icon': 'https://i1.androeed.ru/icons/2019/03/30/w_160_15919.png', 'download_first_url': ['http://s42.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk','http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip']})
+# Helper.build_download_task(data_dic={'name': "PewDiePie's Tuber Simulator",  'icon': 'https://i1.androeed.ru/icons/2019/03/30/w_160_15919.png', 'download_first_url': ['http://s42.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk','http://s41.androeed.ru/files/2019/03/30/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip']})
 # loop = asyncio.get_event_loop()
 # tasks = []
 # for i in data:
@@ -36,18 +36,20 @@ Helper.build_download_task(data_dic={'name': "PewDiePie's Tuber Simulator",  'ic
 #     tasks.append(task)
 #
 # loop.run_until_complete(asyncio.wait(tasks))
-# import hashlib
-#
-# 
-# def Filemd5(filepath):
-#     fp = open(filepath, 'rb')
-#     md5_obj = hashlib.md5()
-#     while True:
-#         tmp = fp.read(8096)
-#         if not tmp:
-#             break
-#         md5_obj.update(tmp)
-#     hash_code = md5_obj.hexdigest()
-#     fp.close()
-#     md5 = str(hash_code).lower()
-#     return md5
+import hashlib
+
+
+def Filemd5(filepath):
+    fp = open(filepath, 'rb')
+    md5_obj = hashlib.md5()
+    while True:
+        tmp = fp.read(8096)
+        if not tmp:
+            break
+        md5_obj.update(tmp)
+    hash_code = md5_obj.hexdigest()
+    fp.close()
+    md5 = str(hash_code).lower()
+    return md5
+
+print(Filemd5('/home/feng/pkgtest/38ec8a02163b927fc5a202b075195ed3.tpk'))

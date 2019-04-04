@@ -154,7 +154,6 @@ class CrawlPkgnames:
                             temp_obb_download_url_data = etree.HTML(data)
                             obb_download_url = temp_obb_download_url_data.xpath(self.analysis.pkg_download_url)[0]
                             if '.zip' in obb_download_url:
-                                data_dic["md5"] =
                                 data_dic["download_first_url"] = [apk_download_url, obb_download_url]
                             else:
                                 return None
