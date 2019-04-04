@@ -19,7 +19,7 @@ class CrawlPkgnames:
         self.app_url = "https://www.androeed.ru/android/programmy.html?hl=en"
         # 包的下载地址在该接口下
         self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_comm_ebu_v_rot_dapda&ui="
-        self.flag = 2
+        self.flag = 1
         self.lock = asyncio.Lock(loop=loop)
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
@@ -106,7 +106,7 @@ class CrawlPkgnames:
             data_dic["what_news"] = ""
         data_dic["icon"] = content.xpath(self.analysis.icon)[0]
         data_dic["categories"] = ','.join(content.xpath(self.analysis.categories))
-        data_dic["version"] = content.xpath(self.analysis.version)[0]
+        data_dic["version"] = content.xpath(self.analysis.version)[0].strip(" ")
         data_dic["os"] = content.xpath(self.analysis.os)[0]
         data_dic["internet"] = content.xpath(self.analysis.internet)[0]
         data_dic["size"] = content.xpath(self.analysis.size)[0]
@@ -171,7 +171,7 @@ class CrawlPkgnames:
                             if '.zip' in obb_download_url:
                                 data_dic["download_first_url"] = [apk_download_url, obb_download_url]
                             else:
-                                data_dic["download_first_url"] = ""
+                                data_dic["download_first_url"] = []
                         elif download_url_len == 4:
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
                             data = await self.request_web(url=temp_apk_download_url)
@@ -179,19 +179,19 @@ class CrawlPkgnames:
                             apk_download_url = temp_apk_download_url_data.xpath(self.analysis.pkg_download_url)[0]
                             data_dic["download_first_url"] = [apk_download_url]
                         else:
-                            data_dic["download_first_url"] = "None"
+                            data_dic["download_first_url"] = []
                             logger.info('长度有问题请查看' + data_dic["app_url"])
                     except Exception as e:
                         logger.info("error:{},url:{}".format(e,data_dic["app_url"]))
-                        data_dic["download_first_url"] = ""
+                        data_dic["download_first_url"] = []
                 else:
-                    data_dic["download_first_url"] = ""
+                    data_dic["download_first_url"] = []
             else:
                 logger.info('is questsion:' + data_dic["app_url"] + ":" + str(mod_nuber) + ',' + str(temp))
-                data_dic["download_first_url"] = ""
+                data_dic["download_first_url"] = []
         else:
             logger.info('没有的url：'+ data_dic["app_url"]+str(mod_nuber))
-            data_dic["download_first_url"] = ""
+            data_dic["download_first_url"] = []
         logger.info(data_dic)
         return data_dic
     def build_detail_tasks(self):
@@ -228,13 +228,19 @@ class CrawlPkgnames:
             return None
 
     async def check_version(self,data):
-        sql = 'select version from crawl_google_play_app_info where name=\'{}\''.format(data["name"])
+        sql = 'select version from crawl_androeed_apk_info where name=\'{}\''.format(data["name"])
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 try:
                     await cur.execute(sql)
                     recond = await cur.fetchone()
-                    return recond
+                    if recond:
+                        if recond[0] != data["version"]:
+                            return data
+                        else:
+                            return None
+                    else:
+                        return None
                 except Exception as e:
                     print(e)
                     return None
@@ -270,14 +276,15 @@ class CrawlPkgnames:
         results = loop.run_until_complete(asyncio.gather(*data_tasks))
 
         #检查更新
-        tasks = self.build_check_tasks(datas)
+        tasks = self.build_check_tasks(datas=results)
 
+        results = loop.run_until_complete(asyncio.gather(*tasks))
 
         #下载包
         for data_dic in results:
             if data_dic:
                 logger.info(data_dic)
-                if data_dic["download_first_url"]:
+                if len(data_dic["download_first_url"])>0:
                     data_dic = Helper.build_download_task(data_dic=data_dic)
                     logger.info('data_dic' + str(data_dic))
                     if data_dic:
