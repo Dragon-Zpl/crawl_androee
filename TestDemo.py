@@ -74,9 +74,9 @@ def analysis_data(data):
                 if download_url_len == 1 or download_url_len == 2:
                     data_dic["download_first_url"] = [mod_content.xpath(analysis.download_first_url)[-1]]
                 elif download_url_len == 3:
-                    # 第一个为破解包，第二个为apk包
-                    data_dic["download_first_url"] = [mod_content.xpath(analysis.download_first_url)[-1],
-                                                      mod_content.xpath(analysis.download_first_url)[-2]]
+                    # 第一个为apk包，第二个为破解包
+                    data_dic["download_first_url"] = [mod_content.xpath(analysis.download_first_url)[-2],
+                                                      mod_content.xpath(analysis.download_first_url)[-1]]
                 elif download_url_len == 4:
                     data_dic["download_first_url"] = [mod_content.xpath(analysis.download_first_url)[-2]]
                 else:
@@ -94,4 +94,9 @@ def analysis_data(data):
     return data_dic
 
 
-print(analysis_data(data))
+data_dic = analysis_data(data)
+
+
+from helper import Helper
+
+Helper.build_download_task(data_dic=data_dic)

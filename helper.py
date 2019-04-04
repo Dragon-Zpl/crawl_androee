@@ -216,14 +216,14 @@ class Helper:
         cls.runProcess("wget --no-check-certificate --output-document \"" + targetFile + "\" \"" + targetUrl + "\"")
 
     @classmethod
-    def build_download_task(cls,data_dic,apk_url=None,obb_url=None):
+    def build_download_task(cls,data_dic):
         basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         apk_path = basic + '.apk'
-        cls.urlFetch(targetFile=apk_path,targetUrl=apk_url)
-        if obb_url:
+        cls.urlFetch(targetFile=apk_path,targetUrl=data_dic["download_first_url"][0])
+        if len(data_dic["download_first_url"])>1:
             logger.info('have obb pkg')
             obb_path = basic + '.zip'
-            cls.urlFetch(targetFile=obb_path, targetUrl=obb_url)
+            cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
 
 # b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
 # print(b)
