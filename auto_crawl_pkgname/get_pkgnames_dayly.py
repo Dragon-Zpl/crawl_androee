@@ -239,19 +239,25 @@ class CrawlPkgnames:
         for result in results:
             if result:
                 logger.info(result)
-                data_dic = Helper.build_download_task(data_dic=result)
-                logger.info('data_dic'+str(data_dic))
-                if data_dic:
-                    #(pkgname, md5, is_delete, update_time,category,size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,app_url
-                    nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
-                    params = (
-                        data_dic["pkgname"],data_dic["md5"],0,nowtime,data_dic["categories"],data_dic["size"],data_dic["developer"],
-                        data_dic["file_path"],data_dic["icon"],data_dic["what_news"],data_dic["version"],data_dic["os"],data_dic["internet"],
-                        data_dic["raiting"],data_dic["russian"],data_dic["img_urls"],data_dic["description"],data_dic["app_url"]
-                    )
-                    loop.run_until_complete(self.save_mysql(params=params))
+                if result["download_first_url"]:
+                    data_dic = Helper.build_download_task(data_dic=result)
+                    logger.info('data_dic' + str(data_dic))
+                    if data_dic:
+                        # (pkgname, md5, is_delete, update_time,category,size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,app_url
+                        nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+                        params = (
+                            data_dic["pkgname"], data_dic["md5"], 0, nowtime, data_dic["categories"], data_dic["size"],
+                            data_dic["developer"],
+                            data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
+                            data_dic["os"], data_dic["internet"],
+                            data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
+                            data_dic["app_url"]
+                        )
+                        loop.run_until_complete(self.save_mysql(params=params))
+                    else:
+                        logger.info('have question' + str(data_dic))
                 else:
-                    logger.info('have question'+str(data_dic))
+                    logger.info('不存在download_url'+str(result))
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
         #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)
