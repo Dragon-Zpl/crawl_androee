@@ -46,6 +46,7 @@ class Helper:
         cls.writeencryptapkinfo(config_info, tpkdir)
         cls.downIcon(tpkdir,dict_tpk)
         obbname = obbpath.split('/')[-1]
+        logger.info(obbname)
         detfile_obb = tpkdir + '/data/' + obbname
         cls.mymovefile(obbpath, detfile_obb)
 
@@ -165,7 +166,7 @@ class Helper:
     @classmethod
     def mymovefile(cls, srcfile, dstfile):
         if not os.path.isfile(srcfile):
-            logger.info("%s not exist!" % (srcfile))
+            logger.info("%s, %s not exist!" % (srcfile,dstfile))
         else:
             fpath, fname = os.path.split(dstfile)  # 分离文件名和路径
             if not os.path.exists(fpath):
