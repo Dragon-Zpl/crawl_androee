@@ -77,9 +77,9 @@ class CrawlPkgnames:
         for url in urls:
             self.pkg_urls.add(self.host + url)
 
-    async def analysis_data(self,data,data_dic):
+    async def analysis_data(self,data):
         content = etree.HTML(data)
-        data_dic = data_dic
+        data_dic = {}
         name = content.xpath(self.analysis.pkg_name)
         if name and '[' in name[0]:
             data_dic["name"] = re.search(r'[\d\D]*\[', name[0]).group().replace(' [', "")
@@ -88,6 +88,7 @@ class CrawlPkgnames:
             data_dic["name"] = name[0]
         else:
             data_dic["name"] = ""
+        data_dic["icon"] = content.xpath(self.analysis.icon)[0]
         data_dic["categories"] = ','.join(content.xpath(self.analysis.categories))
         data_dic["version"] = content.xpath(self.analysis.version)[0]
         data_dic["os"] = content.xpath(self.analysis.os)[0]
@@ -188,9 +189,7 @@ class CrawlPkgnames:
 
         for result in detail_results:
             if result:
-                data_dic = {}
-                data_dic["icon"] = etree.HTML(result).xpath(self.analysis.icon)
-                task = asyncio.ensure_future(self.analysis_data(data=result,data_dic=data_dic))
+                task = asyncio.ensure_future(self.analysis_data(data=result))
                 data_tasks.append(task)
 
         loop.run_until_complete(asyncio.gather(*data_tasks))

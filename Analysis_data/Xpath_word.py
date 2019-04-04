@@ -11,7 +11,7 @@ class Xpaths:
         self.pkg_name = "//h1[@itemprop='name']//text()"
         self.img_urls = "//img/@src"
         self.description = "//div[@itemprop='description']//text()"
-        self.icon = "//div[@class='ico c']/img/@data-src"
+        self.icon = "//div[@class='c in_holder']/img/@data-src"
         self.download_first_url = "//a/@href"
         self.download_second_url = "//a[@id='download_up']/@href"
         self.md5 = "//div[@class='c']//strong/text()"
