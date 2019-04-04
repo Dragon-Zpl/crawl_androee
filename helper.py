@@ -16,7 +16,7 @@ from lxml import etree
 from utils.init import config_file, loop, logger
 from utils.project_helper import ProjectHepler
 
-
+basic_dir = "/home/feng/pkgtest/"
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, bytes):
@@ -101,7 +101,7 @@ class Helper:
             print(e)
 
     @classmethod
-    def configinfo(cls, apk_details, apkpath,obb_path):
+    def configinfo(cls, data_dic, apkpath,obb_path):
         aapk_str = 'aapt dump badging {} > tmp.txt'.format(apkpath)
         os.system(aapk_str)
         with open('tmp.txt', 'r', encoding='utf8', errors='ignore') as f:
@@ -142,7 +142,7 @@ class Helper:
         developer = cls.get_app_other_info(pkgname)
         data_path = '/sdcard/android/obb/' + pkgname + '/'
         dict_tpk = {
-            'app_name': apk_details,
+            'app_name': data_dic["name"],
             'pkg_name': pkgname,
             'app_version': app_version,
             'app_version_code': app_version_code,
@@ -224,7 +224,8 @@ class Helper:
             logger.info('have obb pkg')
             obb_path = basic + '.zip'
             cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
-
+            dict_tpk = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
+            cls.build_tpk(basic_dir=basic_dir,obbpath=obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
 # b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
 # print(b)
 # dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
