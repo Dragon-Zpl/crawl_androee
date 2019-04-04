@@ -37,14 +37,12 @@ class test:
     def run(self):
         loop.run_until_complete(self.get_pool())
         nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
-        params = (
-            data_dic["pkgname"], data_dic["md5"], 0, nowtime, data_dic["categories"], data_dic["size"],
-            data_dic["developer"],
-            data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
-            data_dic["os"], data_dic["internet"],
-            data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
-            data_dic["app_url"]
-        )
+        params = ('', '', 0, '2019-04-04 16:59:50', 'Clash of Clans,Strategy', '99 Mb', '', '',
+         'https://i1.androeed.ru/icons/2019/04/02/w_160_2096.png', '', ' 11.446.11', 'Android 4.1 or above', 'Required',
+         ' 4.6', 'Present',
+         'https://i1.androeed.ru/screens/2019/04/02/674510.png,https://i1.androeed.ru/screens/2019/04/02/674511.png,https://i1.androeed.ru/screens/2019/04/02/674512.png,https://i1.androeed.ru/screens/2019/04/02/674513.png',
+         'Debut work of the studio Supercell - the game Clash of Clans, which literally translates as "Clash of Clans", instantly captured the Play Market, rising to the top of strategic games in a short time and collected more than 10 million downloads around the world. Game Clash of Clans for Android can be attributed to the ancestor of such strategic games, with which, as it usually happens, other developers have started to make numerous clones.Game Clash of Clans contains two main points. The first is the development and arrangement of your own base and the erection of fortifications that will protect you from the invasion of enemies. And the second - the military development of his camp, hiring units to attack and capture enemy resources.Clash of Clans for Android is completely free, but contains donat. In other words, for real money you can buy game valuesFeaturesFeatures:A completely free strategyOnline battle with players around the worldCombine with other players in alliances14 unique units with multiple update levelsA wide range of buildings for protection: guns, towers, mortars, bombs, traps and walls Эту игру можно скачать в официальном Google Play Маркет.',
+         'https://www.androeed.ru/files/clash-of-clans.html?hl=en')
         loop.run_until_complete(self.save_mysql(params))
 t = test()
 t.run()
