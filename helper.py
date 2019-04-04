@@ -228,6 +228,6 @@ class Helper:
             cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
             dict_tpk,new_obb_path = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
             cls.build_tpk(basic_dir=basic_dir,obbpath=new_obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
-
+            os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
 
 
