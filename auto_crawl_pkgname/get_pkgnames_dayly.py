@@ -259,7 +259,7 @@ class CrawlPkgnames:
                     else:
                         nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
                         params = (
-                            "", "", "",0, nowtime, data_dic["categories"], data_dic["size"],
+                            "", data_dic["name"], "",0, nowtime, data_dic["categories"], data_dic["size"],
                             "",
                             "", data_dic["icon"], data_dic["what_news"], data_dic["version"],
                             data_dic["os"], data_dic["internet"],
@@ -271,7 +271,7 @@ class CrawlPkgnames:
                 else:
                     nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
                     params = (
-                        "", "","", 0, nowtime, data_dic["categories"], data_dic["size"],
+                        "", data_dic["name"],"", 0, nowtime, data_dic["categories"], data_dic["size"],
                         "",
                         "", data_dic["icon"], data_dic["what_news"], data_dic["version"],
                         data_dic["os"], data_dic["internet"],
