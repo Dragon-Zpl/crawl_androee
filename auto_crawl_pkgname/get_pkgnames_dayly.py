@@ -19,7 +19,7 @@ class CrawlPkgnames:
         self.app_url = "https://www.androeed.ru/android/programmy.html?hl=en"
         # 包的下载地址在该接口下
         self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_commen_ebu_v_rot_dapda&ui="
-        self.flag = 1
+        self.flag = 2
         self.lock = asyncio.Lock(loop=loop)
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
