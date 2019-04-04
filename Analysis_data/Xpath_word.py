@@ -18,3 +18,4 @@ class Xpaths:
         self.app_url = "//meta[@property='og:type']/@content"
         self.mod_number1 = "//a[@class='google_play round5']/@href"
         self.mod_number2 = "//div[@class='c in_holder']/img/@data-src"
+        self.pkg_download_url = "//div[@class='c']/a[@class='download round30']/@href"

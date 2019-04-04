@@ -72,13 +72,22 @@ def analysis_data(data):
                 # data_dic["download_first_url"] = mod_content.xpath(analysis.download_first_url)[-1]
                 download_url_len = len(mod_content.xpath(analysis.download_first_url))
                 if download_url_len == 1 or download_url_len == 2:
-                    data_dic["download_first_url"] = [mod_content.xpath(analysis.download_first_url)[-1]]
+                    temp_apk_download_url = mod_content.xpath(analysis.download_first_url)[-1]
+                    temp_apk_download_url_data = etree.HTML(requests.get(temp_apk_download_url).text)
+                    apk_download_url = temp_apk_download_url_data.xpath(analysis.pkg_download_url)[0]
+
+                    data_dic["download_first_url"] = [apk_download_url]
                 elif download_url_len == 3:
                     # 第一个为apk包，第二个为破解包
-                    data_dic["download_first_url"] = [mod_content.xpath(analysis.download_first_url)[-2],
-                                                      mod_content.xpath(analysis.download_first_url)[-1]]
+                    temp_apk_download_url = mod_content.xpath(analysis.download_first_url)[-2]
+                    temp_obb_download_url = mod_content.xpath(analysis.download_first_url)[-1]
+                    apk_download_url = temp_apk_download_url.xpath(analysis.pkg_download_url)[0]
+                    obb_download_url = temp_obb_download_url.xpath(analysis.pkg_download_url)[0]
+                    data_dic["download_first_url"] = [apk_download_url,obb_download_url]
                 elif download_url_len == 4:
-                    data_dic["download_first_url"] = [mod_content.xpath(analysis.download_first_url)[-2]]
+                    temp_apk_download_url = mod_content.xpath(analysis.download_first_url)[-2]
+                    apk_download_url = temp_apk_download_url.xpath(analysis.pkg_download_url)[0]
+                    data_dic["download_first_url"] = [apk_download_url]
                 else:
                     data_dic["download_first_url"] = "None"
                     print('长度有问题请查看' + data_dic["app_url"])
