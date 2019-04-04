@@ -35,7 +35,7 @@ class test:
             await self.get_pool()
             return None
     async def check_version(self,data):
-        sql = 'select version from crawl_google_play_app_info where name=\'{}\''.format(data["name"])
+        sql = 'select version from crawl_androeed_apk_info where name=\'{}\''.format(data["name"])
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 try:

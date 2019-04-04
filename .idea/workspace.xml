@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/TestDemo.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestDemo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" beforeDir="false" afterPath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" afterDir="false" />
-    </list>
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,8 +83,11 @@
       <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestDemo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="7" />
+            <state relative-caret-position="624">
+              <caret line="54" column="63" selection-start-line="54" selection-start-column="63" selection-end-line="54" selection-end-column="63" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -387,6 +387,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1025">
           <caret line="41" column="24" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -608,8 +611,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestDemo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="7" />
+        <state relative-caret-position="624">
+          <caret line="54" column="63" selection-start-line="54" selection-start-column="63" selection-end-line="54" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
