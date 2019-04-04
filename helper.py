@@ -209,6 +209,7 @@ class Helper:
         logger.info("runProcess")
         p = subprocess.Popen(commandString, shell=True, stderr=subprocess.PIPE)
         output, err = p.communicate()
+        logger.info('output:{},err:{}'.format(str(output),str(err)))
 
     @classmethod
     def urlFetch(cls, targetUrl, targetFile):
