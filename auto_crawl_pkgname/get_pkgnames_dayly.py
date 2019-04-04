@@ -204,6 +204,7 @@ class CrawlPkgnames:
 
         for result in results:
             if result:
+                logger.info(result)
                 Helper.build_download_task(data_dic=result)
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)

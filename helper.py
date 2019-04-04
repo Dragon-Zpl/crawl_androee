@@ -41,7 +41,7 @@ class Helper:
     def build_tpk(cls, basic_dir, obbpath, dict_tpk,data_dic):
         # tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
         tpkdir = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
-        print('tpkdir', tpkdir)
+        # print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
         cls.writeencryptapkinfo(config_info, tpkdir)
         cls.downIcon(tpkdir,dict_tpk)
@@ -107,14 +107,14 @@ class Helper:
         os.system(aapk_str)
         with open('tmp.txt', 'r', encoding='utf8', errors='ignore') as f:
             result = f.readlines()
-            print('result:'+str(result))
+            # print('result:'+str(result))
         results = ''.join(result)
-        logger.info('results:'+str(results))
+        # logger.info('results:'+str(results))
         try:
             pkgname = re.search(r'package: name=\'(.*?)\'', results).group(1)
-            print("pkgname is {}".format(pkgname))
+            logger.info("pkgname is {}".format(pkgname))
         except:
-            print("re pkgname error")
+            logger.info("re pkgname error")
             os.remove(apkpath)
             os.remove(obb_path)
             return
