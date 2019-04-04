@@ -149,7 +149,10 @@ class CrawlPkgnames:
                         data = await self.request_web(url=temp_obb_download_url)
                         temp_obb_download_url_data = etree.HTML(data)
                         obb_download_url = temp_obb_download_url_data.xpath(self.analysis.pkg_download_url)[0]
-                        data_dic["download_first_url"] = [apk_download_url,obb_download_url]
+                        if '.zip' in obb_download_url:
+                            data_dic["download_first_url"] = [apk_download_url,obb_download_url]
+                        else:
+                            return None
                     elif download_url_len == 4:
                         temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
                         data = await self.request_web(url=temp_apk_download_url)
@@ -195,8 +198,9 @@ class CrawlPkgnames:
 
         results = loop.run_until_complete(asyncio.gather(*data_tasks))
 
-        # for result in requests:
-        #     Helper.build_download_task()
+        for result in results:
+            if result:
+                Helper.build_download_task(data_dic=result)
         # sql = """
         #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
         #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)

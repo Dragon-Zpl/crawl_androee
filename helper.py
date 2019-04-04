@@ -218,7 +218,7 @@ class Helper:
         cls.runProcess("wget --no-check-certificate --output-document \"" + targetFile + "\" \"" + targetUrl + "\"")
 
     @classmethod
-    async def build_download_task(cls,data_dic):
+    def build_download_task(cls,data_dic):
         basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         apk_path = basic + '.apk'
         cls.urlFetch(targetFile=apk_path,targetUrl=data_dic["download_first_url"][0])
@@ -228,9 +228,6 @@ class Helper:
             cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
             dict_tpk,new_obb_path = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
             cls.build_tpk(basic_dir=basic_dir,obbpath=new_obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
-# b = Helper.configinfo(apk_details="PewDiePie's Tuber Simulator",apkpath="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936520-www.androeed.ru.apk",obb_path="/home/feng/pkgtest/PewDiePies_Tuber_Simulator_-1553936709-www.androeed.ru.zip")
-# print(b)
-# dict_tpk = {'app_name': "PewDiePie's Tuber Simulator", 'pkg_name': 'com.outerminds.tubular', 'app_version': '1.36.0', 'app_version_code': '120', 'developer': 'Outerminds Inc.', 'apksize': '33941074', 'data_path': '/sdcard/android/obb/com.outerminds.tubular/', 'data_size': '96421912'}
-# b = Helper.build_tpk(basic_dir="/home/feng/pkgtest/",obbpath="/home/feng/pkgtest/main.120.com.outerminds.tubular.obb",docid="com.outerminds.tubular",dict_tpk=dict_tpk)
+
 
 
