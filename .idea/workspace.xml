@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,17 +13,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/CrawlAndroeed$TestDemo.coverage" NAME="TestDemo Coverage Results" MODIFIED="1554800147641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CrawlAndroeed$TestDemo.coverage" NAME="TestDemo Coverage Results" MODIFIED="1554801103394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CrawlAndroeed$init.coverage" NAME="init Coverage Results" MODIFIED="1554193595074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/CrawlAndroeed$mysql_op.coverage" NAME="mysql_op Coverage Results" MODIFIED="1554362408792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Mysql_" />
+    <SUITE FILE_PATH="coverage/CrawlAndroeed$send_email.coverage" NAME="send_email Coverage Results" MODIFIED="1554802809753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="269" column="76" lean-forward="true" selection-start-line="269" selection-start-column="76" selection-end-line="269" selection-end-column="76" />
+            <state relative-caret-position="125">
+              <caret line="269" column="48" selection-start-line="269" selection-start-column="48" selection-end-line="269" selection-end-column="48" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -60,36 +64,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mysql_op.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="5" column="24" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="24" />
-              <folding>
-                <element signature="e#24#45#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="init.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/init.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestDemo.py">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="auto_crawl.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="send_email.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/send_email.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="smtplib.py" pinned="false" current-in-tab="false">
+        <entry file="file://D:/python/Lib/smtplib.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="887" selection-start-line="887" selection-end-line="887" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="auto_crawl.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auto_crawl.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
@@ -98,11 +92,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="helper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="247" lean-forward="true" selection-start-line="247" selection-end-line="247" />
+            <state relative-caret-position="983">
+              <caret line="258" column="72" lean-forward="true" selection-start-line="258" selection-start-column="72" selection-end-line="258" selection-end-column="72" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -115,8 +109,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -150,8 +144,9 @@
         <option value="$PROJECT_DIR$/huanjing.html" />
         <option value="$PROJECT_DIR$/Analysis_data/Xpath_word.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
-        <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/TestDemo.py" />
+        <option value="$PROJECT_DIR$/send_email.py" />
+        <option value="$PROJECT_DIR$/helper.py" />
       </list>
     </option>
   </component>
@@ -232,7 +227,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.TestDemo">
+  <component name="RunManager" selected="Python.send_email">
     <configuration name="TestDemo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CrawlAndroeed" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -290,13 +285,34 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="send_email" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CrawlAndroeed" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/send_email.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list>
       <item itemvalue="Python.TestDemo" />
       <item itemvalue="Python.init" />
       <item itemvalue="Python.mysql_op" />
+      <item itemvalue="Python.send_email" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.send_email" />
         <item itemvalue="Python.TestDemo" />
         <item itemvalue="Python.mysql_op" />
         <item itemvalue="Python.init" />
@@ -317,7 +333,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -355,20 +371,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/config.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestDemo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1325">
-          <caret line="55" column="31" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -692,33 +694,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helper.py">
+    <entry file="file://$PROJECT_DIR$/auto_crawl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="247" lean-forward="true" selection-start-line="247" selection-end-line="247" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="100">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestDemo.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://D:/python/Lib/smtplib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="887" selection-start-line="887" selection-end-line="887" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/send_email.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="269" column="76" lean-forward="true" selection-start-line="269" selection-start-column="76" selection-end-line="269" selection-end-column="76" />
+        <state relative-caret-position="125">
+          <caret line="269" column="48" selection-start-line="269" selection-start-column="48" selection-end-line="269" selection-end-column="48" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auto_crawl.py">
+    <entry file="file://$PROJECT_DIR$/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        <state relative-caret-position="983">
+          <caret line="258" column="72" lean-forward="true" selection-start-line="258" selection-start-column="72" selection-end-line="258" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
