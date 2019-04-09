@@ -117,7 +117,7 @@ class Helper:
             logger.info("re pkgname error")
             os.remove(apkpath)
             os.remove(obb_path)
-            return
+            return None,None
         file_dir = obb_path.split('/')[:-1]
         file_dir = '/'.join(file_dir)
         sys_str = "cd " + file_dir + " && unzip -t {}".format(obb_path)
@@ -232,11 +232,19 @@ class Helper:
                     obb_path = basic + '.zip'
                     cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
                     dict_tpk, new_obb_path = cls.configinfo(data_dic=data_dic, apkpath=apk_path, obb_path=obb_path)
-                    md5_path = cls.build_tpk(basic_dir=basic_dir, obbpath=new_obb_path, dict_tpk=dict_tpk,
+                    if dict_tpk and new_obb_path:
+                        md5_path = cls.build_tpk(basic_dir=basic_dir, obbpath=new_obb_path, dict_tpk=dict_tpk,
                                              data_dic=data_dic)
+                    else:
+                        os.system('rm ' + basic + '.*')
+                        md5_path = ""
             os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
-            data_dic["md5"] = cls.Filemd5(md5_path)
-            data_dic["file_path"] = md5_path
+            if md5_path == "":
+                data_dic["md5"] = ""
+                data_dic["file_path"] = ""
+            else:
+                data_dic["md5"] = cls.Filemd5(md5_path)
+                data_dic["file_path"] = md5_path
 
             if len(data_dic["download_first_url"]) > 1:
                 if data_dic["download_first_url"][1] == 'need_info':

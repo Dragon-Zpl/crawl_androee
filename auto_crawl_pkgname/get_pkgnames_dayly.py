@@ -26,7 +26,7 @@ class CrawlPkgnames:
         self.pkg_urls = set()
         self.mysql_op = MysqlHeaper()
         self.proxies = []
-
+        self.bad_pkg_url = set()
     async def get_pool(self, loop=None, config='mysql'):
         fr = open('./config/config.yaml', 'r')
         config_file = yaml.load(fr)
@@ -165,6 +165,7 @@ class CrawlPkgnames:
                                 data_dic["download_first_url"] = [apk_download_url, obb_download_url]
                             else:
                                 data_dic["download_first_url"] = [apk_download_url,'need_info']
+                                self.bad_pkg_url.add(data_dic["app_url"])
                         elif download_url_len == 4:
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
                             data = await self.request_web(url=temp_apk_download_url)
@@ -274,15 +275,19 @@ class CrawlPkgnames:
                         data_dic["md5"] = ""
                         data_dic["developer"] = ""
                         data_dic["file_path"] = ""
+                        self.bad_pkg_url.add(data_dic["app_url"])
                         loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
                         logger.info('have question' + str(data_dic))
                     if data_dic and data_dic["file_path"]:
                         loop.run_until_complete(self.insert_update_apk(data_dic=data_dic))
+                    else:
+                        self.bad_pkg_url.add(data_dic["app_url"])
                 else:
                     data_dic["pkgname"] = ""
                     data_dic["md5"] = ""
                     data_dic["developer"] = ""
                     data_dic["file_path"] = ""
+                    self.bad_pkg_url.add(data_dic["app_url"])
                     loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
                     logger.info('have question' + str(data_dic))
                     logger.info('不存在download_url'+str(data_dic))
