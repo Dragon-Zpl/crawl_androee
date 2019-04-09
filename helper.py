@@ -236,6 +236,7 @@ class Helper:
         data_dic["file_path"] = md5_path
 
         if len(data_dic["download_first_url"])>1 and data_dic["download_first_url"][1] == 'need_info':
+            logger.info('rm '+str(data_dic["file_path"]))
             os.system('rm '+str(data_dic["file_path"]))
             data_dic["md5"] = ""
             data_dic["file_path"] = ""
