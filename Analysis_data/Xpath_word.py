@@ -17,5 +17,5 @@ class Xpaths:
         self.md5 = "//div[@class='c']//strong/text()"
         self.app_url = "//meta[@property='og:type']/@content"
         self.mod_number1 = "//a[@class='google_play round5']/@href"
-        self.mod_number2 = "//div[@class='c in_holder']/img/@data-src"
+        self.mod_number2 = "//meta[@property='og:image']/@content"
         self.pkg_download_url = "//a/@href |//div[@class='c']/a[@class='download round30']/@href"
