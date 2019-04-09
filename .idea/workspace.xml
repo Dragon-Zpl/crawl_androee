@@ -18,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="183">
-              <caret line="149" column="111" selection-start-line="149" selection-start-column="111" selection-end-line="149" selection-end-column="111" />
+              <caret line="149" column="106" lean-forward="true" selection-start-line="149" selection-start-column="106" selection-end-line="149" selection-end-column="106" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -39,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Xpath_word.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Xpath_word.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="399">
-              <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+              <caret line="20" column="85" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="85" />
             </state>
           </provider>
         </entry>
@@ -703,20 +703,20 @@
     <entry file="file://$PROJECT_DIR$/TestDemo.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
-          <caret line="149" column="111" selection-start-line="149" selection-start-column="111" selection-end-line="149" selection-end-column="111" />
+          <caret line="149" column="106" lean-forward="true" selection-start-line="149" selection-start-column="106" selection-end-line="149" selection-end-column="106" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="20" column="85" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="85" />
         </state>
       </provider>
     </entry>

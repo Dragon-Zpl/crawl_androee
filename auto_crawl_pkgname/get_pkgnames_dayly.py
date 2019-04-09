@@ -229,12 +229,13 @@ class CrawlPkgnames:
                     await cur.execute(sql)
                     recond = await cur.fetchone()
                     if recond:
+                        logger.info("name:{},now:{},sql:{}".format(data["name"],data["version"],recond))
                         if recond[0] != data["version"]:
                             return data
                         else:
                             return None
                     else:
-                        return None
+                        return data
                 except Exception as e:
                     print(e)
                     return None
@@ -270,6 +271,7 @@ class CrawlPkgnames:
 
         results = loop.run_until_complete(asyncio.gather(*data_tasks))
         logger.info('three'+str(results))
+        logger.info('three_len:'+str(len(results)))
         #检查更新
         tasks = self.build_check_tasks(datas=results)
 
