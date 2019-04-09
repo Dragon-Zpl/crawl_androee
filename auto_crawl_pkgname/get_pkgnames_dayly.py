@@ -194,22 +194,36 @@ class CrawlPkgnames:
             tasks.append(task)
         return tasks
 
-    async def save_mysql(self,data_dic):
+    async def insert_update_apk(self,data_dic):
         try:
             sql = """
-                insert into crawl_androeed_apk_info(pkgname,name, md5, is_delete, update_time,category,app_size,developer,file_path,icon_path,whatsnew,version,os,internet,raiting,russian,img_urls,description,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                                     ON DUPLICATE KEY UPDATE md5=VALUES(md5), is_delete=VALUES(is_delete), file_path=VALUES(file_path), description=VALUES(description), url=VALUES(url), update_time=VALUES(update_time), img_urls=VALUES(img_urls), version=VALUES(version)
-                                     , os=VALUES(os), app_size=VALUES(app_size), category=VALUES(category), icon_path=VALUES(icon_path), whatsnew=VALUES(whatsnew), name=VALUES(name)
+                insert into crawl_androeed_apk_info(pkg_name,version_code, file_path, file_sha1, last_update_date) VALUES (%s,%s,%s,%s,%s)
+                                     ON DUPLICATE KEY UPDATE pkg_name=VALUES(pkg_name), version_code=VALUES(version_code), file_path=VALUES(file_path), file_sha1=VALUES(file_sha1), last_update_date=VALUES(last_update_date)
             """
             nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
             params = (
-                data_dic["pkgname"], data_dic["name"], data_dic["md5"], 0, nowtime, data_dic["categories"],
-                data_dic["size"],
-                data_dic["developer"],
-                data_dic["file_path"], data_dic["icon"], data_dic["what_news"], data_dic["version"],
-                data_dic["os"], data_dic["internet"],
-                data_dic["raiting"], data_dic["russian"], data_dic["img_urls"], data_dic["description"],
-                data_dic["app_url"]
+                data_dic["pkgname"],data_dic["version"],data_dic["file_path"],data_dic["md5"],nowtime
+            )
+            async with self.pool.acquire() as conn:
+                async with conn.cursor() as cur:
+                    results = await cur.execute(sql, params)
+                    return results
+        except Exception as e:
+            logger.error("{}".format(e))
+            await self.get_pool()
+            return None
+
+    async def insert_update_app(self,data_dic):
+        try:
+            sql = """
+                insert into crawl_androeed_app_info(app_size,category, coverimgurl, currentversion, description,developer,whatsnew,last_update_date,minimum_os_version,name,screenshots,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                                     ON DUPLICATE KEY UPDATE app_size=VALUES(app_size), category=VALUES(category), coverimgurl=VALUES(coverimgurl), currentversion=VALUES(currentversion), url=VALUES(url), description=VALUES(description), developer=VALUES(developer), whatsnew=VALUES(whatsnew)
+                                     , last_update_date=VALUES(last_update_date), minimum_os_version=VALUES(minimum_os_version), name=VALUES(name), screenshots=VALUES(screenshots)
+            """
+            nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+            params = (
+                data_dic["size"],data_dic["categories"],data_dic["icon"],data_dic["version"],data_dic["description"],
+                data_dic["developer"],data_dic["what_news"],nowtime,data_dic["os"],data_dic["name"],data_dic["img_urls"],data_dic["app_url"]
             )
             async with self.pool.acquire() as conn:
                 async with conn.cursor() as cur:
@@ -221,7 +235,7 @@ class CrawlPkgnames:
             return None
 
     async def check_version(self,data):
-        sql = 'select version from crawl_androeed_apk_info where name=\'{}\''.format(data["name"])
+        sql = 'select version from crawl_androeed_app_info where name=\'{}\''.format(data["name"])
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 try:
@@ -247,6 +261,31 @@ class CrawlPkgnames:
 
         return tasks
 
+    def download_pkg(self,results):
+        for data_dic in results:
+            if data_dic:
+                logger.info(data_dic)
+                if len(data_dic["download_first_url"]) > 0:
+                    data_dic = Helper.build_download_task(data_dic=data_dic)
+                    if data_dic:
+                        loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
+                    else:
+                        data_dic["pkgname"] = ""
+                        data_dic["md5"] = ""
+                        data_dic["developer"] = ""
+                        data_dic["file_path"] = ""
+                        loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
+                        logger.info('have question' + str(data_dic))
+                    if data_dic and data_dic["file_path"]:
+                        loop.run_until_complete(self.insert_update_apk(data_dic=data_dic))
+                else:
+                    data_dic["pkgname"] = ""
+                    data_dic["md5"] = ""
+                    data_dic["developer"] = ""
+                    data_dic["file_path"] = ""
+                    loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
+                    logger.info('have question' + str(data_dic))
+                    logger.info('不存在download_url'+str(data_dic))
 
     def run(self):
         self.pkg_urls.clear()
@@ -278,35 +317,4 @@ class CrawlPkgnames:
         logger.info('检查剩下的:'+str(results))
         logger.info(('dict_len:'+str(len(results))))
         #下载包
-        for data_dic in results:
-            if data_dic:
-                logger.info(data_dic)
-                if len(data_dic["download_first_url"]) > 0:
-                    data_dic = Helper.build_download_task(data_dic=data_dic)
-                    logger.info('data_dic' + str(data_dic))
-                    if data_dic:
-                        loop.run_until_complete(self.save_mysql(data_dic=data_dic))
-                    else:
-                        data_dic["pkgname"] = ""
-                        data_dic["md5"] = ""
-                        data_dic["developer"] = ""
-                        data_dic["file_path"] = ""
-                        loop.run_until_complete(self.save_mysql(data_dic=data_dic))
-                        logger.info('have question' + str(data_dic))
-                else:
-                    data_dic["pkgname"] = ""
-                    data_dic["md5"] = ""
-                    data_dic["developer"] = ""
-                    data_dic["file_path"] = ""
-                    loop.run_until_complete(self.save_mysql(data_dic=data_dic))
-                    logger.info('have question' + str(data_dic))
-                    logger.info('不存在download_url'+str(data_dic))
-
-        # sql = """
-        #     insert into crawl_androeed_app_info(pkg_name, file_sha1, is_delete, file_path, create_time, update_time) VALUES (%s,%s,%s,%s,%s,%s)
-        #                          ON DUPLICATE KEY UPDATE file_sha1=VALUES(file_sha1), is_delete=VALUES(is_delete), file_path=VALUES(file_path), update_time=VALUES(update_time)
-        # """
-        #
-        # for data in all_data:
-        #     params = ()
-        #     task = asyncio.ensure_future(self.mysql_op.update(sql,params=params))feng@android_crawer2:~/CrawlAndorred/auto_crawl_pkgname$
+        self.download_pkg(results)

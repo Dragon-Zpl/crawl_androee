@@ -244,10 +244,10 @@ class Helper:
                     os.system('rm ' + str(data_dic["file_path"]))
                     data_dic["md5"] = ""
                     data_dic["file_path"] = ""
-            return data_dic
         except Exception as e:
             logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
-
+            return None
+        return data_dic
     @classmethod
     def get_info_app(cls,data,apkpath):
         aapk_str = 'aapt dump badging {} > tmp.txt'.format(apkpath)
