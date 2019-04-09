@@ -6,11 +6,11 @@ from email.header import Header
 
 class SMTP(object):
     def __init__(self, email, tel):
-        self.sender = "15260826071@163.com"
+        self.sender = "786283772@qq.com"
         self.receivers = [email]
-        self.host = "smtp.163.com"
-        self.user = "15260826071@163.com"
-        self.password = "zpl123456"
+        self.host = "smtp.qq.com"
+        self.user = "786283772@qq.com"
+        self.password = "lxnctbyxqaupbbha"
         self.ver_code = str(random.randint(1000, 10000))
         meg = '''
             <h1>好鲜生</h1>

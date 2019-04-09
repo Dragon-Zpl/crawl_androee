@@ -40,6 +40,9 @@ class Helper:
     @classmethod
     def build_tpk(cls, basic_dir, obbpath, dict_tpk,data_dic):
         # tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
+        logger.info('start combine')
+        if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
+            os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
         tpkdir = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         # print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
@@ -64,6 +67,7 @@ class Helper:
         cls.mymovefile(tpkdir + '/' + tpkfilename + '.tpk', basic_dir + tpkfilename + '.tpk')
         del_srcfile = 'rm -fr ' + tpkdir
         os.system(del_srcfile)
+        logger.info('combine finish')
         return basic_dir + tpkfilename + '.tpk'
     @classmethod
     def encryptapkinfo(self, data, key, appkey):
@@ -220,8 +224,8 @@ class Helper:
     @classmethod
     def build_download_task(cls,data_dic):
         try:
-            if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
-                os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
+            if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
+                os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
             basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
             apk_path = basic + '.apk'
             cls.urlFetch(targetFile=apk_path, targetUrl=data_dic["download_first_url"][0])
@@ -256,8 +260,9 @@ class Helper:
         except Exception as e:
             logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
             return None
-        if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
-            os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
+        if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
+            os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
+
         return data_dic
     @classmethod
     def get_info_app(cls,data,apkpath):
