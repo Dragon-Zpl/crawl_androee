@@ -219,28 +219,34 @@ class Helper:
 
     @classmethod
     def build_download_task(cls,data_dic):
-        basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
-        apk_path = basic + '.apk'
-        cls.urlFetch(targetFile=apk_path,targetUrl=data_dic["download_first_url"][0])
-        md5_path = apk_path
+        try:
+            basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
+            apk_path = basic + '.apk'
+            cls.urlFetch(targetFile=apk_path, targetUrl=data_dic["download_first_url"][0])
+            md5_path = apk_path
 
-        data_dic = cls.get_info_app(data_dic,apk_path)
-        if len(data_dic["download_first_url"])>1 and data_dic["download_first_url"][1] != 'need_info':
-            logger.info('have obb pkg')
-            obb_path = basic + '.zip'
-            cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
-            dict_tpk,new_obb_path = cls.configinfo(data_dic=data_dic,apkpath=apk_path,obb_path=obb_path)
-            md5_path =  cls.build_tpk(basic_dir=basic_dir,obbpath=new_obb_path,dict_tpk=dict_tpk,data_dic=data_dic)
+            data_dic = cls.get_info_app(data_dic, apk_path)
+            if len(data_dic["download_first_url"]) > 1:
+                if data_dic["download_first_url"][1] != 'need_info':
+                    logger.info('have obb pkg')
+                    obb_path = basic + '.zip'
+                    cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
+                    dict_tpk, new_obb_path = cls.configinfo(data_dic=data_dic, apkpath=apk_path, obb_path=obb_path)
+                    md5_path = cls.build_tpk(basic_dir=basic_dir, obbpath=new_obb_path, dict_tpk=dict_tpk,
+                                             data_dic=data_dic)
             os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
-        data_dic["md5"] = cls.Filemd5(md5_path)
-        data_dic["file_path"] = md5_path
+            data_dic["md5"] = cls.Filemd5(md5_path)
+            data_dic["file_path"] = md5_path
 
-        if len(data_dic["download_first_url"])>1 and data_dic["download_first_url"][1] == 'need_info':
-            logger.info('rm '+str(data_dic["file_path"]))
-            os.system('rm '+str(data_dic["file_path"]))
-            data_dic["md5"] = ""
-            data_dic["file_path"] = ""
-        return data_dic
+            if len(data_dic["download_first_url"]) > 1:
+                if data_dic["download_first_url"][1] == 'need_info':
+                    logger.info('rm ' + str(data_dic["file_path"]))
+                    os.system('rm ' + str(data_dic["file_path"]))
+                    data_dic["md5"] = ""
+                    data_dic["file_path"] = ""
+            return data_dic
+        except Exception as e:
+            logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
 
     @classmethod
     def get_info_app(cls,data,apkpath):

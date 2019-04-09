@@ -141,7 +141,6 @@ class CrawlPkgnames:
                 if data:
                     try:
                         mod_content = etree.HTML(data)
-                        # data_dic["download_first_url"] = mod_content.xpath(self.analysis.download_first_url)[-1]
                         download_url_len = len(mod_content.xpath(self.analysis.download_first_url))
                         if download_url_len == 1 or download_url_len == 2:
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-1]
@@ -282,7 +281,7 @@ class CrawlPkgnames:
         for data_dic in results:
             if data_dic:
                 logger.info(data_dic)
-                if len(data_dic["download_first_url"])>0:
+                if len(data_dic["download_first_url"]) > 0:
                     data_dic = Helper.build_download_task(data_dic=data_dic)
                     logger.info('data_dic' + str(data_dic))
                     if data_dic:

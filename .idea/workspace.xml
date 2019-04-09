@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestDemo.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestDemo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" beforeDir="false" afterPath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,17 +15,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/CrawlAndroeed$TestDemo.coverage" NAME="TestDemo Coverage Results" MODIFIED="1554777282684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CrawlAndroeed$TestDemo.coverage" NAME="TestDemo Coverage Results" MODIFIED="1554781670410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CrawlAndroeed$init.coverage" NAME="init Coverage Results" MODIFIED="1554193595074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/CrawlAndroeed$mysql_op.coverage" NAME="mysql_op Coverage Results" MODIFIED="1554362408792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Mysql_" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-940">
-              <caret line="239" column="28" lean-forward="true" selection-start-line="239" selection-start-column="28" selection-end-line="239" selection-end-column="28" />
+            <state relative-caret-position="135">
+              <caret line="284" column="52" lean-forward="true" selection-start-line="284" selection-start-column="52" selection-end-line="284" selection-end-column="52" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -84,9 +89,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestDemo.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="auto_crawl.py" pinned="false" current-in-tab="false">
@@ -101,8 +110,8 @@
       <file leaf-file-name="helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="220" column="23" selection-start-line="220" selection-start-column="23" selection-end-line="220" selection-end-column="23" />
+            <state relative-caret-position="233">
+              <caret line="225" column="31" lean-forward="true" selection-start-line="225" selection-start-column="31" selection-end-line="225" selection-end-column="31" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -129,6 +138,7 @@
       <find>self.</find>
       <find>logger.info</find>
       <find>有问题</find>
+      <find>&quot;None&quot;</find>
     </findStrings>
     <replaceStrings>
       <replace>print</replace>
@@ -147,10 +157,10 @@
         <option value="$PROJECT_DIR$/utils/init.py" />
         <option value="$PROJECT_DIR$/Mysql_/mysql_op.py" />
         <option value="$PROJECT_DIR$/huanjing.html" />
-        <option value="$PROJECT_DIR$/helper.py" />
-        <option value="$PROJECT_DIR$/TestDemo.py" />
         <option value="$PROJECT_DIR$/Analysis_data/Xpath_word.py" />
+        <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
+        <option value="$PROJECT_DIR$/TestDemo.py" />
       </list>
     </option>
   </component>
@@ -164,10 +174,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="138" />
-    <option name="y" value="47" />
-    <option name="width" value="1400" />
-    <option name="height" value="808" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -321,9 +329,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.32997763" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.32997763" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26332623" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26332623" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -674,16 +682,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/huanjing.html" />
-    <entry file="file://$PROJECT_DIR$/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="220" column="23" selection-start-line="220" selection-start-column="23" selection-end-line="220" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -698,9 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestDemo.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -710,11 +705,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-940">
-          <caret line="239" column="28" lean-forward="true" selection-start-line="239" selection-start-column="28" selection-end-line="239" selection-end-column="28" />
+        <state relative-caret-position="135">
+          <caret line="284" column="52" lean-forward="true" selection-start-line="284" selection-start-column="52" selection-end-line="284" selection-end-column="52" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="225" column="31" lean-forward="true" selection-start-line="225" selection-start-column="31" selection-end-line="225" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestDemo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
