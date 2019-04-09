@@ -11,7 +11,7 @@ from CrawlProxy.crawl_proxies import asyncCrawlProxy
 from Mysql_.mysql_op import MysqlHeaper
 from helper import Helper
 from utils.init import *
-
+from send_email import SMTP
 class CrawlPkgnames:
     def __init__(self):
         self.mods_urls = ["https://www.androeed.ru/files/vzlomannie_igri_na_android-" + str(page) + ".html?hl=en" for page in range(1,6)]
@@ -323,3 +323,6 @@ class CrawlPkgnames:
         logger.info(('dict_len:'+str(len(results))))
         #下载包
         self.download_pkg(results)
+
+        email = SMTP("15260826071@163.com", 15260826071,self.bad_pkg_url)
+        email.send_email()

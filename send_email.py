@@ -5,7 +5,7 @@ from email.header import Header
 
 
 class SMTP(object):
-    def __init__(self, email, tel):
+    def __init__(self, email, tel, data):
         self.sender = "786283772@qq.com"
         self.receivers = [email]
         self.host = "smtp.qq.com"
@@ -13,10 +13,9 @@ class SMTP(object):
         self.password = "lxnctbyxqaupbbha"
         self.ver_code = str(random.randint(1000, 10000))
         meg = '''
-            <h1>好鲜生</h1>
-            <p>该邮件为验证码邮件,建议确认验证码后删除该邮件</p> 
-            <p>您的验证码为: {}</p>
-        '''.format(self.ver_code)
+            <h1>错误的url</h1>
+            <p>{}</p> 
+        '''.format(str(data))
         self.message = MIMEText(meg, "html", "utf-8")
         self.message["Form"] = Header("好鲜生", "utf-8")
         self.message["To"] = Header(tel, "utf-8")
