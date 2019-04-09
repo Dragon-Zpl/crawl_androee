@@ -220,7 +220,7 @@ class Helper:
     @classmethod
     def build_download_task(cls,data_dic):
         try:
-            if not os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
+            if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
                 os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
             basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
             apk_path = basic + '.apk'
@@ -256,7 +256,7 @@ class Helper:
         except Exception as e:
             logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
             return None
-        if not os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
+        if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
             os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
         return data_dic
     @classmethod
