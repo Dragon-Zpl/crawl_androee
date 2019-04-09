@@ -18,8 +18,8 @@ class CrawlPkgnames:
         self.host = "https://www.androeed.ru"
         self.app_url = "https://www.androeed.ru/android/programmy.html?hl=en"
         # 包的下载地址在该接口下
-        self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_comm_ebu_v_rot_dapda&ui="
-        self.flag = 1
+        self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_comm_dapda_otsosal_2_raza&ui="
+        self.flag = 2
         self.lock = asyncio.Lock(loop=loop)
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
@@ -171,7 +171,7 @@ class CrawlPkgnames:
                             if '.zip' in obb_download_url:
                                 data_dic["download_first_url"] = [apk_download_url, obb_download_url]
                             else:
-                                data_dic["download_first_url"] = []
+                                data_dic["download_first_url"] = [apk_download_url,'need_info']
                         elif download_url_len == 4:
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
                             data = await self.request_web(url=temp_apk_download_url)
@@ -261,25 +261,27 @@ class CrawlPkgnames:
         tasks = self.build_async_tasks()
         results = loop.run_until_complete(asyncio.gather(*tasks))
         for result in results:
-            self.get_app_urls(result)
+            if result:
+                self.get_app_urls(result)
         logger.info('pkg_urls:'+str(self.pkg_urls))
         detail_tasks = self.build_detail_tasks()
         detail_results = loop.run_until_complete(asyncio.gather(*detail_tasks))
 
         data_tasks = []
-
+        logger.info('second')
         for result in detail_results:
             if result:
                 task = asyncio.ensure_future(self.analysis_data(data=result))
                 data_tasks.append(task)
 
         results = loop.run_until_complete(asyncio.gather(*data_tasks))
-
+        logger.info('three'+str(results))
         #检查更新
         tasks = self.build_check_tasks(datas=results)
 
         results = loop.run_until_complete(asyncio.gather(*tasks))
-
+        logger.info('检查剩下的:'+str(results))
+        logger.info(('dict_len:'+str(len(results))))
         #下载包
         for data_dic in results:
             if data_dic:
@@ -312,4 +314,4 @@ class CrawlPkgnames:
         #
         # for data in all_data:
         #     params = ()
-        #     task = asyncio.ensure_future(self.mysql_op.update(sql,params=params))
+        #     task = asyncio.ensure_future(self.mysql_op.update(sql,params=params))feng@android_crawer2:~/CrawlAndorred/auto_crawl_pkgname$
