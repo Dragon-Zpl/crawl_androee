@@ -225,7 +225,7 @@ class Helper:
         md5_path = apk_path
 
         data_dic = cls.get_info_app(data_dic,apk_path)
-        if len(data_dic["download_first_url"])>1 and data_dic[download_first_url][1] != 'need_info':
+        if len(data_dic["download_first_url"])>1 and data_dic["download_first_url"][1] != 'need_info':
             logger.info('have obb pkg')
             obb_path = basic + '.zip'
             cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
