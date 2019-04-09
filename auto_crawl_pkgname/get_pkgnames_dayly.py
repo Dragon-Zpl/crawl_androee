@@ -236,7 +236,7 @@ class CrawlPkgnames:
             return None
 
     async def check_version(self,data):
-        sql = 'select version from crawl_androeed_app_info where name=\'{}\''.format(data["name"])
+        sql = 'select currentversion from crawl_androeed_app_info where name=\'{}\''.format(data["name"])
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 try:
