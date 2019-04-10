@@ -1,6 +1,7 @@
 import base64
 import hashlib
 import json
+import random
 from datetime import datetime, date
 import logging
 import pymysql
@@ -26,8 +27,8 @@ class CJsonEncoder(json.JSONEncoder):
 
 
 
-def pack_data(self, data_list, url):
-    rdstr = self.randonstr()
+def pack_data(data_list, url):
+    rdstr = randonstr()
     skey = "OHDKD*&HJldhkfg"
     # 转化为json格式
     appinfo = json.dumps(data_list, ensure_ascii=False, cls=CJsonEncoder)
@@ -49,6 +50,14 @@ def pack_data(self, data_list, url):
         pass
 
 
+def randonstr():
+    seed = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    sa = []
+    for i in range(8):
+        sa.append(random.choice(seed))
+    salt = ''.join(sa)
+    return salt
+
 def update_data(command, data, commit=False):
     try:
         x = cursor.execute(command, data)
@@ -57,3 +66,28 @@ def update_data(command, data, commit=False):
         return x
     except Exception as e:
         logging.info('mysql insert_data exception msg:%s' % e)
+
+
+
+data = {
+    "source":"p",
+    "filebundleid":"com.dodreams.driveahead",
+    "appDevelopers":"Dodreams Ltd.",
+    "categoryCode":"Arcade,Cars,Pixels",
+    "appUpdateDate":"2019-04-10 18:16:45",
+    "storeCode":"us",
+    "coverRomoteUrl":"http://crawer2.tutuapp.net:8080/androee_files/picture/screenshot/2019-04-102945878e4ad4f5dcb3588fa2b72296c7.png",
+    "localization":{
+        "appName":"Drive Ahead!",
+        "appIntroduction":"Drive Ahead! - Arcade mini-cars and battle in the arena.Racing, Arcade, Action ... How about we combine the three genre? Get behind the wheel and crashed his car ramming enemy. Destroy his car, earn points and win in quick, sharp, dynamic and fun rides. You can even play with a friend on the same device! And of course to open new cars, so the game it was always interesting.Features:Crazy gameplayRetro-style graphics Twin Shooter.Simple operationOpportunity to play together on one device Эту игру можно скачать в официальном Google Play Маркет",
+        "compatibility":"Android 4.4 or above"
+    },
+    "fileInfo":{
+        "downloadUrl":"http://crawer2.tutuapp.net:8080/androee_files/app_page/2019-04-10/8cc2d062cb408c966bb2651826bb0814.apk",
+        "fileMd5":"334594e625fcb5017ec217f7561268ad",
+        "weight":10
+    }
+}
+
+if __name__ == '__main__':
+    print(pack_data(data, "https://www.androeed.ru/files/drive-ahead.html?hl=en"))
