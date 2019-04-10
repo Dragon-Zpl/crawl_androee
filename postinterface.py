@@ -85,6 +85,7 @@ data = {
     "fileInfo":{
         "downloadUrl":"http://crawer2.tutuapp.net:8080/androee_files/app_page/2019-04-10/8cc2d062cb408c966bb2651826bb0814.apk",
         "fileMd5":"334594e625fcb5017ec217f7561268ad",
+        "callbackUrl":"http://23.236.115.228:5001/appVideoView".
         "weight":10
     }
 }
