@@ -16,7 +16,7 @@ from lxml import etree
 from utils.init import config_file, loop, logger
 from utils.project_helper import ProjectHepler
 
-basic_dir = "/home/feng/pkgtest/"
+basic_dir = "/home/feng/android_files1/androee_files/"
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, bytes):
@@ -41,9 +41,9 @@ class Helper:
     def build_tpk(cls, basic_dir, obbpath, dict_tpk,data_dic):
         # tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
         logger.info('start combine')
-        if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
-            os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
-        tpkdir = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
+        if os.path.exists("/home/feng/android_files1/androee_files/www.androeed.ru.txt"):
+            os.system('rm /home/feng/android_files1/androee_files/www.androeed.ru.txt')
+        tpkdir = "/home/feng/android_files1/androee_files/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         # print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
         cls.writeencryptapkinfo(config_info, tpkdir)
@@ -223,16 +223,16 @@ class Helper:
 
     @classmethod
     def remove_txt(cls):
-        if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
-            os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
-        if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
-            os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
+        if os.path.exists("/home/feng/android_files1/androee_files/www.androeed.ru.txt"):
+            os.system('rm /home/feng/android_files1/androee_files/www.androeed.ru.txt')
+        if os.path.exists("/home/feng/android_files1/androee_files/www_androeed_ru.txt"):
+            os.system('rm /home/feng/android_files1/androee_files/www_androeed_ru.txt')
 
     @classmethod
     def build_download_task(cls,data_dic):
         try:
             cls.remove_txt()
-            basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
+            basic = "/home/feng/android_files1/androee_files/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
             apk_path = basic + '.apk'
             cls.urlFetch(targetFile=apk_path, targetUrl=data_dic["download_first_url"][0])
             md5_path = apk_path
@@ -264,7 +264,8 @@ class Helper:
                     data_dic["md5"] = ""
                     data_dic["file_path"] = ""
         except Exception as e:
-            logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
+            # logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
+            logger.info(e)
             return None
         cls.remove_txt()
         return data_dic
