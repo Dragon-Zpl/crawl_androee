@@ -2,7 +2,6 @@
 import datetime
 import logging.config
 import aiomysql, yaml
-from utils.init import logger
 
 class MysqlHeaper(object):
     fr = open('./config/config.yaml', 'r')
@@ -12,7 +11,6 @@ class MysqlHeaper(object):
     """
     def __init__(self,pool):
         self.pool = pool
-        self.logger = logger
     async def get_pool(self, loop=None, config='mysql'):
 
         local_mysql_config = self.config_file[config]
@@ -39,7 +37,7 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            self.logger.info("{}".format(e))
+            print("{}".format(e))
             await self.get_pool()
             return None
 
@@ -51,7 +49,7 @@ class MysqlHeaper(object):
                     await cur.execute(sql)
                     recond = await cur.fetchone()
                     if recond:
-                        self.logger.info("name:{},now:{},sql:{}".format(data["name"],data["version"],recond))
+                        print("name:{},now:{},sql:{}".format(data["name"],data["version"],recond))
                         if recond[0] != data["version"]:
                             return data
                         else:
@@ -77,7 +75,7 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            self.logger.info("{}".format(e))
+            print("{}".format(e))
             await self.get_pool()
             return None
 
@@ -96,11 +94,11 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            self.logger.info("{}".format(e))
+            print("{}".format(e))
             await self.get_pool()
             return None
 
-    async def insert_update_screen(self,data):
+    async def insert_update_screen(self, data):
         try:
             sql = """
                               insert into crawl_androeed_screenshots(url,screenshot_path,romote_url,type,is_success_downland,need_update,create_date,update_date) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
@@ -116,6 +114,6 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            self.logger.info("{}".format(e))
+            print("{}".format(e))
             await self.get_pool()
             return None
