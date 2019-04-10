@@ -82,8 +82,8 @@ class CrawlPkgnames:
         else:
             task = asyncio.ensure_future(self.request_web(url=self.mods_urls[0]),loop=loop)
             tasks.append(task)
-        # task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
-        # tasks.append(task)
+        task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
+        tasks.append(task)
         return tasks
 
     def get_app_urls(self,data):
@@ -304,13 +304,14 @@ class CrawlPkgnames:
         return tasks
 
     def file_path_detail(self, url):
-        file_name = url.replace('https://i1.androeed.ru/icons/', '').replace('/', '')
+        file_name = url.replace('https://i1.androeed.ru/', '').replace('/', '')
         if 'i3.androeed.ru' in url:
-            file_name = url.replace('https://i3.androeed.ru/icons/', '').replace('/', '')
+            file_name = url.replace('https://i3.androeed.ru/', '').replace('/', '')
         file_name = hashlib.md5((file_name).encode('utf-8')).hexdigest() + '.png'
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
         return file_name, now_date
+
 
     async def download_icon(self,datas,proxy=None):
         for i in range(3):
@@ -346,7 +347,7 @@ class CrawlPkgnames:
                         if r.status in [200, 201]:
                             data = await r.read()
                             file_name, nowdate = self.file_path_detail(url)
-                            image_dir = ICONSTORE + nowdate
+                            image_dir = SCREENSTORE + nowdate
                             if os.path.exists(image_dir) is False:
                                 os.makedirs(image_dir)
                             file_path = image_dir + file_name
