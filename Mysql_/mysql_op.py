@@ -2,7 +2,7 @@
 import datetime
 import logging.config
 import aiomysql, yaml
-from utils.init import *
+from utils.init import logger
 
 class MysqlHeaper(object):
     fr = open('./config/config.yaml', 'r')
