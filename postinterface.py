@@ -72,7 +72,7 @@ def update_data(command, data, commit=False):
 
 
 
-data = {
+data = [{
     "source":"g",
     "filebundleid":"com.dodreams.driveahead",
     "appDevelopers":"Dodreams Ltd.",
@@ -91,7 +91,7 @@ data = {
         "callbackUrl":"http://23.236.115.228:5001/appVideoView",
         "weight":10
     }
-}
+}]
 
 if __name__ == '__main__':
     print(pack_data(data, "https://www.androeed.ru/files/drive-ahead.html?hl=en"))
