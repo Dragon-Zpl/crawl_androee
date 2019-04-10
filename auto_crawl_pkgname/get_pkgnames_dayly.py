@@ -21,7 +21,7 @@ class CrawlPkgnames:
         self.app_url = "https://www.androeed.ru/android/programmy.html?hl=en"
         # 包的下载地址在该接口下
         self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_comm_dapda_otsosal_2_raza&ui="
-        self.flag = 2
+        self.flag = 1
         self.lock = asyncio.Lock(loop=loop)
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
@@ -85,8 +85,8 @@ class CrawlPkgnames:
         else:
             task = asyncio.ensure_future(self.request_web(url=self.mods_urls[0]),loop=loop)
             tasks.append(task)
-        # task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
-        # tasks.append(task)
+        task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
+        tasks.append(task)
         return tasks
 
     def get_app_urls(self,data):
@@ -270,7 +270,7 @@ class CrawlPkgnames:
                     if r.status in [200, 201]:
                         data = await r.read()
                         file_name, nowdate = self.file_path_detail(datas["icon"])
-                        image_dir = ICONSTORE + nowdate
+                        image_dir = ICONSTORE + nowdate + '/'
                         if os.path.exists(image_dir) is False:
                             os.makedirs(image_dir)
                         file_path = image_dir + file_name
@@ -295,11 +295,10 @@ class CrawlPkgnames:
             for i in range(3):
                 try:
                     async with session.get(url=url, proxy=proxy, timeout=15) as r:
-                        print(proxy)
                         if r.status in [200, 201]:
                             data = await r.read()
                             file_name, nowdate = self.file_path_detail(url)
-                            image_dir = SCREENSTORE + nowdate
+                            image_dir = SCREENSTORE + nowdate + '/'
                             if os.path.exists(image_dir) is False:
                                 os.makedirs(image_dir)
                             file_path = image_dir + file_name
