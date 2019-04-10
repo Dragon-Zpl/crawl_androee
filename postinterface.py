@@ -43,6 +43,7 @@ def pack_data(data_list, url):
         print(post_data)
         r = requests.post('http://192.168.183.58/index.php?r=apiandroid/crawler/UpdateAppInfoBatch', data=post_data,
                           timeout=60)
+        print(r.text)
         if r.ok == True:
             print('修改数据库')
             sql = "update crawl_androeed_app_info set isinfosynced=1 where url=%s"
