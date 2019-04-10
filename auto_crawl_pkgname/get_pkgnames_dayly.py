@@ -29,15 +29,15 @@ class CrawlPkgnames:
         self.mysql_op = MysqlHeaper()
         self.proxies = []
         self.bad_pkg_url = set()
-    async def get_pool(self, loop=None, config='mysql'):
-        fr = open('./config/config.yaml', 'r')
-        config_file = yaml.load(fr)
-        local_mysql_config = config_file[config]
-        self.pool = await aiomysql.create_pool(host=local_mysql_config["host"], port=local_mysql_config["port"],
-                                               user=local_mysql_config["user"], password=local_mysql_config["password"],
-                                               db=local_mysql_config["database"], loop=loop,
-                                               charset=local_mysql_config["charset"], autocommit=True)
-        return self
+    # async def get_pool(self, loop=None, config='mysql'):
+    #     fr = open('./config/config.yaml', 'r')
+    #     config_file = yaml.load(fr)
+    #     local_mysql_config = config_file[config]
+    #     self.pool = await aiomysql.create_pool(host=local_mysql_config["host"], port=local_mysql_config["port"],
+    #                                            user=local_mysql_config["user"], password=local_mysql_config["password"],
+    #                                            db=local_mysql_config["database"], loop=loop,
+    #                                            charset=local_mysql_config["charset"], autocommit=True)
+    #     return self
     async def request_web(self,url,proxy=None):
         for i in range(3):
             try:
@@ -82,8 +82,8 @@ class CrawlPkgnames:
         else:
             task = asyncio.ensure_future(self.request_web(url=self.mods_urls[0]),loop=loop)
             tasks.append(task)
-        task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
-        tasks.append(task)
+        # task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
+        # tasks.append(task)
         return tasks
 
     def get_app_urls(self,data):
@@ -370,7 +370,7 @@ class CrawlPkgnames:
             logger.info(e)
     def run(self):
         self.pkg_urls.clear()
-        loop.run_until_complete(self.get_pool())
+        # loop.run_until_complete(self.get_pool())
         logger.info('start crawl ...')
         tasks = self.build_async_tasks()
         results = loop.run_until_complete(asyncio.gather(*tasks))
