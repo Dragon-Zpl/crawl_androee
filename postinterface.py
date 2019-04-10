@@ -40,9 +40,11 @@ def pack_data(data_list, url):
         'oncestr': rdstr
     }
     try:
+        print(post_data)
         r = requests.post('http://192.168.183.58/index.php?r=apiandroid/crawler/UpdateAppInfoBatch', data=post_data,
                           timeout=60)
         if r.ok == True:
+            print('修改数据库')
             sql = "update crawl_androeed_app_info set isinfosynced=1 where url=%s"
             update_data(sql, (url,))
     except Exception as e:
@@ -85,7 +87,7 @@ data = {
     "fileInfo":{
         "downloadUrl":"http://crawer2.tutuapp.net:8080/androee_files/app_page/2019-04-10/8cc2d062cb408c966bb2651826bb0814.apk",
         "fileMd5":"334594e625fcb5017ec217f7561268ad",
-        "callbackUrl":"http://23.236.115.228:5001/appVideoView".
+        "callbackUrl":"http://23.236.115.228:5001/appVideoView",
         "weight":10
     }
 }
