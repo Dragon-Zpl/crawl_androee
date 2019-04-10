@@ -113,7 +113,10 @@ class CrawlPkgnames:
         else:
             data_dic["icon"] = ""
         data_dic["categories"] = ','.join(content.xpath(self.analysis.categories))
-        data_dic["version"] = content.xpath(self.analysis.version)[0].strip(" ")
+        if content.xpath(self.analysis.version):
+            data_dic["version"] = content.xpath(self.analysis.version)[0].strip(" ")
+        else:
+            data_dic["version"] = ""
         data_dic["os"] = content.xpath(self.analysis.os)[0]
         data_dic["internet"] = content.xpath(self.analysis.internet)[0]
         data_dic["size"] = content.xpath(self.analysis.size)[0]
