@@ -1,5 +1,7 @@
 import asyncio
 import datetime
+import hashlib
+import os
 from random import choice
 import re
 
@@ -19,7 +21,7 @@ class CrawlPkgnames:
         self.app_url = "https://www.androeed.ru/android/programmy.html?hl=en"
         # 包的下载地址在该接口下
         self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_comm_dapda_otsosal_2_raza&ui="
-        self.flag = 1
+        self.flag = 2
         self.lock = asyncio.Lock(loop=loop)
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
@@ -80,8 +82,8 @@ class CrawlPkgnames:
         else:
             task = asyncio.ensure_future(self.request_web(url=self.mods_urls[0]),loop=loop)
             tasks.append(task)
-        task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
-        tasks.append(task)
+        # task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
+        # tasks.append(task)
         return tasks
 
     def get_app_urls(self,data):
@@ -198,69 +200,69 @@ class CrawlPkgnames:
             tasks.append(task)
         return tasks
 
-    async def insert_update_apk(self,data_dic):
-        try:
-            sql = """
-                insert into crawl_androeed_apk_info(pkg_name,version_code, file_path, file_sha1, last_update_date) VALUES (%s,%s,%s,%s,%s)
-                                     ON DUPLICATE KEY UPDATE pkg_name=VALUES(pkg_name), version_code=VALUES(version_code), file_path=VALUES(file_path), file_sha1=VALUES(file_sha1), last_update_date=VALUES(last_update_date)
-            """
-            nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
-            params = (
-                data_dic["pkgname"],data_dic["version"],data_dic["file_path"],data_dic["md5"],nowtime
-            )
-            async with self.pool.acquire() as conn:
-                async with conn.cursor() as cur:
-                    results = await cur.execute(sql, params)
-                    return results
-        except Exception as e:
-            logger.error("{}".format(e))
-            await self.get_pool()
-            return None
-
-    async def insert_update_app(self,data_dic):
-        try:
-            sql = """
-                insert into crawl_androeed_app_info(app_size,category, coverimgurl, currentversion, description,developer,whatsnew,last_update_date,minimum_os_version,name,screenshots,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                                     ON DUPLICATE KEY UPDATE app_size=VALUES(app_size), category=VALUES(category), coverimgurl=VALUES(coverimgurl), currentversion=VALUES(currentversion), url=VALUES(url), description=VALUES(description), developer=VALUES(developer), whatsnew=VALUES(whatsnew)
-                                     , last_update_date=VALUES(last_update_date), minimum_os_version=VALUES(minimum_os_version), name=VALUES(name), screenshots=VALUES(screenshots)
-            """
-            nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
-            params = (
-                data_dic["size"],data_dic["categories"],data_dic["icon"],data_dic["version"],data_dic["description"],
-                data_dic["developer"],data_dic["what_news"],nowtime,data_dic["os"],data_dic["name"],data_dic["img_urls"],data_dic["app_url"]
-            )
-            async with self.pool.acquire() as conn:
-                async with conn.cursor() as cur:
-                    results = await cur.execute(sql, params)
-                    return results
-        except Exception as e:
-            logger.error("{}".format(e))
-            await self.get_pool()
-            return None
-
-    async def check_version(self,data):
-        sql = 'select currentversion from crawl_androeed_app_info where name=\'{}\''.format(data["name"])
-        async with self.pool.acquire() as conn:
-            async with conn.cursor() as cur:
-                try:
-                    await cur.execute(sql)
-                    recond = await cur.fetchone()
-                    if recond:
-                        logger.info("name:{},now:{},sql:{}".format(data["name"],data["version"],recond))
-                        if recond[0] != data["version"]:
-                            return data
-                        else:
-                            return None
-                    else:
-                        return data
-                except Exception as e:
-                    print(e)
-                    return None
+    # async def insert_update_apk(self,data_dic):
+    #     try:
+    #         sql = """
+    #             insert into crawl_androeed_apk_info(pkg_name,version_code, file_path, file_sha1, last_update_date) VALUES (%s,%s,%s,%s,%s)
+    #                                  ON DUPLICATE KEY UPDATE pkg_name=VALUES(pkg_name), version_code=VALUES(version_code), file_path=VALUES(file_path), file_sha1=VALUES(file_sha1), last_update_date=VALUES(last_update_date)
+    #         """
+    #         nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+    #         params = (
+    #             data_dic["pkgname"],data_dic["version"],data_dic["file_path"],data_dic["md5"],nowtime
+    #         )
+    #         async with self.pool.acquire() as conn:
+    #             async with conn.cursor() as cur:
+    #                 results = await cur.execute(sql, params)
+    #                 return results
+    #     except Exception as e:
+    #         logger.error("{}".format(e))
+    #         await self.get_pool()
+    #         return None
+    #
+    # async def insert_update_app(self,data_dic):
+    #     try:
+    #         sql = """
+    #             insert into crawl_androeed_app_info(app_size,category, coverimgurl, currentversion, description,developer,whatsnew,last_update_date,minimum_os_version,name,screenshots,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+    #                                  ON DUPLICATE KEY UPDATE app_size=VALUES(app_size), category=VALUES(category), coverimgurl=VALUES(coverimgurl), currentversion=VALUES(currentversion), url=VALUES(url), description=VALUES(description), developer=VALUES(developer), whatsnew=VALUES(whatsnew)
+    #                                  , last_update_date=VALUES(last_update_date), minimum_os_version=VALUES(minimum_os_version), name=VALUES(name), screenshots=VALUES(screenshots)
+    #         """
+    #         nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
+    #         params = (
+    #             data_dic["size"],data_dic["categories"],data_dic["icon"],data_dic["version"],data_dic["description"],
+    #             data_dic["developer"],data_dic["what_news"],nowtime,data_dic["os"],data_dic["name"],data_dic["img_urls"],data_dic["app_url"]
+    #         )
+    #         async with self.pool.acquire() as conn:
+    #             async with conn.cursor() as cur:
+    #                 results = await cur.execute(sql, params)
+    #                 return results
+    #     except Exception as e:
+    #         logger.error("{}".format(e))
+    #         await self.get_pool()
+    #         return None
+    #
+    # async def check_version(self,data):
+    #     sql = 'select currentversion from crawl_androeed_app_info where name=\'{}\''.format(data["name"])
+    #     async with self.pool.acquire() as conn:
+    #         async with conn.cursor() as cur:
+    #             try:
+    #                 await cur.execute(sql)
+    #                 recond = await cur.fetchone()
+    #                 if recond:
+    #                     logger.info("name:{},now:{},sql:{}".format(data["name"],data["version"],recond))
+    #                     if recond[0] != data["version"]:
+    #                         return data
+    #                     else:
+    #                         return None
+    #                 else:
+    #                     return data
+    #             except Exception as e:
+    #                 print(e)
+    #                 return None
 
     def build_check_tasks(self,datas):
         tasks = []
         for data in datas:
-            task = asyncio.ensure_future(self.check_version(data))
+            task = asyncio.ensure_future(self.mysql_op.check_version(data))
             tasks.append(task)
 
         return tasks
@@ -271,11 +273,11 @@ class CrawlPkgnames:
                 if len(data_dic["download_first_url"]) > 0:
                     data_dic = Helper.build_download_task(data_dic=data_dic)
                     if data_dic:
-                        loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
+                        loop.run_until_complete(self.mysql_op.insert_update_app(data_dic=data_dic))
                     else:
                         self.bad_pkg_url.add(data_dic["app_url"])
                     if data_dic and data_dic["file_path"]:
-                        loop.run_until_complete(self.insert_update_apk(data_dic=data_dic))
+                        loop.run_until_complete(self.mysql_op.insert_update_apk(data_dic=data_dic))
                     else:
                         self.bad_pkg_url.add(data_dic["app_url"])
                 else:
@@ -284,10 +286,87 @@ class CrawlPkgnames:
                     data_dic["developer"] = ""
                     data_dic["file_path"] = ""
                     self.bad_pkg_url.add(data_dic["app_url"])
-                    loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
+                    loop.run_until_complete(self.mysql_op.insert_update_app(data_dic=data_dic))
                     logger.info('have question' + str(data_dic))
                     logger.info('不存在download_url'+str(data_dic))
 
+    def download_image_tasks(self,datas):
+        if not os.path.exists(PKGSTORE):
+            os.makedirs(PKGSTORE)
+        tasks = []
+        for data in datas:
+            if data["icon"]:
+                task = asyncio.ensure_future(self.download_icon(data))
+                tasks.append(task)
+            if data["img_urls"]:
+                task = asyncio.ensure_future(self.download_screen(data))
+                tasks = tasks.append(task)
+        return tasks
+
+    def file_path_detail(self, url):
+        file_name = url.replace('https://i1.androeed.ru/icons/', '').replace('/', '')
+        if 'i3.androeed.ru' in url:
+            file_name = url.replace('https://i3.androeed.ru/icons/', '').replace('/', '')
+        file_name = hashlib.md5((file_name).encode('utf-8')).hexdigest() + '.png'
+        now = datetime.datetime.now()
+        now_date = now.strftime('%Y-%m-%d')
+        return file_name, now_date
+
+    async def download_icon(self,datas,proxy=None):
+        for i in range(3):
+            try:
+                async with session.get(url=datas["icon"], proxy=proxy, timeout=15) as r:
+                    if r.status in [200, 201]:
+                        data = await r.read()
+                        file_name, nowdate = self.file_path_detail(datas["icon"])
+                        image_dir = ICONSTORE + nowdate
+                        if os.path.exists(image_dir) is False:
+                            os.makedirs(image_dir)
+                        file_path = image_dir + file_name
+                        with open(file_path, 'wb') as fp:
+                            fp.write(data)
+                        datas["icon_path"] = file_path
+                        loop.run_until_complete(self.mysql_op.insert_update_icon(datas))
+                        break
+                    elif r.status in [403, 400, 500, 502, 503, 429]:
+                        proxy = await self.get_proxy()
+                    else:
+                        break
+            except Exception as e:
+                proxy = await self.get_proxy()
+                logger.info(e)
+
+    async def download_screen(self,datas,proxy=None):
+        urls = datas['img_urls'].split(',')
+        urls_list = []
+        for url in urls:
+            for i in range(3):
+                try:
+                    async with session.get(url=url, proxy=proxy, timeout=15) as r:
+                        if r.status in [200, 201]:
+                            data = await r.read()
+                            file_name, nowdate = self.file_path_detail(url)
+                            image_dir = ICONSTORE + nowdate
+                            if os.path.exists(image_dir) is False:
+                                os.makedirs(image_dir)
+                            file_path = image_dir + file_name
+                            with open(file_path, 'wb') as fp:
+                                fp.write(data)
+                            urls_list.append(file_path)
+                            break
+                        elif r.status in [403, 400, 500, 502, 503, 429]:
+                            proxy = await self.get_proxy()
+                        else:
+                            break
+                except Exception as e:
+                    proxy = await self.get_proxy()
+                    logger.info(e)
+
+        try:
+            datas['screen_path'] = ','.join(urls_list)
+            loop.run_until_complete(self.mysql_op.insert_update_screen(datas))
+        except Exception as e:
+            logger.info(e)
     def run(self):
         self.pkg_urls.clear()
         loop.run_until_complete(self.get_pool())
@@ -319,6 +398,13 @@ class CrawlPkgnames:
         logger.info(('dict_len:'+str(len(results))))
         #下载包
         self.download_pkg(results)
+
+        #下载icon和screenshots
+
+        tasks = self.download_image_tasks(results)
+
+        loop.run_until_complete(asyncio.gather(*tasks))
+
         logger.info("self.bad_pkg_url:"+str(self.bad_pkg_url))
         logger.info('start send email')
         if self.bad_pkg_url:

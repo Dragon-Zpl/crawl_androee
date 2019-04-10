@@ -1,4 +1,5 @@
 import os
+from utils.init import PKGSTORE
 
-if os.path.exists("./*.sh"):
-    print(".dasdsa")
+if not os.path.exists(PKGSTORE):
+    os.makedirs(PKGSTORE)

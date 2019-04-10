@@ -29,3 +29,7 @@ logging.config.dictConfig(config_file['logger'])
 logger = logging.getLogger('project')
 
 loop.run_until_complete(MysqlHeaper().get_pool())
+
+SCREENSTORE = "/home/feng/android_files1/androee_files/picture/coverimg/"
+ICONSTORE = "/home/feng/android_files1/androee_files/picture/screenshot/"
+PKGSTORE = "/home/feng/android_files1/androee_files/app_page/"

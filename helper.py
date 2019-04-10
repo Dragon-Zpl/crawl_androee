@@ -13,10 +13,10 @@ import requests
 from Crypto.Cipher import DES3
 from lxml import etree
 
-from utils.init import config_file, loop, logger
+from utils.init import *
 from utils.project_helper import ProjectHepler
 
-basic_dir = "/home/feng/android_files1/androee_files/"
+
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, bytes):
@@ -28,22 +28,13 @@ class Helper:
     des3 = config_file['DES3']
     key = des3['key']
     appkey = des3['appkey']
-    pkgpath = "/home/feng/{}/google_files/app_page".format(ProjectHepler.get_basic_path(ProjectHepler.get_ip()))
-
-    @classmethod
-    def file_path_detail(cls):
-        now = datetime.datetime.now()
-        now_date = now.strftime('%Y-%m-%d')
-        download_dir = "%s/%s/" % (cls.pkgpath, now_date)
-        return download_dir
 
     @classmethod
     def build_tpk(cls, basic_dir, obbpath, dict_tpk,data_dic):
         # tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
         logger.info('start combine')
-        if os.path.exists("/home/feng/android_files1/androee_files/www.androeed.ru.txt"):
-            os.system('rm /home/feng/android_files1/androee_files/www.androeed.ru.txt')
-        tpkdir = "/home/feng/android_files1/androee_files/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
+        cls.remove_txt()
+        tpkdir = basic_dir + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         # print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
         cls.writeencryptapkinfo(config_info, tpkdir)
@@ -223,16 +214,18 @@ class Helper:
 
     @classmethod
     def remove_txt(cls):
-        if os.path.exists("/home/feng/android_files1/androee_files/www.androeed.ru.txt"):
-            os.system('rm /home/feng/android_files1/androee_files/www.androeed.ru.txt')
-        if os.path.exists("/home/feng/android_files1/androee_files/www_androeed_ru.txt"):
-            os.system('rm /home/feng/android_files1/androee_files/www_androeed_ru.txt')
+        if os.path.exists(PKGSTORE+ 'www.androeed.ru.txt'):
+            os.system('rm '+PKGSTORE+ 'www.androeed.ru.txt')
+        if os.path.exists(PKGSTORE+'www_androeed_ru.txt'):
+            os.system('rm '+PKGSTORE+'www_androeed_ru.txt')
 
     @classmethod
     def build_download_task(cls,data_dic):
         try:
             cls.remove_txt()
-            basic = "/home/feng/android_files1/androee_files/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
+            if not os.path.exists(PKGSTORE):
+                os.makedirs(PKGSTORE)
+            basic = PKGSTORE + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
             apk_path = basic + '.apk'
             cls.urlFetch(targetFile=apk_path, targetUrl=data_dic["download_first_url"][0])
             md5_path = apk_path
@@ -245,7 +238,7 @@ class Helper:
                     cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
                     dict_tpk, new_obb_path = cls.configinfo(data_dic=data_dic, apkpath=apk_path, obb_path=obb_path)
                     if dict_tpk and new_obb_path:
-                        md5_path = cls.build_tpk(basic_dir=basic_dir, obbpath=new_obb_path, dict_tpk=dict_tpk,
+                        md5_path = cls.build_tpk(basic_dir=PKGSTORE, obbpath=new_obb_path, dict_tpk=dict_tpk,
                                              data_dic=data_dic)
                     else:
                         os.system('rm ' + basic + '.*')
