@@ -48,7 +48,6 @@ class CrawlPkgnames:
                     elif r.status in [403, 400, 500, 502, 503, 429]:
                         proxy = await self.get_proxy()
                     else:
-                        logger.info(url+",status:"+str(r.status))
                         return None
             except Exception as e:
                 logger.info("url:{},error:{}".format(url,e))
@@ -125,12 +124,12 @@ class CrawlPkgnames:
                     if img_content.xpath(self.analysis.img_urls):
                         data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
                 else:
-                    logger.info('img_url:'+img_url)
-                    data_dic["img_urls"] = "None"
+                    data_dic["img_urls"] = ""
             except Exception as e :
+                data_dic["img_urls"] = ""
                 logger.info("error:{},img_urls:{}".format(e,str(img_urls)))
         else:
-            data_dic["img_urls"] = "None"
+            data_dic["img_urls"] = ""
         data_dic["description"] = ''.join(content.xpath(self.analysis.description))
         data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
 

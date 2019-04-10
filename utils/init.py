@@ -20,8 +20,8 @@ conn = aiohttp.TCPConnector(
 session = aiohttp.ClientSession(connector=conn)
 loop = asyncio.get_event_loop()
 
-pool = redis.ConnectionPool(host='23.236.115.226', password="weiphone", port=6379, db=11)
-rcon = redis.Redis(connection_pool=pool)
+# pool = redis.ConnectionPool(host='23.236.115.226', password="weiphone", port=6379, db=11)
+# rcon = redis.Redis(connection_pool=pool)
 with open('./config/config.yaml', 'r') as fr:
     config_file = yaml.load(fr)
 redis_topic = config_file["redis_topic"]["test"]

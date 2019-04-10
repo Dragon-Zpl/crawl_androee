@@ -1,8 +1,8 @@
 mysql:
-  host: 120.79.2.95
-  port: 3306
-  user: root
-  password:
+  host: 192.168.182.118
+  port: 3973
+  user: deve
+  password: weiphone
   database: google_play
   charset: utf8
 
