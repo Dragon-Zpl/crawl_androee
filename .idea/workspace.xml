@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Mysql_/mysql_op.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mysql_/mysql_op.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" beforeDir="false" afterPath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" afterDir="false" />
-    </list>
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +20,8 @@
       <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
-              <caret line="31" column="8" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+            <state relative-caret-position="-3126">
+              <caret line="86" selection-start-line="86" selection-end-line="87" selection-end-column="28" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <element signature="e#3816#9690#0" />
@@ -741,8 +738,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="31" column="8" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+        <state relative-caret-position="-3126">
+          <caret line="86" selection-start-line="86" selection-end-line="87" selection-end-column="28" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <element signature="e#3816#9690#0" />

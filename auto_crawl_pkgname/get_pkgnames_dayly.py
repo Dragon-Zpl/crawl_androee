@@ -26,7 +26,8 @@ class CrawlPkgnames:
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
         self.pkg_urls = set()
-        self.mysql_op = MysqlHeaper(loop.run_until_complete(self.get_pool()))
+        pool = loop.run_until_complete(self.get_pool())
+        self.mysql_op = MysqlHeaper(pool=pool)
         self.proxies = []
         self.bad_pkg_url = set()
 
