@@ -38,7 +38,9 @@ class SMTP(object):
 
 
 if __name__ == '__main__':
-    email = "jian.zou@office.feng.com"
+    # email = "jian.zou@office.feng.com"
+    email = "15260826071@163.com"
     tel = "15260826071"
-    smtp = SMTP(email, tel)
+    data = ('www,baidu.com','dasdasdsada')
+    smtp = SMTP(email, tel,data)
     smtp.send_email()
