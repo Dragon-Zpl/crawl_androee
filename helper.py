@@ -222,19 +222,23 @@ class Helper:
         cls.runProcess("wget --no-check-certificate --output-document \"" + targetFile + "\" \"" + targetUrl + "\"")
 
     @classmethod
+    def remove_txt(cls):
+        if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
+            os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
+        if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
+            os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
+
+    @classmethod
     def build_download_task(cls,data_dic):
         try:
-            if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
-                os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
-            if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
-                os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
+            cls.remove_txt()
             basic = "/home/feng/pkgtest/" + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
             apk_path = basic + '.apk'
             cls.urlFetch(targetFile=apk_path, targetUrl=data_dic["download_first_url"][0])
             md5_path = apk_path
 
             data_dic = cls.get_info_app(data_dic, apk_path)
-            if len(data_dic["download_first_url"]) > 1:
+            if len(data_dic["download_first_url"]) > 1 and data_dic["icon"]:
                 if data_dic["download_first_url"][1] != 'need_info':
                     logger.info('have obb pkg')
                     obb_path = basic + '.zip'
@@ -254,7 +258,7 @@ class Helper:
                 data_dic["file_path"] = md5_path
 
             if len(data_dic["download_first_url"]) > 1:
-                if data_dic["download_first_url"][1] == 'need_info':
+                if data_dic["download_first_url"][1] == 'need_info' or data_dic["icon"] is None:
                     logger.info('rm ' + str(data_dic["file_path"]))
                     os.system('rm ' + str(data_dic["file_path"]))
                     data_dic["md5"] = ""
@@ -262,10 +266,7 @@ class Helper:
         except Exception as e:
             logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
             return None
-        if os.path.exists("/home/feng/pkgtest/www.androeed.ru.txt"):
-            os.system('rm /home/feng/pkgtest/www.androeed.ru.txt')
-        if os.path.exists("/home/feng/pkgtest/www_androeed_ru.txt"):
-            os.system('rm /home/feng/pkgtest/www_androeed_ru.txt')
+        cls.remove_txt()
         return data_dic
     @classmethod
     def get_info_app(cls,data,apkpath):

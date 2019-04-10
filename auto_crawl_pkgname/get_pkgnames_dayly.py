@@ -19,7 +19,7 @@ class CrawlPkgnames:
         self.app_url = "https://www.androeed.ru/android/programmy.html?hl=en"
         # 包的下载地址在该接口下
         self.mod_pkg_url = "https://www.androeed.ru/index.php?m=files&f=load_comm_dapda_otsosal_2_raza&ui="
-        self.flag = 2
+        self.flag = 1
         self.lock = asyncio.Lock(loop=loop)
         self.crawlProxy = asyncCrawlProxy()
         self.analysis = Xpaths()
@@ -150,10 +150,11 @@ class CrawlPkgnames:
                             data = await self.request_web(url=temp_apk_download_url)
                             temp_apk_download_url_data = etree.HTML(data)
                             apk_download_url = temp_apk_download_url_data.xpath(self.analysis.pkg_download_url)[0]
-                            if 'zip' not in apk_download_url:
+                            if '.apk' in apk_download_url:
                                 data_dic["download_first_url"] = [apk_download_url]
                             else:
-                                logger.info(data_dic["app_url"]+'有问题')
+                                data_dic["download_first_url"] = []
+                                self.bad_pkg_url.add(data_dic["app_url"])
                         elif download_url_len == 3:
                             # 第一个为破解包，第二个为apk包
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
