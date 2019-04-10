@@ -346,11 +346,11 @@ class CrawlPkgnames:
         #下载icon和screenshots
 
         tasks = self.download_image_tasks(results)
+        loop.run_until_complete(asyncio.gather(*tasks))
         #下载包
         self.download_pkg(results)
 
 
-        loop.run_until_complete(asyncio.gather(*tasks))
 
         logger.info("self.bad_pkg_url:"+str(self.bad_pkg_url))
         logger.info('start send email')

@@ -12,7 +12,7 @@ class MysqlHeaper(object):
     """
     def __init__(self,pool):
         self.pool = pool
-
+        self.logger = logger
     async def get_pool(self, loop=None, config='mysql'):
 
         local_mysql_config = self.config_file[config]
@@ -39,7 +39,7 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            logger.error("{}".format(e))
+            self.logger.info("{}".format(e))
             await self.get_pool()
             return None
 
@@ -51,7 +51,7 @@ class MysqlHeaper(object):
                     await cur.execute(sql)
                     recond = await cur.fetchone()
                     if recond:
-                        logger.info("name:{},now:{},sql:{}".format(data["name"],data["version"],recond))
+                        self.logger.info("name:{},now:{},sql:{}".format(data["name"],data["version"],recond))
                         if recond[0] != data["version"]:
                             return data
                         else:
@@ -77,7 +77,7 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            logger.error("{}".format(e))
+            self.logger.info("{}".format(e))
             await self.get_pool()
             return None
 
@@ -96,7 +96,7 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            logger.error("{}".format(e))
+            self.logger.info("{}".format(e))
             await self.get_pool()
             return None
 
@@ -116,6 +116,6 @@ class MysqlHeaper(object):
                     results = await cur.execute(sql, params)
                     return results
         except Exception as e:
-            logger.error("{}".format(e))
+            self.logger.info("{}".format(e))
             await self.get_pool()
             return None
