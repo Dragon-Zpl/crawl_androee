@@ -33,7 +33,7 @@ class Helper:
     def build_tpk(cls, basic_dir, obbpath, dict_tpk,data_dic):
         # tpkdir = basic_dir + hashlib.md5((docid).encode('utf-8')).hexdigest()
         logger.info('start combine')
-        cls.remove_txt()
+        cls.remove_txt(basic_dir)
         tpkdir = basic_dir + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
         # print('tpkdir', tpkdir)
         config_info = cls.encryptapkinfo(dict_tpk, cls.key, cls.appkey)
@@ -113,23 +113,24 @@ class Helper:
             os.remove(apkpath)
             os.remove(obb_path)
             return None,None
-        file_dir = obb_path.split('/')[:-1]
-        file_dir = '/'.join(file_dir)
-        sys_str = "cd " + file_dir + " && unzip -t {}".format(obb_path)
-        f = os.popen(sys_str)
-        # 删除zip文件
-        result_unzip = f.readlines()
-        result_unzip = ''.join(result_unzip)
         try:
+            file_dir = obb_path.split('/')[:-1]
+            file_dir = '/'.join(file_dir)
+            sys_str = "cd " + file_dir + " && unzip -t {}".format(obb_path)
+            f = os.popen(sys_str)
+            # 删除zip文件
+            result_unzip = f.readlines()
+            result_unzip = ''.join(result_unzip)
             obbname = re.search(r'.*?ing.*?/(.*?obb).*', result_unzip).group(1)
+            unzip_str = 'cd ' + file_dir + " && unzip -j {}".format(obb_path)
+            os.system(unzip_str)
+            new_obb_path = file_dir + '/' + obbname
+
+            delete_command = 'rm -rf {} {} {}'.format(obb_path, file_dir + '/' + 'Read*',
+                                                      file_dir + '/' + 'ReXdl.com.url')
+            os.system(delete_command)
         except:
             return None, None
-        unzip_str = 'cd ' + file_dir + " && unzip -j {}".format(obb_path)
-        os.system(unzip_str)
-        new_obb_path = file_dir + '/' + obbname
-
-        delete_command = 'rm -rf {} {} {}'.format(obb_path, file_dir + '/' + 'Read*', file_dir + '/' + 'ReXdl.com.url')
-        os.system(delete_command)
 
         app_version_code = re.search(r'versionCode=\'(.*?)\'', results).group(1)
         app_version = re.search(r'versionName=\'(.*?)\'', results).group(1)
@@ -213,19 +214,27 @@ class Helper:
         cls.runProcess("wget --no-check-certificate --output-document \"" + targetFile + "\" \"" + targetUrl + "\"")
 
     @classmethod
-    def remove_txt(cls):
-        if os.path.exists(PKGSTORE+ 'www.androeed.ru.txt'):
-            os.system('rm '+PKGSTORE+ 'www.androeed.ru.txt')
-        if os.path.exists(PKGSTORE+'www_androeed_ru.txt'):
-            os.system('rm '+PKGSTORE+'www_androeed_ru.txt')
+    def remove_txt(cls,path):
+        if os.path.exists(path+ 'www.androeed.ru.txt'):
+            os.system('rm '+path+ 'www.androeed.ru.txt')
+        if os.path.exists(path+'www_androeed_ru.txt'):
+            os.system('rm '+path+'www_androeed_ru.txt')
+
+    @classmethod
+    def file_path_detail(cls):
+        now = datetime.datetime.now()
+        now_date = now.strftime('%Y-%m-%d')
+        download_dir = PKGSTORE + now_date + "/"
+        return download_dir
 
     @classmethod
     def build_download_task(cls,data_dic):
+        basic_dir = cls.file_path_detail()
         try:
-            cls.remove_txt()
-            if not os.path.exists(PKGSTORE):
-                os.makedirs(PKGSTORE)
-            basic = PKGSTORE + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
+            cls.remove_txt(basic_dir)
+            if not os.path.exists(basic_dir):
+                os.makedirs(basic_dir)
+            basic = basic_dir + hashlib.md5((data_dic["name"]).encode('utf-8')).hexdigest()
             apk_path = basic + '.apk'
             cls.urlFetch(targetFile=apk_path, targetUrl=data_dic["download_first_url"][0])
             md5_path = apk_path
@@ -238,7 +247,7 @@ class Helper:
                     cls.urlFetch(targetFile=obb_path, targetUrl=data_dic["download_first_url"][1])
                     dict_tpk, new_obb_path = cls.configinfo(data_dic=data_dic, apkpath=apk_path, obb_path=obb_path)
                     if dict_tpk and new_obb_path:
-                        md5_path = cls.build_tpk(basic_dir=PKGSTORE, obbpath=new_obb_path, dict_tpk=dict_tpk,
+                        md5_path = cls.build_tpk(basic_dir=basic_dir, obbpath=new_obb_path, dict_tpk=dict_tpk,
                                              data_dic=data_dic)
                     else:
                         os.system('rm ' + basic + '.*')
@@ -263,7 +272,7 @@ class Helper:
             data_dic["file_path"] = ""
             data_dic["pkgname"] = ""
             data_dic["developer"] = ""
-        cls.remove_txt()
+        cls.remove_txt(basic_dir)
         return data_dic
     @classmethod
     def get_info_app(cls,data,apkpath):

@@ -7,8 +7,6 @@ from utils.init import *
 class MysqlHeaper(object):
     fr = open('./config/config.yaml', 'r')
     config_file = yaml.load(fr)
-    logging.config.dictConfig(config_file['logger'])
-    logger = logging.getLogger('mysql')
     """
     异步mysql class
     """

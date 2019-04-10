@@ -298,12 +298,13 @@ class CrawlPkgnames:
             os.makedirs(PKGSTORE)
         tasks = []
         for data in datas:
-            if data["icon"]:
-                task = asyncio.ensure_future(self.download_icon(data))
-                tasks.append(task)
-            if data["img_urls"]:
-                task = asyncio.ensure_future(self.download_screen(data))
-                tasks = tasks.append(task)
+            if data:
+                if data["icon"]:
+                    task = asyncio.ensure_future(self.download_icon(data))
+                    tasks.append(task)
+                if data["img_urls"]:
+                    task = asyncio.ensure_future(self.download_screen(data))
+                    tasks = tasks.append(task)
         return tasks
 
     def file_path_detail(self, url):
@@ -400,12 +401,12 @@ class CrawlPkgnames:
         results = loop.run_until_complete(asyncio.gather(*tasks))
         logger.info('检查剩下的:'+str(results))
         logger.info(('dict_len:'+str(len(results))))
-        #下载包
-        self.download_pkg(results)
-
         #下载icon和screenshots
 
         tasks = self.download_image_tasks(results)
+        #下载包
+        self.download_pkg(results)
+
 
         loop.run_until_complete(asyncio.gather(*tasks))
 
