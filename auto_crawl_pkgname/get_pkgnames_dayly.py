@@ -29,7 +29,7 @@ class CrawlPkgnames:
         self.mysql_op = MysqlHeaper(loop.run_until_complete(self.get_pool()))
         self.proxies = []
         self.bad_pkg_url = set()
-        
+
     async def get_pool(self, loop=None, config='mysql'):
         fr = open('./config/config.yaml', 'r')
         config_file = yaml.load(fr)
@@ -84,8 +84,8 @@ class CrawlPkgnames:
         else:
             task = asyncio.ensure_future(self.request_web(url=self.mods_urls[0]),loop=loop)
             tasks.append(task)
-        task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
-        tasks.append(task)
+        # task = asyncio.ensure_future(self.request_web(url=self.app_url),loop=loop)
+        # tasks.append(task)
         return tasks
 
     def get_app_urls(self,data):
