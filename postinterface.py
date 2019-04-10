@@ -83,13 +83,16 @@ data = [{
     "localization":{
         "appName":"Drive Ahead!",
         "appIntroduction":"Drive Ahead! - Arcade mini-cars and battle in the arena.Racing, Arcade, Action ... How about we combine the three genre? Get behind the wheel and crashed his car ramming enemy. Destroy his car, earn points and win in quick, sharp, dynamic and fun rides. You can even play with a friend on the same device! And of course to open new cars, so the game it was always interesting.Features:Crazy gameplayRetro-style graphics Twin Shooter.Simple operationOpportunity to play together on one device Эту игру можно скачать в официальном Google Play Маркет",
-        "compatibility":"Android 4.4 or above"
+        "compatibility":"Android 4.4 or above",
+        'currencyCode': 'KRW',
+        "appPrice":0,
     },
     "fileInfo":{
         "downloadUrl":"http://crawer2.tutuapp.net:8080/androee_files/app_page/2019-04-10/8cc2d062cb408c966bb2651826bb0814.apk",
         "fileMd5":"334594e625fcb5017ec217f7561268ad",
         "callbackUrl":"http://23.236.115.228:5001/appVideoView",
-        "weight":10
+        "weight":5,
+
     }
 }]
 
