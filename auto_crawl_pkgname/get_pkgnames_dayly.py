@@ -242,11 +242,11 @@ class CrawlPkgnames:
         for data in datas:
             if data:
                 if data["icon"]:
-                    task = asyncio.ensure_future(self.download_icon(data))
+                    task = asyncio.ensure_future(self.download_icon(datas=data))
                     tasks.append(task)
                 if data["img_urls"]:
-                    task = asyncio.ensure_future(self.download_screen(data))
-                    tasks = tasks.append(task)
+                    task = asyncio.ensure_future(self.download_screen(datas=data))
+                    tasks.append(task)
         return tasks
 
     def file_path_detail(self, url):
