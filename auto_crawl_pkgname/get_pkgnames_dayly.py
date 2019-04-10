@@ -269,19 +269,12 @@ class CrawlPkgnames:
     def download_pkg(self,results):
         for data_dic in results:
             if data_dic:
-                logger.info(data_dic)
                 if len(data_dic["download_first_url"]) > 0:
                     data_dic = Helper.build_download_task(data_dic=data_dic)
                     if data_dic:
                         loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
                     else:
-                        data_dic["pkgname"] = ""
-                        data_dic["md5"] = ""
-                        data_dic["developer"] = ""
-                        data_dic["file_path"] = ""
                         self.bad_pkg_url.add(data_dic["app_url"])
-                        loop.run_until_complete(self.insert_update_app(data_dic=data_dic))
-                        logger.info('have question' + str(data_dic))
                     if data_dic and data_dic["file_path"]:
                         loop.run_until_complete(self.insert_update_apk(data_dic=data_dic))
                     else:
@@ -327,6 +320,6 @@ class CrawlPkgnames:
         logger.info(('dict_len:'+str(len(results))))
         #下载包
         self.download_pkg(results)
-
+        logger.info('start send email')
         email = SMTP("15260826071@163.com", 15260826071,self.bad_pkg_url)
         email.send_email()

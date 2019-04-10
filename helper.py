@@ -266,7 +266,10 @@ class Helper:
         except Exception as e:
             # logger.info("error:{},download_url:{}".format(e,str(data_dic["download_first_url"])))
             logger.info(e)
-            return None
+            data_dic["md5"] = ""
+            data_dic["file_path"] = ""
+            data_dic["pkgname"] = ""
+            data_dic["developer"] = ""
         cls.remove_txt()
         return data_dic
     @classmethod
