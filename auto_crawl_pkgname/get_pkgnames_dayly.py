@@ -259,7 +259,8 @@ class CrawlPkgnames:
         return file_name, now_date
 
 
-    async def download_icon(self,datas,proxy=None):
+    async def download_icon(self,datas,proxy_put=None):
+        proxy = proxy_put
         for i in range(3):
             try:
                 async with session.get(url=datas["icon"], proxy=proxy, timeout=15) as r:
@@ -273,7 +274,8 @@ class CrawlPkgnames:
                         with open(file_path, 'wb') as fp:
                             fp.write(data)
                         datas["icon_path"] = file_path
-                        loop.run_until_complete(self.mysql_op.insert_update_icon(datas))
+                        await self.mysql_op.insert_update_icon(datas)
+                        # loop.run_until_complete(self.mysql_op.insert_update_icon(datas))
                         break
                     elif r.status in [403, 400, 500, 502, 503, 429]:
                         proxy = await self.get_proxy()
@@ -290,6 +292,7 @@ class CrawlPkgnames:
             for i in range(3):
                 try:
                     async with session.get(url=url, proxy=proxy, timeout=15) as r:
+                        print(proxy)
                         if r.status in [200, 201]:
                             data = await r.read()
                             file_name, nowdate = self.file_path_detail(url)
@@ -306,12 +309,13 @@ class CrawlPkgnames:
                         else:
                             break
                 except Exception as e:
-                    proxy = await self.get_proxy()
                     logger.info(e)
+                    proxy = await self.get_proxy()
 
         try:
             datas['screen_path'] = ','.join(urls_list)
-            loop.run_until_complete(self.mysql_op.insert_update_screen(datas))
+            # loop.run_until_complete(self.mysql_op.insert_update_screen(datas))
+            await self.mysql_op.insert_update_screen(datas)
         except Exception as e:
             logger.info(e)
     def run(self):
