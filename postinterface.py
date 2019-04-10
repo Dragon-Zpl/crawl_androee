@@ -73,7 +73,7 @@ def update_data(command, data, commit=False):
 
 
 data = {
-    "source":"p",
+    "source":"g",
     "filebundleid":"com.dodreams.driveahead",
     "appDevelopers":"Dodreams Ltd.",
     "categoryCode":"Arcade,Cars,Pixels",
