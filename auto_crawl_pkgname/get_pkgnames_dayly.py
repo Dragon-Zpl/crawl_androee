@@ -374,5 +374,5 @@ class CrawlPkgnames:
         logger.info("self.bad_pkg_url:"+str(self.bad_pkg_url))
         logger.info('start send email')
         if self.bad_pkg_url:
-            email = SMTP("jian.zou@office.feng.com", "15260826071",self.bad_pkg_url)
+            email = SMTP("15260826071@163.com", "15260826071",self.bad_pkg_url)
             email.send_email()
