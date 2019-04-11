@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Mysql_/mysql_op.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mysql_/mysql_op.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" beforeDir="false" afterPath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestDemo.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestDemo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postinterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/postinterface.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +24,8 @@
       <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2810">
-              <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
+            <state relative-caret-position="281">
+              <caret line="226" column="44" lean-forward="true" selection-start-line="226" selection-start-column="44" selection-end-line="226" selection-end-column="44" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -45,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="postinterface.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="postinterface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/postinterface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="88" column="88" selection-start-line="88" selection-start-column="88" selection-end-line="88" selection-end-column="88" />
+            <state relative-caret-position="625">
+              <caret line="95" column="51" lean-forward="true" selection-start-line="95" selection-start-column="51" selection-end-line="95" selection-end-column="51" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -57,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="send_email.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="send_email.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/send_email.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="894">
-              <caret line="42" column="83" lean-forward="true" selection-start-line="42" selection-start-column="83" selection-end-line="42" selection-end-column="83" />
+            <state relative-caret-position="219">
+              <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -72,10 +72,10 @@
       <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestDemo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+            <state relative-caret-position="319">
+              <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#54#63#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,7 +107,7 @@
       <file leaf-file-name="mysql_op.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
+            <state relative-caret-position="1319">
               <caret line="142" column="28" lean-forward="true" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
@@ -188,13 +188,13 @@
         <option value="$PROJECT_DIR$/Analysis_data/Xpath_word.py" />
         <option value="$PROJECT_DIR$/auto_crawl.py" />
         <option value="$PROJECT_DIR$/config/config.yaml" />
-        <option value="$PROJECT_DIR$/TestDemo.py" />
         <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/utils/init.py" />
-        <option value="$PROJECT_DIR$/postinterface.py" />
         <option value="$PROJECT_DIR$/send_email.py" />
-        <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
         <option value="$PROJECT_DIR$/Mysql_/mysql_op.py" />
+        <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
+        <option value="$PROJECT_DIR$/TestDemo.py" />
+        <option value="$PROJECT_DIR$/postinterface.py" />
       </list>
     </option>
   </component>
@@ -252,7 +252,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Users/Administrator/PycharmProjects/CrawlAndroeed/auto_crawl_pkgname/get_pkgnames_dayly.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/mydata/CrawlGoogleWithGplayCli" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -721,30 +721,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestDemo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1650">
           <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/postinterface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="88" column="88" selection-start-line="88" selection-start-column="88" selection-end-line="88" selection-end-column="88" />
-          <folding>
-            <element signature="e#24#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,7 +740,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
+        <state relative-caret-position="1319">
           <caret line="142" column="28" lean-forward="true" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
@@ -768,22 +748,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/send_email.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2810">
-          <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
+        <state relative-caret-position="281">
+          <caret line="226" column="44" lean-forward="true" selection-start-line="226" selection-start-column="44" selection-end-line="226" selection-end-column="44" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/send_email.py">
+    <entry file="file://$PROJECT_DIR$/TestDemo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="894">
-          <caret line="42" column="83" lean-forward="true" selection-start-line="42" selection-start-column="83" selection-end-line="42" selection-end-column="83" />
+        <state relative-caret-position="319">
+          <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/postinterface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="95" column="51" lean-forward="true" selection-start-line="95" selection-start-column="51" selection-end-line="95" selection-end-column="51" />
+          <folding>
+            <element signature="e#24#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

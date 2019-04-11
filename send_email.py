@@ -48,7 +48,7 @@ class SMTP(object):
                 logger.info(recond)
                 if recond:
                     recond = recond[0][0]
-                    cover_path = recond.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
+                    cover_path = recond.replace('/home/feng/android_files1/', 'http://crawer2.tutuapp.net:8080/')
                     word = '<p> cover_path:{} </p>'.format(cover_path)
                     meg += word
                 sql = "select screenshot_path from crawl_androeed_screenshots WHERE url=\'{}\'".format(url)
@@ -58,7 +58,7 @@ class SMTP(object):
                 if recond:
                     for recond in recond_screens:
                         recond = ''.join(recond)
-                        recond = recond.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
+                        recond = recond.replace('/home/feng/android_files1/', 'http://crawer2.tutuapp.net:8080/')
                         re_reconds.append(recond)
                     word = '<p> screenshot_path:{} </p>'.format(str(re_reconds))
                     meg += word
