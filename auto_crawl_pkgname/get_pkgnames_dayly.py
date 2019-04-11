@@ -126,7 +126,9 @@ class CrawlPkgnames:
         if len(img_urls) > 0:
             try:
                 img_url = img_urls[0].replace("('#images_while').load('","").replace("\" ')","").replace("')","")
-                data = await self.request_web(url=self.host + img_url)
+                parameter1 = img_url.split('&')[-2]
+                parameter2 = img_url.split('&')[-1]
+                data = await self.request_web(url=self.host + "/index.php?m=files&f=images_while&" + parameter1 + "&" + parameter2)
                 if data:
                     img_content = etree.HTML(data)
                     if img_content.xpath(self.analysis.img_urls):

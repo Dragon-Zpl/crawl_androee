@@ -1,24 +1,7 @@
+c = "https://www.androeed.ru"
+a = "/index.php?m=' +ur+ 'f=images_while&id=24492&youtube=oxO1XF2Lyfg"
 
-import asyncio
-
-import aiomysql
-import yaml
-
-from Mysql_.mysql_op import MysqlHeaper
-async def get_pool(loop=None, config='mysql'):
-    fr = open('./config/config.yaml', 'r')
-    config_file = yaml.load(fr)
-    local_mysql_config = config_file[config]
-    pool = await aiomysql.create_pool(host=local_mysql_config["host"], port=local_mysql_config["port"],
-                                           user=local_mysql_config["user"], password=local_mysql_config["password"],
-                                           db=local_mysql_config["database"], loop=loop,
-                                           charset=local_mysql_config["charset"], autocommit=True)
-    return pool
-loop = asyncio.get_event_loop()
-pool = loop.run_until_complete(get_pool())
-mysql_op = MysqlHeaper(pool=pool)
-sql = "select * from crawl_androeed_app_info WHERE url=\'{}\'".format("https://www.androeed.ru/files/homescapes.html?hl=en")
-print(sql)
-print(loop.run_until_complete(mysql_op.fetch_all(sql)))
-
-
+b = a.split('&')
+print(b[-1])
+print(b[-2])
+print(c+"/index.php?m=files&f=images_while&"+b[-2]+"&"+b[-1])
