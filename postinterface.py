@@ -44,12 +44,12 @@ class PostModData:
         pkgname_url_list = []
         #查询未同步的app
         # sql = "SELECT detail_url FROM androidmod_app_info WHERE is_info_synced=0 AND is_sync_failed=0"
-        sql = "select pkg_name from crawl_androeed_apk WHERE is_delete=0 and pkg_name=\'{}\'".format(pkgname)
+        sql = "select pkg_name from crawl_androeed_apk_info WHERE pkg_name=\'{}\' and is_delete=0".format(pkgname)
         # sql = "select pkg_name from apkdlmod_apk_info WHERE id<800"
         url_reconds = loop.run_until_complete(self.mysql_op.fetch_one(sql))
         logger.info("url_reconds"+str(url_reconds))
         if url_reconds != None:
-            sql = "select * from crawl_androeed_app WHERE pkg_name=\'{}\'".format(pkgname)# AND is_info_synced=0 AND is_sync_failed=0"
+            sql = "select * from crawl_androeed_app_info WHERE pkg_name=\'{}\'".format(pkgname)# AND is_info_synced=0 AND is_sync_failed=0"
             recond_all = loop.run_until_complete(self.mysql_op.fetch_all(sql))
             logger.info(recond_all)
             if recond_all:
@@ -83,7 +83,7 @@ class PostModData:
                 appinfo_dict['source'] = 'p'
                 if appinfo_dict['filebundleid']:
                     appinfo_dict['filebundleid'] = appinfo_dict['filebundleid'].encode('utf-8')
-                    sql_apk = "select file_path,file_sha1 from crawl_androeed_app WHERE pkg_name=\'{}\' and is_delete=0".format(appinfo_dict['filebundleid'])
+                    sql_apk = "select file_path,file_sha1 from crawl_androeed_app_info WHERE pkg_name=\'{}\' and is_delete=0".format(appinfo_dict['filebundleid'])
                     file_info = {}
                     recond = loop.run_until_complete(self.mysql_op.fetch_one(sql_apk))
                     logger.info(recond)
