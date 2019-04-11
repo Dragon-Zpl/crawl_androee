@@ -38,8 +38,8 @@ class SMTP(object):
                 logger.info(recond)
                 if recond:
                     recond = recond[0]
-                    decription = recond[4].encode('utf-8')
-                    what_news = recond[5].encode('utf-8')
+                    decription = recond[5]
+                    what_news = recond[6]
                     word = '<p>' + '<a href="' + url + '">' + url + '</a>' + '</p>'
                     word += '<p> decription:{} </p> <p> whatnews:{} </p>'.format(decription,what_news)
                     meg += word
