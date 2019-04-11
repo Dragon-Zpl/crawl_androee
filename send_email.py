@@ -8,7 +8,7 @@ import aiomysql
 from utils.init import *
 
 class SMTP(object):
-    def __init__(self, email, tel, data):
+    def __init__(self, email):
         self.sender = "786283772@qq.com"
         self.receivers = [email]
         self.host = "smtp.qq.com"
@@ -27,12 +27,12 @@ class SMTP(object):
                                                db=local_mysql_config["database"], loop=loop,
                                                charset=local_mysql_config["charset"], autocommit=True)
         return self.pool
-    def send_email(self):
+    def send_email(self, tel, data):
         try:
             logger.info('begging send')
             meg = '''
                 <h1>需要手动下载的URL</h1>
-            '''.format(str(data))
+            '''
             for url in data:
                 sql = "select * from crawl_androeed_app_info WHERE url=\'{}\'".format(url)
                 recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))

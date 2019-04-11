@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/TestDemo.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestDemo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" beforeDir="false" afterPath="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" afterDir="false" />
-    </list>
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +21,8 @@
       <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="129" column="50" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
+            <state relative-caret-position="274">
+              <caret line="166" column="65" lean-forward="true" selection-start-line="166" selection-start-column="65" selection-end-line="166" selection-end-column="67" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -72,8 +69,8 @@
       <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestDemo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+            <state relative-caret-position="150">
+              <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -134,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cls.</find>
       <find>test</find>
       <find>self,</find>
       <find>self.</find>
@@ -143,7 +139,7 @@
       <find>&quot;None&quot;</find>
       <find>/home/feng/pkgtest/</find>
       <find>不存在download</find>
-      <find />
+      <find>pkgname is</find>
       <find>PKGSTORE</find>
       <find>basic_dir</find>
       <find>icon</find>
@@ -164,6 +160,7 @@
       <find>bad_pkg_url</find>
       <find>%22</find>
       <find>img_url</find>
+      <find>[ ]</find>
     </findStrings>
     <replaceStrings>
       <replace>/home/feng/android_files1/androee_files/</replace>
@@ -404,9 +401,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.32997763" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.32997763" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2771855" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2771855" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
@@ -766,15 +763,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestDemo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        <state relative-caret-position="150">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="129" column="50" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
+        <state relative-caret-position="274">
+          <caret line="166" column="65" lean-forward="true" selection-start-line="166" selection-start-column="65" selection-end-line="166" selection-end-column="67" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
