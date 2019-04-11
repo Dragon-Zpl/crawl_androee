@@ -1,81 +1,23 @@
-# _*_ coding: utf-8 _*_
-__time__ = '2018/4/12 10:22'
 
-import os
+import asyncio
 
-from flask import Flask, jsonify
-from flask import request
+import aiomysql
+import yaml
 
-from MysqlWapper import Mysqlwrapper
-
-app = Flask(__name__)
-
-
-@app.route('/api/v1.0/deleteapk/<string:source>/<string:pkgname>', methods=['GET'])
-def create_task(source, pkgname):
-    "删除apk包的接口"
-    p_list = ['androidmod_apk_info', 'apkdlmod_apk_info', 'apk_rex_dlmod_apk_info', 'crawl_androeed_apk_info']
-    dict_apktable = {
-        'a': 'apkpure_apk_info',
-        'p': p_list,
-        'g': 'crawl_google_play_apk_info'
-    }
-    if not source or not pkgname:
-        result = {
-             "success": 0,
-             "info": "DELETE FAILED! PARAMETER ERR"
-        }
-        return jsonify({'result': result}), 400
-    elif source not in dict_apktable:
-        result = {
-            "success": 0,
-            "info": "DELETE FAILED!  ERR"
-        }
-        return jsonify({'result': result}), 400
-
-    else:    
-        data_info = {}
-        mysqlwapper = Mysqlwrapper()
-        conn = mysqlwapper.connection 
-        cursor = mysqlwapper.getcursor()
-        if source == 'p':
-            mysql_tables = dict_apktable[source]
-            result = ''
-            for mysql_table in mysql_tables: 
-                result = delete_apk_file(data_info, cursor, conn, mysql_table, pkgname)
-        else:
-            mysql_table = dict_apktable[source]
-            result = delete_apk_file(data_info, cursor, conn, mysql_table, pkgname)
-
-    return jsonify({'result': result}), 200
-
-def delete_apk_file(data_info, cursor, conn, mysql_table, pkgname):
-    sql_find = "select file_path from " + mysql_table + " WHERE pkg_name=\'" + pkgname + "\'"
-    print(sql_find)
-    rows = cursor.execute(sql_find)
-    conn.commit()
-    if rows != 0:
-        filepath = cursor.fetchone()
-        filepath = ''.join(filepath)
-        if os.path.exists(filepath):
-            delete_operation = "rm -f %s" % filepath
-            os.system(delete_operation)
-            sql_delelte = "update " + mysql_table + " set is_delete=1 WHERE pkg_name=\'" + pkgname + "\'"
-            print(sql_delelte)
-            cursor.execute(sql_delelte)
-            data_info[pkgname] = 'haved deleted'
-        else:
-            data_info[pkgname] = 'have no this app'
-    else:
-        data_info[pkgname] = '{} have no this app'.format(mysql_table)
-
-    result = {
-        "success": 1,
-        "data": data_info
-    }
-    return result
+from Mysql_.mysql_op import MysqlHeaper
+async def get_pool(loop=None, config='mysql'):
+    fr = open('./config/config.yaml', 'r')
+    config_file = yaml.load(fr)
+    local_mysql_config = config_file[config]
+    pool = await aiomysql.create_pool(host=local_mysql_config["host"], port=local_mysql_config["port"],
+                                           user=local_mysql_config["user"], password=local_mysql_config["password"],
+                                           db=local_mysql_config["database"], loop=loop,
+                                           charset=local_mysql_config["charset"], autocommit=True)
+    return pool
+loop = asyncio.get_event_loop()
+pool = loop.run_until_complete(get_pool())
+mysql_op = MysqlHeaper(pool=pool)
+sql = "select * from crawl_androeed_app_info WHERE url=\'{}\'".format("https://www.androeed.ru/files/homescapes.html?hl=en")
+print(loop.run_until_complete(mysql_op.fetch_all(sql)))
 
 
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
