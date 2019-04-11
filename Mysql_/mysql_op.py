@@ -117,3 +117,28 @@ class MysqlHeaper(object):
             print("{}".format(e))
             await self.get_pool()
             return None
+
+    async def fetch_one(self,sql):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                try:
+                    await cur.execute(sql)
+                    recond = await cur.fetchone()
+                    if recond:
+                        return True
+                    else:
+                        return None
+                except Exception as e:
+                    print(e)
+                    return None
+
+    async def fetch_all(self, sql, params=None):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                try:
+                    await cur.execute(sql, params)
+                    reconds = await cur.fetchall()
+                    return reconds
+                except Exception as e:
+                    print(e)
+                    return None
