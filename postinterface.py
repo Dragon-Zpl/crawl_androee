@@ -45,6 +45,7 @@ class PostModData:
         #查询未同步的app
         # sql = "SELECT detail_url FROM androidmod_app_info WHERE is_info_synced=0 AND is_sync_failed=0"
         sql = "select pkg_name from crawl_androeed_apk_info WHERE pkg_name=\'{}\' and is_delete=0".format(pkgname)
+        logger.info(sql)
         # sql = "select pkg_name from apkdlmod_apk_info WHERE id<800"
         url_reconds = loop.run_until_complete(self.mysql_op.fetch_one(sql))
         logger.info("url_reconds"+str(url_reconds))
