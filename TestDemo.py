@@ -18,6 +18,7 @@ loop = asyncio.get_event_loop()
 pool = loop.run_until_complete(get_pool())
 mysql_op = MysqlHeaper(pool=pool)
 sql = "select * from crawl_androeed_app_info WHERE url=\'{}\'".format("https://www.androeed.ru/files/homescapes.html?hl=en")
+print(sql)
 print(loop.run_until_complete(mysql_op.fetch_all(sql)))
 
 
