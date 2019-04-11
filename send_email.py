@@ -34,18 +34,20 @@ class SMTP(object):
             '''.format(str(data))
             for url in data:
                 sql = "select * from crawl_androeed_app_info WHERE url=\'{}\'".format(url)
-                recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))[0]
+                recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))
                 logger.info(recond)
                 if recond:
+                    recond = recond[0]
                     decription = recond[4].encode('utf-8')
                     what_news = recond[5].encode('utf-8')
                     word = '<p>' + '<a href="' + url + '">' + url + '</a>' + '</p>'
                     word += '<p> decription:{} </p> <p> whatnews:{} </p>'.format(decription,what_news)
                     meg += word
-                sql = "select coverimg_path from crawl_androeed_images WHERE url=\'{}\'".format(url)
-                recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))[0]
+                sql = "select coverimg_path from crawl_androeed_coverimg WHERE url=\'{}\'".format(url)
+                recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))
                 logger.info(recond)
                 if recond:
+                    recond = recond[0]
                     cover_path = recond.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
                     word = '<p> cover_path:{} </p>'.format(cover_path)
                     meg += word
