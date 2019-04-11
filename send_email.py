@@ -53,8 +53,7 @@ class SMTP(object):
                     meg += word
                 sql = "select screenshot_path from crawl_androeed_screenshots WHERE url=\'{}\'".format(url)
                 recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))[0][0]
-                recond_screens = list(recond)
-                logger.info(recond_screens)
+                recond_screens = recond.split(",")
                 re_reconds = []
                 if recond:
                     for recond in recond_screens:
