@@ -131,6 +131,8 @@ class CrawlPkgnames:
                     img_content = etree.HTML(data)
                     if img_content.xpath(self.analysis.img_urls):
                         data_dic["img_urls"] = ','.join(img_content.xpath(self.analysis.img_urls))
+                    else:
+                        data_dic["img_urls"] = ""
                 else:
                     data_dic["img_urls"] = ""
             except Exception as e :
