@@ -29,7 +29,7 @@ class MysqlHeaper(object):
             """
             nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
             params = (
-                data_dic["size"],data_dic["categories"],data_dic["icon"],data_dic["version"],data_dic["description"],
+                data_dic["size"],data_dic["categories"],data_dic["icon"],data_dic["version"].strip(' '),data_dic["description"],
                 data_dic["developer"],data_dic["what_news"],nowtime,data_dic["os"],data_dic["name"],data_dic["img_urls"],data_dic["app_url"],data_dic["pkgname"]
             )
             async with self.pool.acquire() as conn:
