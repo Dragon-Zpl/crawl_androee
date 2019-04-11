@@ -161,7 +161,7 @@ class CrawlPkgnames:
                                 data_dic["download_first_url"] = [apk_download_url]
                             else:
                                 data_dic["download_first_url"] = []
-                                self.bad_pkg_url.add(data_dic["app_url"])
+                                # self.bad_pkg_url.add(data_dic["app_url"])
                         elif download_url_len == 3:
                             # 第一个为破解包，第二个为apk包
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
@@ -176,7 +176,7 @@ class CrawlPkgnames:
                                 data_dic["download_first_url"] = [apk_download_url, obb_download_url]
                             else:
                                 data_dic["download_first_url"] = [apk_download_url,'need_info']
-                                self.bad_pkg_url.add(data_dic["app_url"])
+                                # self.bad_pkg_url.add(data_dic["app_url"])
                         elif download_url_len == 4:
                             temp_apk_download_url = mod_content.xpath(self.analysis.download_first_url)[-2]
                             data = await self.request_web(url=temp_apk_download_url)
@@ -223,10 +223,15 @@ class CrawlPkgnames:
                     if data_dic:
                         loop.run_until_complete(self.mysql_op.insert_update_app(data_dic=data_dic))
                     else:
+                        data_dic["pkgname"] = ""
+                        data_dic["md5"] = ""
+                        data_dic["developer"] = ""
+                        data_dic["file_path"] = ""
                         self.bad_pkg_url.add(data_dic["app_url"])
+                        loop.run_until_complete(self.mysql_op.insert_update_app(data_dic=data_dic))
                     if data_dic and data_dic["file_path"]:
                         loop.run_until_complete(self.mysql_op.insert_update_apk(data_dic=data_dic))
-                    else:
+                    if data_dic and data_dic["file_path"] is None:
                         self.bad_pkg_url.add(data_dic["app_url"])
                 else:
                     data_dic["pkgname"] = ""
@@ -320,8 +325,10 @@ class CrawlPkgnames:
             await self.mysql_op.insert_update_screen(datas)
         except Exception as e:
             logger.info(e)
+
     def run(self):
         self.pkg_urls.clear()
+        self.bad_pkg_url.clear()
         # loop.run_until_complete(self.get_pool())
         logger.info('start crawl ...')
         tasks = self.build_async_tasks()
@@ -353,7 +360,11 @@ class CrawlPkgnames:
 
         tasks = self.download_image_tasks(results)
         loop.run_until_complete(asyncio.gather(*tasks))
-        #下载包
+
+        #检查是否需要下载包
+        # check_tasks = self.build_check_need_download(results)
+        # need_results = loop.run_until_complete(asyncio.gather(*check_tasks))
+        # 下载包
         self.download_pkg(results)
 
 
@@ -361,5 +372,5 @@ class CrawlPkgnames:
         logger.info("self.bad_pkg_url:"+str(self.bad_pkg_url))
         logger.info('start send email')
         if self.bad_pkg_url:
-            email = SMTP("15260826071@163.com", "15260826071",self.bad_pkg_url)
+            email = SMTP("jian.zou@office.feng.com", "15260826071",self.bad_pkg_url)
             email.send_email()
