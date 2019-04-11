@@ -62,10 +62,10 @@ class PostModData:
                 appinfo_dict['storeCode'] = 'en'
                 sql_cover = "select coverimg_path from crawl_androeed_coverimg where url=\'{}\'".format(
                     recond_all[-1])
-                coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_one(sql_cover))[0]
+                coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_all(sql_cover))[0][0]
                 appinfo_dict['coverRomoteUrl'] = coverRomoteUrl.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
                 sql_screens = "select screenshot_path from crawl_androeed_screenshots where url=\'{}\'".format(recond_all[-1])
-                recond_screens = loop.run_until_complete(self.mysql_op.fetch_one(sql_screens))[0]
+                recond_screens = loop.run_until_complete(self.mysql_op.fetch_all(sql_screens))[0][0]
                 recond_screens = list(recond_screens)
                 re_reconds = []
                 try:
@@ -86,7 +86,7 @@ class PostModData:
                     appinfo_dict['filebundleid'] = appinfo_dict['filebundleid'].encode('utf-8')
                     sql_apk = "select file_path,file_sha1 from crawl_androeed_apk_info WHERE pkg_name=\'{}\' and is_delete=0".format(appinfo_dict['filebundleid'])
                     file_info = {}
-                    recond = loop.run_until_complete(self.mysql_op.fetch_one(sql_apk))
+                    recond = loop.run_until_complete(self.mysql_op.fetch_all(sql_apk))[0]
                     logger.info(recond)
                     if recond:
                         apk_path = ''.join(recond[0])
