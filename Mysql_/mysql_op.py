@@ -23,14 +23,14 @@ class MysqlHeaper(object):
     async def insert_update_app(self,data_dic):
         try:
             sql = """
-                insert into crawl_androeed_app_info(app_size,category, coverimgurl, currentversion, description,developer,whatsnew,last_update_date,minimum_os_version,name,screenshots,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                insert into crawl_androeed_app_info(app_size,category, coverimgurl, currentversion, description,developer,whatsnew,last_update_date,minimum_os_version,name,screenshots,url,pkgname) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                                      ON DUPLICATE KEY UPDATE app_size=VALUES(app_size), category=VALUES(category), coverimgurl=VALUES(coverimgurl), currentversion=VALUES(currentversion), url=VALUES(url), description=VALUES(description), developer=VALUES(developer), whatsnew=VALUES(whatsnew)
-                                     , last_update_date=VALUES(last_update_date), minimum_os_version=VALUES(minimum_os_version), name=VALUES(name), screenshots=VALUES(screenshots)
+                                     , last_update_date=VALUES(last_update_date), minimum_os_version=VALUES(minimum_os_version), name=VALUES(name), screenshots=VALUES(screenshots), pkgname=VALUES(pkgname)
             """
             nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
             params = (
                 data_dic["size"],data_dic["categories"],data_dic["icon"],data_dic["version"],data_dic["description"],
-                data_dic["developer"],data_dic["what_news"],nowtime,data_dic["os"],data_dic["name"],data_dic["img_urls"],data_dic["app_url"]
+                data_dic["developer"],data_dic["what_news"],nowtime,data_dic["os"],data_dic["name"],data_dic["img_urls"],data_dic["app_url"],data_dic["pkgname"]
             )
             async with self.pool.acquire() as conn:
                 async with conn.cursor() as cur:

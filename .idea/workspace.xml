@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Mysql_/mysql_op.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mysql_/mysql_op.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postinterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/postinterface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/send_email.py" beforeDir="false" afterPath="$PROJECT_DIR$/send_email.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +25,8 @@
       <file leaf-file-name="get_pkgnames_dayly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="33" selection-start-line="33" selection-end-line="41" selection-end-column="24" />
+            <state relative-caret-position="6">
+              <caret line="155" column="98" selection-start-line="155" selection-start-column="98" selection-end-line="155" selection-end-column="98" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -33,10 +37,34 @@
       <file leaf-file-name="postinterface.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/postinterface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
-              <caret line="49" column="51" lean-forward="true" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+            <state relative-caret-position="175">
+              <caret line="68" column="16" selection-start-line="68" selection-start-column="16" selection-end-line="74" selection-end-column="49" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="send_email.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/send_email.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="49" column="31" lean-forward="true" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestDemo.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestDemo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,10 +75,10 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="config.yaml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.yaml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1650">
+            <state relative-caret-position="794">
               <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="56" />
             </state>
           </provider>
@@ -61,18 +89,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="14000">
               <caret line="572" column="4" selection-start-line="572" selection-start-column="4" selection-end-line="572" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crawl_proxies.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CrawlProxy/crawl_proxies.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4200">
-              <caret line="171" column="14" selection-start-line="171" selection-start-column="14" selection-end-line="171" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -89,20 +105,11 @@
       <file leaf-file-name="mysql_op.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+            <state relative-caret-position="455">
+              <caret line="134" column="14" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="14" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Xpath_word.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="20" column="85" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="85" />
             </state>
           </provider>
         </entry>
@@ -154,6 +161,9 @@
       <find>currencyCode</find>
       <find>crawl_androeed_apk_info</find>
       <find>crawl_androeed_apk</find>
+      <find>crawl_androeed_app_info</find>
+      <find>4</find>
+      <find>appIntroduction</find>
     </findStrings>
     <replaceStrings>
       <replace>/home/feng/android_files1/androee_files/</replace>
@@ -174,13 +184,13 @@
         <option value="$PROJECT_DIR$/Analysis_data/Xpath_word.py" />
         <option value="$PROJECT_DIR$/auto_crawl.py" />
         <option value="$PROJECT_DIR$/config/config.yaml" />
-        <option value="$PROJECT_DIR$/send_email.py" />
         <option value="$PROJECT_DIR$/TestDemo.py" />
         <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/utils/init.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
         <option value="$PROJECT_DIR$/Mysql_/mysql_op.py" />
         <option value="$PROJECT_DIR$/postinterface.py" />
+        <option value="$PROJECT_DIR$/send_email.py" />
       </list>
     </option>
   </component>
@@ -216,7 +226,17 @@
             <path>
               <item name="CrawlAndroeed" type="b2602c69:ProjectViewProjectNode" />
               <item name="CrawlAndroeed" type="462c0819:PsiDirectoryNode" />
+              <item name="auto_crawl_pkgname" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CrawlAndroeed" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CrawlAndroeed" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CrawlAndroeed" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CrawlAndroeed" type="462c0819:PsiDirectoryNode" />
+              <item name="Mysql_" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -636,29 +656,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/send_email.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/1.png" />
     <entry file="file://$PROJECT_DIR$/Analysis_data/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Mysql_/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestDemo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/helper.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -724,10 +727,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="794">
+          <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestDemo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="33" selection-start-line="33" selection-end-line="41" selection-end-column="24" />
+        <state relative-caret-position="6">
+          <caret line="155" column="98" selection-start-line="155" selection-start-column="98" selection-end-line="155" selection-end-column="98" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -736,8 +756,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+        <state relative-caret-position="455">
+          <caret line="134" column="14" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="14" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>
@@ -746,18 +766,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/postinterface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="49" column="51" lean-forward="true" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+        <state relative-caret-position="175">
+          <caret line="68" column="16" selection-start-line="68" selection-start-column="16" selection-end-line="74" selection-end-column="49" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.yaml">
+    <entry file="file://$PROJECT_DIR$/send_email.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="56" />
+        <state relative-caret-position="400">
+          <caret line="49" column="31" lean-forward="true" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

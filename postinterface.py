@@ -50,7 +50,7 @@ class PostModData:
         url_reconds = loop.run_until_complete(self.mysql_op.fetch_one(sql))
         logger.info("url_reconds"+str(url_reconds))
         if url_reconds != None:
-            sql = "select * from crawl_androeed_app_info WHERE pkg_name=\'{}\'".format(pkgname)# AND is_info_synced=0 AND is_sync_failed=0"
+            sql = "select * from crawl_androeed_app_info WHERE pkgname=\'{}\'".format(pkgname)# AND is_info_synced=0 AND is_sync_failed=0"
             recond_all = loop.run_until_complete(self.mysql_op.fetch_all(sql))
             logger.info(recond_all)
             if recond_all:
@@ -78,13 +78,13 @@ class PostModData:
                     appinfo_dict['screenshots'] = ""
                 country_appinfo = {}
 
-                country_appinfo['en'] = {'appName':recond_all[9].encode('utf-8') + ' MOD', 'appIntroduction':recond_all[2].encode('utf-8'),
+                country_appinfo['en'] = {'appName':recond_all[9].encode('utf-8') + ' MOD', 'appIntroduction':recond_all[4].encode('utf-8'),
                                          'appRecentChanges':'','currencyCode':'USD','appPrice' : '','compatibility': ""}
                 appinfo_dict['localization'] = country_appinfo
                 appinfo_dict['source'] = 'p'
                 if appinfo_dict['filebundleid']:
                     appinfo_dict['filebundleid'] = appinfo_dict['filebundleid'].encode('utf-8')
-                    sql_apk = "select file_path,file_sha1 from crawl_androeed_app_info WHERE pkg_name=\'{}\' and is_delete=0".format(appinfo_dict['filebundleid'])
+                    sql_apk = "select file_path,file_sha1 from crawl_androeed_apk_info WHERE pkg_name=\'{}\' and is_delete=0".format(appinfo_dict['filebundleid'])
                     file_info = {}
                     recond = loop.run_until_complete(self.mysql_op.fetch_one(sql_apk))
                     logger.info(recond)
