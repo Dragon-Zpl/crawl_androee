@@ -29,6 +29,7 @@ class SMTP(object):
         return self.pool
     def send_email(self):
         try:
+            logger.info('begging send')
             meg = '''
                 <h1>需要手动下载的URL</h1>
             '''.format(str(data))
