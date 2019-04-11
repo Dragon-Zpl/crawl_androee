@@ -34,7 +34,7 @@ class SMTP(object):
             '''.format(str(data))
             for url in data:
                 sql = "select * from crawl_androeed_app_info WHERE url=\'{}\'".format(url)
-                recond = loop.run_until_complete(self.mysql_op.fetch_one(sql))
+                recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))
                 logger.info(recond)
                 if recond:
                     decription = recond[4].encode('utf-8')
@@ -43,14 +43,14 @@ class SMTP(object):
                     word += '<p> decription:{} </p> <p> whatnews:{} </p>'.format(decription,what_news)
                     meg += word
                 sql = "select coverimg_path from crawl_androeed_images WHERE url=\'{}\'".format(url)
-                recond = loop.run_until_complete(self.mysql_op.fetch_one(sql))
+                recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))
                 logger.info(recond)
                 if recond:
                     cover_path = recond.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
                     word = '<p> cover_path:{} </p>'.format(cover_path)
                     meg += word
                 sql = "select screenshot_path from crawl_androeed_screenshots WHERE url=\'{}\'".format(url)
-                recond = loop.run_until_complete(self.mysql_op.fetch_one(sql))
+                recond = loop.run_until_complete(self.mysql_op.fetch_all(sql))
                 recond_screens = list(recond)
                 logger.info(recond_screens)
                 re_reconds = []
