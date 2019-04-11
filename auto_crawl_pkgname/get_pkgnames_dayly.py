@@ -201,7 +201,6 @@ class CrawlPkgnames:
         else:
             logger.info('没有的url：'+ data_dic["app_url"]+str(mod_nuber))
             data_dic["download_first_url"] = []
-        logger.info(data_dic)
         return data_dic
     def build_detail_tasks(self):
         tasks = []

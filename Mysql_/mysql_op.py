@@ -21,6 +21,7 @@ class MysqlHeaper(object):
         return self
 
     async def insert_update_app(self,data_dic):
+        print('进入数据库：'+str(data_dic))
         try:
             sql = """
                 insert into crawl_androeed_app_info(app_size,category, coverimgurl, currentversion, description,developer,whatsnew,last_update_date,minimum_os_version,name,screenshots,url,pkgname) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
