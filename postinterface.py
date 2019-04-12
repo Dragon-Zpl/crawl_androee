@@ -63,10 +63,12 @@ class PostModData:
                 appinfo_dict['storeCode'] = 'en'
                 sql_cover = "select coverimg_path from crawl_androeed_coverimg where url=\'{}\'".format(
                     recond_all[-1])
-                coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_all(sql_cover))[0][0]
+                coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_all(sql_cover))[0]
+                logger.info(coverRomoteUrl)
                 appinfo_dict['coverRomoteUrl'] = coverRomoteUrl.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
                 sql_screens = "select screenshot_path from crawl_androeed_screenshots where url=\'{}\'".format(recond_all[-1])
-                recond_screens = loop.run_until_complete(self.mysql_op.fetch_all(sql_screens))[0][0]
+                recond_screens = loop.run_until_complete(self.mysql_op.fetch_all(sql_screens))[0]
+                logger.info(recond_screens)
                 recond_screens = list(recond_screens)
                 re_reconds = []
                 try:
