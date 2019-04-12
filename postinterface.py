@@ -58,10 +58,11 @@ class PostModData:
                 appinfo_dict = {}
                 appinfo_dict['filebundleid'] = pkgname
                 appinfo_dict['appDevelopers'] = recond_all[6].encode('utf-8')
-                appinfo_dict['categoryCode'] = recond_all[1].encode('utf-8')
-                appinfo_dict['appUpdateDate'] = recond_all[7]
+                appinfo_dict['categoryCode'] = recond_all[2].encode('utf-8')
+                appinfo_dict['appUpdateDate'] = recond_all[8]
                 appinfo_dict['storeCode'] = 'en'
                 logger.info(appinfo_dict)
+                logger.info(recond_all[-2])
                 sql_cover = "select coverimg_path from crawl_androeed_coverimg where url=\'{}\'".format(
                     recond_all[-2])
                 coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_all(sql_cover))
@@ -89,7 +90,7 @@ class PostModData:
                     appinfo_dict['screenshots'] = ""
                 country_appinfo = {}
 
-                country_appinfo['en'] = {'appName':recond_all[9].encode('utf-8') + ' MOD', 'appIntroduction':recond_all[4].encode('utf-8'),
+                country_appinfo['en'] = {'appName':recond_all[10].encode('utf-8') + ' MOD', 'appIntroduction':recond_all[5].encode('utf-8'),
                                          'appRecentChanges':'','currencyCode':'USD','appPrice' : '','compatibility': ""}
                 appinfo_dict['localization'] = country_appinfo
                 appinfo_dict['source'] = 'p'
