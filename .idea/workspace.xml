@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/postinterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/postinterface.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,8 +47,8 @@
       <file leaf-file-name="postinterface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/postinterface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-298">
-              <caret line="82" column="52" lean-forward="true" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
+            <state relative-caret-position="374">
+              <caret line="138" column="41" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="41" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -139,7 +141,7 @@
       <find>&quot;None&quot;</find>
       <find>/home/feng/pkgtest/</find>
       <find>不存在download</find>
-      <find />
+      <find>pkgname is</find>
       <find>PKGSTORE</find>
       <find>basic_dir</find>
       <find>icon</find>
@@ -160,7 +162,7 @@
       <find>bad_pkg_url</find>
       <find>%22</find>
       <find>img_url</find>
-      <find />
+      <find>[ ]</find>
       <find>self.</find>
       <find>await</find>
       <find>logger.info</find>
@@ -779,8 +781,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/postinterface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-298">
-          <caret line="82" column="52" lean-forward="true" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
+        <state relative-caret-position="374">
+          <caret line="138" column="41" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="41" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>

@@ -111,32 +111,35 @@ class PostModData:
                     logger.info(appinfo_dict)
                     data_list.append(appinfo_dict)
                     # print(appinfo_dict)
+                    self.pack_data(data_list,recond_all[-3])
                 else:
                     #丢弃未下载到apk的数据
                     return None
                 logger.info(data_list)
 
-    # def pack_data(self, data_list, pkgname_url_list):
-    #     rdstr = self.randonstr()
-    #     skey = "OHDKD*&HJldhkfg"
-    #     # print(len(data_list))
-    #     # 转化为json格式pm2
-    #     appinfo = json.dumps(data_list, ensure_ascii=False, cls=CJsonEncoder)
-    #     data = base64.b64encode(appinfo)
-    #     sign = hashlib.md5(data + skey + rdstr).hexdigest()
-    #     post_data = {
-    #         'data': data,
-    #         'sign': sign,
-    #         'oncestr': rdstr
-    #     }
-    #     r = requests.post('http://192.168.183.58/index.php?r=apiandroid/crawler/UpdateAppInfoBatch', data=post_data)
-    #     print(r.text.encode('UTF-8'))
-    #     print(type(r.text))
-    #     # 将以及同步的app 同步状态更新
-    #     if r.ok == True:
-    #          for pkgname in pkgname_url_list:
-    #              sql = "update apkdlmod_app_info set is_info_synced=1 where pkg_name=%s"
-    #              self.mysqlwapper.update_data(sql, (pkgname,))
+    def pack_data(self, data_list, url):
+        rdstr = self.randonstr()
+        skey = "OHDKD*&HJldhkfg"
+        # 转化为json格式
+        appinfo = json.dumps(data_list, ensure_ascii=False, cls=CJsonEncoder)
+        data = base64.b64encode(appinfo.encode('utf-8'))
+        sign = hashlib.md5((str(data, encoding='utf-8') + skey + rdstr).encode('utf-8')).hexdigest()
+        post_data = {
+            'data': data,
+            'sign': sign,
+            'oncestr': rdstr
+        }
+        logger.info(data_list[0])
+        try:
+            r = requests.post('http://192.168.183.58/index.php?r=apiandroid/crawler/UpdateAppInfoBatch', data=post_data,
+                              timeout=60)
+            logger.info(r.text)
+            if r.ok == True:
+                sql = "update crawl_androeed_app_info set isinfosynced=1 where url=%s"
+                self.mysql_op.update(sql, (url,))
+        except Exception as e:
+            logger.error(e)
+            pass
 
 
 
@@ -154,7 +157,7 @@ class PostModData:
 
 if __name__ == '__main__':
     post_mod_data = PostModData()
-    post_mod_data.run_post('com.outfit7.mytalkingtom2')
+    post_mod_data.run_post('com.android.vending')
     # change_cover()
 
 

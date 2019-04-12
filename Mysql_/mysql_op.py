@@ -143,3 +143,13 @@ class MysqlHeaper(object):
                 except Exception as e:
                     print(e)
                     return None
+
+    async def update(self, sql, params):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                try:
+                    reconds = await cur.execute(sql, params)
+                    return reconds
+                except Exception as e:
+                    print(e)
+                    return None
