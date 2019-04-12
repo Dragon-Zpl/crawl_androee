@@ -83,9 +83,9 @@ class SMTP(object):
 
 
 if __name__ == '__main__':
-    # email = "jian.zou@office.feng.com"
-    email = "15260826071@163.com"
+    email = "jian.zou@office.feng.com"
+    # email = "15260826071@163.com"
     tel = "15260826071"
-    data = {'https://www.androeed.ru/files/homescapes.html?hl=en', 'https://www.androeed.ru/files/badland.html?hl=en', 'https://www.androeed.ru/files/madout2-bigcityonline.html?hl=en', 'https://www.androeed.ru/files/dawn-of-titans.html?hl=en', 'https://www.androeed.ru/files/angry-birds-evolution.html?hl=en', 'https://www.androeed.ru/files/toca-life-world.html?hl=en', 'https://www.androeed.ru/files/morphite-unreleased.html?hl=en', 'https://www.androeed.ru/files/driving-school-2017.html?hl=en', 'https://www.androeed.ru/files/world-truck-driving-simulator-.html?hl=en', 'https://www.androeed.ru/files/frontline-eastern-front.html?hl=en', 'https://www.androeed.ru/files/soul-knight-unreleased-.html?hl=en', 'https://www.androeed.ru/files/world-war-heroes-unreleased.html?hl=en', 'https://www.androeed.ru/files/trials-frontier.html?hl=en', 'https://www.androeed.ru/files/dont-starve-pocket-edition.html?hl=en', 'https://www.androeed.ru/files/real-steel-world-robot-boxing.html?hl=en', 'https://www.androeed.ru/files/construction-simulator-3.html?hl=en'}
-    smtp = SMTP(email, tel,data)
-    smtp.send_email()
+    data = {'https://www.androeed.ru/files/stardew-valley.html?hl=en','https://www.androeed.ru/files/toca-hair-salon-2.html?hl=en','https://www.androeed.ru/files/homescapes.html?hl=en', 'https://www.androeed.ru/files/badland.html?hl=en', 'https://www.androeed.ru/files/madout2-bigcityonline.html?hl=en', 'https://www.androeed.ru/files/dawn-of-titans.html?hl=en', 'https://www.androeed.ru/files/angry-birds-evolution.html?hl=en', 'https://www.androeed.ru/files/toca-life-world.html?hl=en', 'https://www.androeed.ru/files/morphite-unreleased.html?hl=en', 'https://www.androeed.ru/files/driving-school-2017.html?hl=en', 'https://www.androeed.ru/files/world-truck-driving-simulator-.html?hl=en', 'https://www.androeed.ru/files/frontline-eastern-front.html?hl=en', 'https://www.androeed.ru/files/soul-knight-unreleased-.html?hl=en', 'https://www.androeed.ru/files/world-war-heroes-unreleased.html?hl=en', 'https://www.androeed.ru/files/trials-frontier.html?hl=en', 'https://www.androeed.ru/files/dont-starve-pocket-edition.html?hl=en', 'https://www.androeed.ru/files/real-steel-world-robot-boxing.html?hl=en', 'https://www.androeed.ru/files/construction-simulator-3.html?hl=en'}
+    smtp = SMTP(email)
+    smtp.send_email(tel,data)
