@@ -61,23 +61,31 @@ class PostModData:
                 appinfo_dict['categoryCode'] = recond_all[1].encode('utf-8')
                 appinfo_dict['appUpdateDate'] = recond_all[7]
                 appinfo_dict['storeCode'] = 'en'
+                logger.info(appinfo_dict)
                 sql_cover = "select coverimg_path from crawl_androeed_coverimg where url=\'{}\'".format(
                     recond_all[-2])
-                coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_all(sql_cover))[0][0]
+                coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_all(sql_cover))
                 logger.info(coverRomoteUrl)
-                appinfo_dict['coverRomoteUrl'] = coverRomoteUrl.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
+                if coverRomoteUrl:
+                    appinfo_dict['coverRomoteUrl'] = coverRomoteUrl[0][0].replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
+                else:
+                    appinfo_dict['coverRomoteUrl'] = ""
                 sql_screens = "select screenshot_path from crawl_androeed_screenshots where url=\'{}\'".format(recond_all[-2])
-                recond_screens = loop.run_until_complete(self.mysql_op.fetch_all(sql_screens))[0][0]
+                recond_screens = loop.run_until_complete(self.mysql_op.fetch_all(sql_screens))
                 logger.info(recond_screens)
-                recond_screens = list(recond_screens)
-                re_reconds = []
-                try:
-                    for recond in recond_screens:
-                        recond = ''.join(recond)
-                        recond = recond.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
-                        re_reconds.append(recond)
-                    appinfo_dict['screenshots'] = re_reconds
-                except:
+                if recond_screens:
+                    recond_screens = recond_screens[0][0]
+                    recond_screens = list(recond_screens)
+                    re_reconds = []
+                    try:
+                        for recond in recond_screens:
+                            recond = ''.join(recond)
+                            recond = recond.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
+                            re_reconds.append(recond)
+                        appinfo_dict['screenshots'] = re_reconds
+                    except:
+                        appinfo_dict['screenshots'] = ""
+                else:
                     appinfo_dict['screenshots'] = ""
                 country_appinfo = {}
 
