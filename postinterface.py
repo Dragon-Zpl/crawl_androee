@@ -57,21 +57,21 @@ class PostModData:
                 recond_all = recond_all[0]
                 appinfo_dict = {}
                 appinfo_dict['filebundleid'] = pkgname
-                appinfo_dict['appDevelopers'] = recond_all[6].encode('utf-8')
-                appinfo_dict['categoryCode'] = recond_all[2].encode('utf-8')
+                appinfo_dict['appDevelopers'] = recond_all[6]
+                appinfo_dict['categoryCode'] = recond_all[2]
                 appinfo_dict['appUpdateDate'] = recond_all[8]
                 appinfo_dict['storeCode'] = 'en'
                 logger.info(appinfo_dict)
-                logger.info(recond_all[-2])
+                logger.info(recond_all[-3])
                 sql_cover = "select coverimg_path from crawl_androeed_coverimg where url=\'{}\'".format(
-                    recond_all[-2])
+                    recond_all[-3])
                 coverRomoteUrl = loop.run_until_complete(self.mysql_op.fetch_all(sql_cover))
                 logger.info(coverRomoteUrl)
                 if coverRomoteUrl:
                     appinfo_dict['coverRomoteUrl'] = coverRomoteUrl[0][0].replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
                 else:
                     appinfo_dict['coverRomoteUrl'] = ""
-                sql_screens = "select screenshot_path from crawl_androeed_screenshots where url=\'{}\'".format(recond_all[-2])
+                sql_screens = "select screenshot_path from crawl_androeed_screenshots where url=\'{}\'".format(recond_all[-3])
                 recond_screens = loop.run_until_complete(self.mysql_op.fetch_all(sql_screens))
                 logger.info(recond_screens)
                 if recond_screens:
@@ -90,12 +90,12 @@ class PostModData:
                     appinfo_dict['screenshots'] = ""
                 country_appinfo = {}
 
-                country_appinfo['en'] = {'appName':recond_all[10].encode('utf-8') + ' MOD', 'appIntroduction':recond_all[5].encode('utf-8'),
+                country_appinfo['en'] = {'appName':recond_all[10] + ' MOD', 'appIntroduction':recond_all[5],
                                          'appRecentChanges':'','currencyCode':'USD','appPrice' : '','compatibility': ""}
                 appinfo_dict['localization'] = country_appinfo
                 appinfo_dict['source'] = 'p'
                 if appinfo_dict['filebundleid']:
-                    appinfo_dict['filebundleid'] = appinfo_dict['filebundleid'].encode('utf-8')
+                    appinfo_dict['filebundleid'] = appinfo_dict['filebundleid']
                     sql_apk = "select file_path,file_sha1 from crawl_androeed_apk_info WHERE pkg_name=\'{}\' and is_delete=0".format(appinfo_dict['filebundleid'])
                     file_info = {}
                     recond = loop.run_until_complete(self.mysql_op.fetch_all(sql_apk))
@@ -104,7 +104,7 @@ class PostModData:
                         recond = recond[0]
                         apk_path = ''.join(recond[0])
                         apk_path = apk_path.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
-                        file_info['downloadUrl'] = apk_path.encode('utf8')
+                        file_info['downloadUrl'] = apk_path
                         file_info['fileMd5'] = ''.join(recond[1])
                         file_info['callbackUrl'] =  '/api/v1.0/deleteapk/p/' + appinfo_dict['filebundleid']
                     appinfo_dict['fileInfo'] = file_info
