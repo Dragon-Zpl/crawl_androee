@@ -54,6 +54,7 @@ class PostModData:
             recond_all = loop.run_until_complete(self.mysql_op.fetch_all(sql))
             logger.info(recond_all)
             if recond_all:
+                recond_all = recond_all[0]
                 appinfo_dict = {}
                 appinfo_dict['filebundleid'] = pkgname
                 appinfo_dict['appDevelopers'] = recond_all[6].encode('utf-8')
@@ -86,9 +87,10 @@ class PostModData:
                     appinfo_dict['filebundleid'] = appinfo_dict['filebundleid'].encode('utf-8')
                     sql_apk = "select file_path,file_sha1 from crawl_androeed_apk_info WHERE pkg_name=\'{}\' and is_delete=0".format(appinfo_dict['filebundleid'])
                     file_info = {}
-                    recond = loop.run_until_complete(self.mysql_op.fetch_all(sql_apk))[0]
+                    recond = loop.run_until_complete(self.mysql_op.fetch_all(sql_apk))
                     logger.info(recond)
                     if recond:
+                        recond = recond[0]
                         apk_path = ''.join(recond[0])
                         apk_path = apk_path.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
                         file_info['downloadUrl'] = apk_path.encode('utf8')
