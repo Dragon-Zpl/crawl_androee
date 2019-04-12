@@ -115,16 +115,22 @@ class CrawlPkgnames:
             data_dic["icon"] = content.xpath(self.analysis.icon)[0]
         else:
             data_dic["icon"] = ""
-        data_dic["categories"] = ','.join(content.xpath(self.analysis.categories))
+        if content.xpath(self.analysis.categories):
+            data_dic["categories"] = ','.join(content.xpath(self.analysis.categories))
+        else:
+            data_dic["categories"] = ""
         if content.xpath(self.analysis.version):
             data_dic["version"] = content.xpath(self.analysis.version)[0].strip(" ")
         else:
             data_dic["version"] = ""
-        data_dic["os"] = content.xpath(self.analysis.os)[0]
-        data_dic["internet"] = content.xpath(self.analysis.internet)[0]
-        data_dic["size"] = content.xpath(self.analysis.size)[0]
-        data_dic["raiting"] = content.xpath(self.analysis.raiting)[0]
-        data_dic["russian"] = content.xpath(self.analysis.russian)[0]
+        if content.xpath(self.analysis.os):
+            data_dic["os"] = content.xpath(self.analysis.os)[0]
+        else:
+            data_dic["os"] = ""
+        if content.xpath(self.analysis.size):
+            data_dic["size"] = content.xpath(self.analysis.size)[0]
+        else:
+            data_dic["size"] = ""
         img_urls = re.findall(r"\('#images_while'\)\.load[\d\D]+?\)", data)
         if len(img_urls) > 0:
             try:
@@ -145,9 +151,15 @@ class CrawlPkgnames:
                 logger.info("error:{},img_urls:{}".format(e,str(img_urls)))
         else:
             data_dic["img_urls"] = ""
-        data_dic["description"] = ''.join(content.xpath(self.analysis.description))
-        data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
-
+        if content.xpath(self.analysis.description):
+            data_dic["description"] = ''.join(content.xpath(self.analysis.description))
+        else:
+            data_dic["description"] = ''
+        if content.xpath(self.analysis.app_url):
+            data_dic["app_url"] = content.xpath(self.analysis.app_url)[0]
+        else:
+            logger.info('抓取不到app_url'+str(data_dic))
+            data_dic["app_url"] = ""
         mod_nuber = content.xpath(self.analysis.mod_number2)
         if mod_nuber:
             temp = re.findall("\d+",mod_nuber[-1])
