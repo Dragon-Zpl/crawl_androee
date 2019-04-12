@@ -4,6 +4,7 @@ import aiomysql
 import yaml
 
 from Mysql_.mysql_op import MysqlHeaper
+from postinterface import PostModData
 
 
 async def get_pool( loop=None, config='mysql'):
@@ -22,6 +23,6 @@ pool = loop.run_until_complete(get_pool())
 mysql_op = MysqlHeaper(pool=pool)
 sql = "select pkg_name from crawl_androeed_apk_info WHERE is_delete=0"
 data= loop.run_until_complete(mysql_op.fetch_all(sql))
-
+t = PostModData()
 for i in data:
-    print(i)
+    t.run_post(i[0])
