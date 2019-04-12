@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/postinterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/postinterface.py" afterDir="false" />
-    </list>
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,8 +45,8 @@
       <file leaf-file-name="postinterface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/postinterface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="123" column="77" selection-start-line="123" selection-start-column="71" selection-end-line="123" selection-end-column="77" />
+            <state relative-caret-position="-298">
+              <caret line="82" column="52" lean-forward="true" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -137,7 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self,</find>
       <find>有问题</find>
       <find>&quot;None&quot;</find>
       <find>/home/feng/pkgtest/</find>
@@ -167,6 +164,7 @@
       <find>self.</find>
       <find>await</find>
       <find>logger.info</find>
+      <find>encode</find>
     </findStrings>
     <replaceStrings>
       <replace>/home/feng/android_files1/androee_files/</replace>
@@ -256,7 +254,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Users/Administrator/PycharmProjects/CrawlAndroeed/auto_crawl_pkgname/get_pkgnames_dayly.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/company_data/apkdlmod" />
+    <property name="last_opened_file_path" value="E:/mydata/CrawlGoogleWithGplayCli" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -781,8 +779,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/postinterface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="123" column="77" selection-start-line="123" selection-start-column="71" selection-end-line="123" selection-end-column="77" />
+        <state relative-caret-position="-298">
+          <caret line="82" column="52" lean-forward="true" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>

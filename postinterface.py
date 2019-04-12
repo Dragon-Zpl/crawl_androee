@@ -106,7 +106,7 @@ class PostModData:
                         apk_path = apk_path.replace('/home/feng/android_files1', 'http://crawer2.tutuapp.net:8080/')
                         file_info['downloadUrl'] = apk_path
                         file_info['fileMd5'] = ''.join(recond[1])
-                        file_info['callbackUrl'] =  '/api/v1.0/deleteapk/p/' + appinfo_dict['filebundleid']
+                        file_info['callbackUrl'] = 'http://23.236.115.227:5000/api/v1.0/deleteapk/p/' + appinfo_dict['filebundleid']
                     appinfo_dict['fileInfo'] = file_info
                     logger.info(appinfo_dict)
                     data_list.append(appinfo_dict)
