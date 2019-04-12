@@ -1,7 +1,1 @@
-import hashlib
-
-
-
-while True:
-    a = input("path:")
-    print(hashlib.md5((a).encode('utf-8')).hexdigest())
+sql = "update crawl_androeed_app_info set currentversion='' where url='https://www.androeed.ru/files/my-talking-tom-2.html?hl=en'"

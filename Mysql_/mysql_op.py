@@ -25,7 +25,7 @@ class MysqlHeaper(object):
         try:
             sql = """
                 insert into crawl_androeed_app_info(app_size,category, coverimgurl, currentversion, description,developer,whatsnew,last_update_date,minimum_os_version,name,screenshots,url,pkgname) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                                     ON DUPLICATE KEY UPDATE app_size=VALUES(app_size), category=VALUES(category), coverimgurl=VALUES(coverimgurl), currentversion=VALUES(currentversion), url=VALUES(url), description=VALUES(description), developer=VALUES(developer), whatsnew=VALUES(whatsnew)
+                                     ON DUPLICATE KEY UPDATE app_size=VALUES(app_size), category=VALUES(category), coverimgurl=VALUES(coverimgurl), url=VALUES(url), description=VALUES(description), developer=VALUES(developer), whatsnew=VALUES(whatsnew)
                                      , last_update_date=VALUES(last_update_date), minimum_os_version=VALUES(minimum_os_version), name=VALUES(name), screenshots=VALUES(screenshots), pkgname=VALUES(pkgname)
             """
             nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
@@ -64,12 +64,12 @@ class MysqlHeaper(object):
     async def insert_update_apk(self,data_dic):
         try:
             sql = """
-                insert into crawl_androeed_apk_info(pkg_name,version_code, file_path, file_sha1, last_update_date) VALUES (%s,%s,%s,%s,%s)
-                                     ON DUPLICATE KEY UPDATE pkg_name=VALUES(pkg_name), version_code=VALUES(version_code), file_path=VALUES(file_path), file_sha1=VALUES(file_sha1), last_update_date=VALUES(last_update_date)
+                insert into crawl_androeed_apk_info(pkg_name,version_code, file_path, file_sha1, last_update_date,is_delete) VALUES (%s,%s,%s,%s,%s,%s)
+                                     ON DUPLICATE KEY UPDATE pkg_name=VALUES(pkg_name), version_code=VALUES(version_code), file_path=VALUES(file_path), file_sha1=VALUES(file_sha1), last_update_date=VALUES(last_update_date), is_delete=VALUES(is_delete)
             """
             nowtime = (datetime.datetime.now() + datetime.timedelta(hours=13)).strftime("%Y-%m-%d %H:%M:%S")
             params = (
-                data_dic["pkgname"],data_dic["version"],data_dic["file_path"],data_dic["md5"],nowtime
+                data_dic["pkgname"],data_dic["version"],data_dic["file_path"],data_dic["md5"],nowtime,0
             )
             async with self.pool.acquire() as conn:
                 async with conn.cursor() as cur:
@@ -145,6 +145,20 @@ class MysqlHeaper(object):
                     return None
 
     async def update(self, sql, params):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                try:
+                    reconds = await cur.execute(sql, params)
+                    return reconds
+                except Exception as e:
+                    print(e)
+                    return None
+
+    async def update_version(self,data_dict):
+        sql = "update crawl_androeed_app_info set currentversion=%s where url=%s"
+        params = (
+            data_dict["app_url"],data_dict["version"]
+        )
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 try:

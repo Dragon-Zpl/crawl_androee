@@ -137,7 +137,7 @@ class PostModData:
             logger.info(r.text)
             if r.ok == True:
                 sql = "update crawl_androeed_app_info set isinfosynced=1 where url=%s"
-                self.mysql_op.update(sql, (url,))
+                loop.run_until_complete(self.mysql_op.update(sql, (url,)))
         except Exception as e:
             logger.error(e)
             pass

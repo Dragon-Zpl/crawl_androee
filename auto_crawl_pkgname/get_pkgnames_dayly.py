@@ -12,6 +12,7 @@ from Analysis_data.Xpath_word import Xpaths
 from CrawlProxy.crawl_proxies import asyncCrawlProxy
 from Mysql_.mysql_op import MysqlHeaper
 from helper import Helper
+from postinterface import PostModData
 from utils.init import *
 from send_email import SMTP
 class CrawlPkgnames:
@@ -30,6 +31,7 @@ class CrawlPkgnames:
         self.mysql_op = MysqlHeaper(pool=pool)
         self.proxies = []
         self.bad_pkg_url = set()
+        self.post_data = PostModData()
 
     async def get_pool(self, loop=None, config='mysql'):
         fr = open('./config/config.yaml', 'r')
@@ -235,6 +237,9 @@ class CrawlPkgnames:
                         loop.run_until_complete(self.mysql_op.insert_update_app(data_dic=data_dic))
                     if data_dic and data_dic["file_path"]:
                         loop.run_until_complete(self.mysql_op.insert_update_apk(data_dic=data_dic))
+                        #下载成功更新版本
+                        loop.run_until_complete(self.mysql_op.update_version(data_dic))
+                        self.post_data.run_post(data_dic["pkgname"])
                     if data_dic and data_dic["file_path"] is None:
                         self.bad_pkg_url.add(data_dic["app_url"])
                 else:
