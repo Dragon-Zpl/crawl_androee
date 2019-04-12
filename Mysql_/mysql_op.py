@@ -162,8 +162,9 @@ class MysqlHeaper(object):
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 try:
-                    reconds = await cur.execute(sql, params)
-                    return reconds
+                    print('开始更新')
+                    await cur.execute(sql, params)
+                    return True
                 except Exception as e:
                     print(e)
                     return None
