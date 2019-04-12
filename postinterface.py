@@ -76,7 +76,7 @@ class PostModData:
                 logger.info(recond_screens)
                 if recond_screens:
                     recond_screens = recond_screens[0][0]
-                    recond_screens = list(recond_screens)
+                    recond_screens = recond_screens.split(',')
                     re_reconds = []
                     try:
                         for recond in recond_screens:
