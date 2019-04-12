@@ -91,7 +91,7 @@ class PostModData:
                 country_appinfo = {}
 
                 country_appinfo['en'] = {'appName':recond_all[10] + ' MOD', 'appIntroduction':recond_all[5],
-                                         'appRecentChanges':'','currencyCode':'USD','appPrice' : '','compatibility': ""}
+                                         'appRecentChanges':'','currencyCode':'USD','appPrice' : '0','compatibility': ""}
                 appinfo_dict['localization'] = country_appinfo
                 appinfo_dict['source'] = 'p'
                 if appinfo_dict['filebundleid']:

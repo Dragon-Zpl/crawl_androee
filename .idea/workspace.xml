@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/postinterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/postinterface.py" afterDir="false" />
-    </list>
+    <list default="true" id="4736134d-170b-43e4-82a4-f893ab3a4af0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,8 +45,8 @@
       <file leaf-file-name="postinterface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/postinterface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="138" column="41" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="41" />
+            <state relative-caret-position="452">
+              <caret line="109" column="47" selection-start-line="109" selection-start-column="47" selection-end-line="109" selection-end-column="47" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -116,8 +114,8 @@
       <file leaf-file-name="mysql_op.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+            <state relative-caret-position="299">
+              <caret line="146" column="20" selection-start-line="146" selection-start-column="14" selection-end-line="146" selection-end-column="20" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -137,8 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>有问题</find>
-      <find>&quot;None&quot;</find>
       <find>/home/feng/pkgtest/</find>
       <find>不存在download</find>
       <find>pkgname is</find>
@@ -167,6 +163,8 @@
       <find>await</find>
       <find>logger.info</find>
       <find>encode</find>
+      <find>weigh</find>
+      <find>weight</find>
     </findStrings>
     <replaceStrings>
       <replace>/home/feng/android_files1/androee_files/</replace>
@@ -190,9 +188,9 @@
         <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/utils/init.py" />
         <option value="$PROJECT_DIR$/send_email.py" />
-        <option value="$PROJECT_DIR$/Mysql_/mysql_op.py" />
         <option value="$PROJECT_DIR$/TestDemo.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname/get_pkgnames_dayly.py" />
+        <option value="$PROJECT_DIR$/Mysql_/mysql_op.py" />
         <option value="$PROJECT_DIR$/postinterface.py" />
       </list>
     </option>
@@ -711,16 +709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-          <folding>
-            <element signature="e#24#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Analysis_data/Xpath_word.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -779,10 +767,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Mysql_/mysql_op.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="146" column="20" selection-start-line="146" selection-start-column="14" selection-end-line="146" selection-end-column="20" />
+          <folding>
+            <element signature="e#24#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/postinterface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="138" column="41" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="41" />
+        <state relative-caret-position="452">
+          <caret line="109" column="47" selection-start-line="109" selection-start-column="47" selection-end-line="109" selection-end-column="47" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>
