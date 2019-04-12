@@ -157,7 +157,7 @@ class MysqlHeaper(object):
     async def update_version(self,data_dict):
         sql = "update crawl_androeed_app_info set currentversion=%s where url=%s"
         params = (
-            data_dict["app_url"],data_dict["version"]
+            data_dict["version"],data_dict["app_url"]
         )
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
