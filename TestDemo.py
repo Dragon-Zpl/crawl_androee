@@ -21,7 +21,7 @@ loop = asyncio.get_event_loop()
 pool = loop.run_until_complete(get_pool())
 mysql_op = MysqlHeaper(pool=pool)
 sql = "select pkg_name from crawl_androeed_apk_info WHERE is_delete=0"
-data= loop.run_until_complete(mysql_op.fetch_all())
+data= loop.run_until_complete(mysql_op.fetch_all(sql))
 
 for i in data:
     print(i)
