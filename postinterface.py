@@ -45,7 +45,6 @@ class PostModData:
         #查询未同步的app
         # sql = "SELECT detail_url FROM androidmod_app_info WHERE is_info_synced=0 AND is_sync_failed=0"
         sql = "select pkg_name from crawl_androeed_apk_info WHERE pkg_name=\'{}\' and is_delete=0".format(pkgname)
-        logger.info(sql)
         # sql = "select pkg_name from apkdlmod_apk_info WHERE id<800"
         url_reconds = loop.run_until_complete(self.mysql_op.fetch_one(sql))
         logger.info("url_reconds"+str(url_reconds))
@@ -162,39 +161,3 @@ if __name__ == '__main__':
     # change_cover()
 
 
-
-
-
-data = [{
-    "source":"g",
-    "filebundleid":"com.dodreams.driveahead",
-    "appDevelopers":"Dodreams Ltd.",
-    "categoryCode":"Arcade,Cars,Pixels",
-    "appUpdateDate":"datetime.datetime(2018, 4, 11, 0, 0)",
-    "storeCode":"us",
-    "coverRomoteUrl":"http://crawer2.tutuapp.net:8080/androee_files/picture/screenshot/2019-04-102945878e4ad4f5dcb3588fa2b72296c7.png",
-    "localization":{
-        "en":{
-        "appName":"Drive Ahead!",
-        "appIntroduction":"Drive Ahead! - Arcade mini-cars and battle in the arena.Racing, Arcade, Action ... How about we combine the three genre? Get behind the wheel and crashed his car ramming enemy. Destroy his car, earn points and win in quick, sharp, dynamic and fun rides. You can even play with a friend on the same device! And of course to open new cars, so the game it was always interesting.Features:Crazy gameplayRetro-style graphics Twin Shooter.Simple operationOpportunity to play together on one device Эту игру можно скачать в официальном Google Play Маркет",
-        "compatibility":"Android 4.4 or above",
-        'currencyCode': 'KRW',
-        "appPrice":'0',
-        'appRecentChanges': '',
-        }
-
-    },
-    "fileInfo":{
-        "downloadUrl":"http://crawer2.tutuapp.net:8080/androee_files/app_page/2019-04-10/8cc2d062cb408c966bb2651826bb0814.apk",
-        "fileMd5":"334594e625fcb5017ec217f7561268ad",
-        "callbackUrl":"http://23.236.115.228:5001/appVideoView",
-        "weight":5,
-
-    }
-}]
-
-
-
-
-# if __name__ == '__main__':
-#     print(pack_data(data, "https://www.androeed.ru/files/drive-ahead.html?hl=en"))
