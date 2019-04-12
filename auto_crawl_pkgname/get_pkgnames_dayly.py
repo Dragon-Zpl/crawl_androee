@@ -77,6 +77,7 @@ class CrawlPkgnames:
 
     def build_async_tasks(self):
         tasks = []
+        logger.info("flag:" + str(self.flag))
         if self.flag == 1:
             for url in self.mods_urls:
                 task = asyncio.ensure_future(self.request_web(url=url),loop=loop)

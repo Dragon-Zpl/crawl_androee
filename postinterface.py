@@ -107,7 +107,7 @@ class PostModData:
     #     rdstr = self.randonstr()
     #     skey = "OHDKD*&HJldhkfg"
     #     # print(len(data_list))
-    #     # 转化为json格式
+    #     # 转化为json格式pm2
     #     appinfo = json.dumps(data_list, ensure_ascii=False, cls=CJsonEncoder)
     #     data = base64.b64encode(appinfo)
     #     sign = hashlib.md5(data + skey + rdstr).hexdigest()
@@ -141,7 +141,7 @@ class PostModData:
 
 if __name__ == '__main__':
     post_mod_data = PostModData()
-    post_mod_data.run_post('com.dodreams.driveahead')
+    post_mod_data.run_post('com.outfit7.mytalkingtom2')
     # change_cover()
 
 
