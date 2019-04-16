@@ -9,10 +9,10 @@ from utils.init import *
 
 class SMTP(object):
     def __init__(self, email):
-        self.sender = "786283772@qq.com"
+        self.sender = "@qq.com"
         self.receivers = [email]
         self.host = "smtp.qq.com"
-        self.user = "786283772@qq.com"
+        self.user = "@qq.com"
         self.password = "lxnctbyxqaupbbha"
         self.ver_code = str(random.randint(1000, 10000))
         pool = loop.run_until_complete(self.get_pool())
@@ -83,9 +83,9 @@ class SMTP(object):
 
 
 if __name__ == '__main__':
-    email = "jian.zou@office.feng.com"
+    email = ""
     # email = "15260826071@163.com"
-    tel = "15260826071"
+    tel = ""
     data = {'https://www.androeed.ru/files/stardew-valley.html?hl=en','https://www.androeed.ru/files/toca-hair-salon-2.html?hl=en','https://www.androeed.ru/files/homescapes.html?hl=en', 'https://www.androeed.ru/files/badland.html?hl=en', 'https://www.androeed.ru/files/madout2-bigcityonline.html?hl=en', 'https://www.androeed.ru/files/dawn-of-titans.html?hl=en', 'https://www.androeed.ru/files/angry-birds-evolution.html?hl=en', 'https://www.androeed.ru/files/toca-life-world.html?hl=en', 'https://www.androeed.ru/files/morphite-unreleased.html?hl=en', 'https://www.androeed.ru/files/driving-school-2017.html?hl=en', 'https://www.androeed.ru/files/world-truck-driving-simulator-.html?hl=en', 'https://www.androeed.ru/files/frontline-eastern-front.html?hl=en', 'https://www.androeed.ru/files/soul-knight-unreleased-.html?hl=en', 'https://www.androeed.ru/files/world-war-heroes-unreleased.html?hl=en', 'https://www.androeed.ru/files/trials-frontier.html?hl=en', 'https://www.androeed.ru/files/dont-starve-pocket-edition.html?hl=en', 'https://www.androeed.ru/files/real-steel-world-robot-boxing.html?hl=en', 'https://www.androeed.ru/files/construction-simulator-3.html?hl=en'}
     smtp = SMTP(email)
     smtp.send_email(tel,data)
